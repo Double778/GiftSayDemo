@@ -3,9 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_pop_rv"
+    <ImageView
+        android:id="@+id/activity_welcome_show_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.zhao.giftsaydemo"
+        applicationId "com.zhao.volley"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -23,9 +23,6 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:design:23.2.1'
-    compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     compile 'com.netflix.feign:feign-gson:8.16.2'
-    compile 'com.android.support:cardview-v7:23.2.1'
 }
