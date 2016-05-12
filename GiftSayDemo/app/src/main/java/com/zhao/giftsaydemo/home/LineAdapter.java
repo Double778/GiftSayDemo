@@ -6,9 +6,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.zhao.giftsaydemo.home.bean.TabBean;
-import com.zhao.giftsaydemo.volley.VolleyTool;
+import com.zhao.giftsaydemo.volley.GsonResquest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,9 +22,13 @@ import java.util.List;
  */
 public class LineAdapter extends FragmentPagerAdapter {
     List<Fragment> fragments;
-    private VolleyTool volleyTool;
-    String[] strings = {"精选", "一周最热", "天天种草", "完美礼物", "谈个恋爱", "送女票", "送爸妈", "送基友", "送闺蜜", "送同事", "送宝贝", "设计感", "科技范", "创意生活", "文艺风", "奇葩搞怪", "萌萌哒"};
+    //String[] strings = {"精选", "一周最热", "天天种草", "完美礼物", "谈个恋爱", "送女票", "送爸妈", "送基友", "送闺蜜", "送同事", "送宝贝", "设计感", "科技范", "创意生活", "文艺风", "奇葩搞怪", "萌萌哒"};
+    ArrayList<String> titles;
 
+    public void setTitles(ArrayList<String> titles) {
+        this.titles = titles;
+        notifyDataSetChanged();
+    }
 
     public void setFragments(List<Fragment> fragments) {
         this.fragments = fragments;
@@ -27,7 +37,6 @@ public class LineAdapter extends FragmentPagerAdapter {
 
     public LineAdapter(FragmentManager fm) {
         super(fm);
-        volleyTool = new VolleyTool();
     }
 
     @Override
@@ -37,14 +46,15 @@ public class LineAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return fragments == null ? 0 : fragments.size();
+        return titles == null ? 0 : titles.size();
     }
 
-//    @Override
+    @Override
     public CharSequence getPageTitle(int position) {
 //      TabBean tabBean =  volleyTool.JsonTabData("http://api.liwushuo.com/v2/channels/preset?gender=1&generation=4");
 //       Log.d("LineAdapter", "tabBean:" + tabBean);
-//       return tabBean.getData().getChannels().get(position).getName();
-        return strings[position];
+//       return tabBean.getData().   *().get(position).getName();
+
+        return titles.get(position) ;
     }
 }
