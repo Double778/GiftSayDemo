@@ -9,6 +9,8 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
+import com.zhao.giftsaydemo.category.strategy.StrategyFragment;
+import com.zhao.giftsaydemo.category.gift.GiftFragment;
 
 import java.util.ArrayList;
 import java.util.List;

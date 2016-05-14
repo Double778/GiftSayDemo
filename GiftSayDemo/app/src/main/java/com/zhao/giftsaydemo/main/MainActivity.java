@@ -79,7 +79,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.main_activity_category_btn:
                 transaction.replace(R.id.main_activity_replace_layout, new CategoryFragment());
                 findViewById(R.id.title).setVisibility(View.GONE);
-                //findViewById(R.id.title_fragment_category_tab).setVisibility(View.VISIBLE);
 
                 break;
             case R.id.main_activity_user_btn:
