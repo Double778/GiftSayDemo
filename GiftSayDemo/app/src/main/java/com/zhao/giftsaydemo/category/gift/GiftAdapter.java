@@ -5,14 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhao.giftsaydemo.R;
-import com.zhao.giftsaydemo.category.bean.GiftBean;
 import com.zhao.giftsaydemo.util.MyGridView;
 
 import it.sephiroth.android.library.picasso.Picasso;
@@ -21,11 +18,11 @@ import za.co.immedia.pinnedheaderlistview.SectionedBaseAdapter;
 /**
  * Created by 华哥哥 on 16/5/14.
  */
-public class MyAdapter extends SectionedBaseAdapter {
+public class GiftAdapter extends SectionedBaseAdapter {
     private Context context;
     private GiftBean giftBean;
 
-    public MyAdapter(Context context) {
+    public GiftAdapter(Context context) {
         this.context = context;
     }
 

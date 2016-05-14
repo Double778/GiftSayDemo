@@ -30,7 +30,6 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.fragment_home_vp)
     private ViewPager viewPager;
     private LineAdapter adapter;
-    private List<Fragment> fragments;
     private TabBean tabBean;
     @Override
     public void initData() {
@@ -47,7 +46,11 @@ public class HomeFragment extends BaseFragment {
 //            @Override
 //            public void onResponse(HomeChannelsBean response) {
 //                if (response != null) {
-//                    Log.d("HomeFragment", response.getData().toString());
+//                  String title1 = response.getData().getItems().get(0).getTitle();
+//
+//                    Log.d("HomeFragment", "---->" + title1);
+//
+//                    Log.d("HomeFragment",   "---->" + response.getData().toString() );
 //
 //
 //                    adapter.setBean(response);
@@ -70,8 +73,8 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onPageSelected(int position) {
-
-                String path = "http://api.liwushuo.com/v2/channels/" + tabBean.getData().getChannels().get(position).getId() + "/items?limit=20&ad=2&gender=2&offset=0&generation=1";
+                Log.d("HomeFragment", "position:" + position);
+                String path = "http://api.liwushuo.com/v2/channels/" + tabBean.getData().getCandidates().get(position).getId() + "/items?limit=20&ad=2&gender=2&offset=0&generation=1";
                 GsonRequest<HomeChannelsBean> homeChannelsBeanGsonRequest = new GsonRequest<>(Request.Method.GET, path, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -80,7 +83,7 @@ public class HomeFragment extends BaseFragment {
                 }, new Response.Listener<HomeChannelsBean>() {
                     @Override
                     public void onResponse(HomeChannelsBean response) {
-                        Log.d("HomeFragment", response.getData().getItems().get(1).getTitle());
+                        Log.d("HomeFragment", response.getData().getItems().get(0).getTitle());
                         adapter.setBean(response);
 
                     }
@@ -113,6 +116,21 @@ public class HomeFragment extends BaseFragment {
                         titles.add(response.getData().getChannels().get(i).getName());
                     }
                     adapter.setTitles(titles);
+                    String path = "http://api.liwushuo.com/v2/channels/" + tabBean.getData().getCandidates().get(0).getId() + "/items?limit=20&ad=2&gender=2&offset=0&generation=1";
+                    GsonRequest<HomeChannelsBean> homeChannelsBeanGsonRequest = new GsonRequest<>(Request.Method.GET, path, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }, new Response.Listener<HomeChannelsBean>() {
+                        @Override
+                        public void onResponse(HomeChannelsBean response) {
+                            Log.d("HomeFragment", response.getData().getItems().get(1).getTitle());
+                            adapter.setBean(response);
+
+                        }
+                    }, HomeChannelsBean.class);
+                    MyRequestQueue.getInstance().add(homeChannelsBeanGsonRequest);
 
 
                 }

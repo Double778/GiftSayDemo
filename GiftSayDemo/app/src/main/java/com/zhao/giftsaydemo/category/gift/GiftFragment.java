@@ -1,9 +1,6 @@
 package com.zhao.giftsaydemo.category.gift;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +19,6 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
-import com.zhao.giftsaydemo.category.bean.GiftBean;
 import com.zhao.giftsaydemo.util.MyRequestQueue;
 import com.zhao.giftsaydemo.volley.GsonRequest;
 
@@ -40,7 +35,7 @@ public class GiftFragment extends BaseFragment {
     @BindView(R.id.fragment_category_gift_fragment_right_lv)
     private PinnedHeaderListView rightListView;
     private boolean isScroll = true;
-    private MyAdapter adapter;
+    private GiftAdapter adapter;
     private GiftBean giftBean;
 
 
@@ -96,7 +91,7 @@ public class GiftFragment extends BaseFragment {
                     }
 
                 });
-                adapter = new MyAdapter(context);
+                adapter = new GiftAdapter(context);
                 adapter.setGiftBean(giftBean);
                 rightListView.setAdapter(adapter);
                 leftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

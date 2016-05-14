@@ -16,7 +16,6 @@ import java.util.List;
  * Created by 华哥哥 on 16/5/10.
  */
 public class LineAdapter extends FragmentPagerAdapter {
-    List<Fragment> fragments;
     ArrayList<String> titles;
 
     HomeChannelsBean bean;
@@ -31,10 +30,6 @@ public class LineAdapter extends FragmentPagerAdapter {
         notifyDataSetChanged();
     }
 
-    public void setFragments(List<Fragment> fragments) {
-        this.fragments = fragments;
-        notifyDataSetChanged();
-    }
 
     public LineAdapter(FragmentManager fm) {
         super(fm);
@@ -42,11 +37,11 @@ public class LineAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (bean == null) {
-            Log.d("LineAdapter", "嗷嗷");
-            return new FirstFragment();
-
-        }
+//        if (bean == null) {
+//            Log.d("LineAdapter", "嗷嗷");
+//            return new FirstFragment();
+//
+//        }
 
 //        Log.d("LineAdapter", this.bean.getMessage());
         return ChannelsFragment.newInstance(bean);
@@ -61,11 +56,11 @@ public class LineAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return titles == null ? 0 : titles.size();
+        return titles != null && titles.size() > 0 ? titles.size() : 0;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return titles.get(position) ;
+        return titles.get(position);
     }
 }
