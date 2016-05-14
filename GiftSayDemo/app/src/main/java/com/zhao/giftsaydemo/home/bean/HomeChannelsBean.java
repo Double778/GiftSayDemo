@@ -1,11 +1,14 @@
 package com.zhao.giftsaydemo.home.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/12.
  */
-public class HomeSelectionData {
+public class HomeChannelsBean implements Parcelable{
 
 
     /**
@@ -22,6 +25,23 @@ public class HomeSelectionData {
 
     private DataBean data;
     private String message;
+
+    protected HomeChannelsBean(Parcel in) {
+        code = in.readInt();
+        message = in.readString();
+    }
+
+    public static final Creator<HomeChannelsBean> CREATOR = new Creator<HomeChannelsBean>() {
+        @Override
+        public HomeChannelsBean createFromParcel(Parcel in) {
+            return new HomeChannelsBean(in);
+        }
+
+        @Override
+        public HomeChannelsBean[] newArray(int size) {
+            return new HomeChannelsBean[size];
+        }
+    };
 
     public int getCode() {
         return code;
@@ -45,6 +65,17 @@ public class HomeSelectionData {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(code);
+        dest.writeString(message);
     }
 
     public static class DataBean {

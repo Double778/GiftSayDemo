@@ -17,42 +17,61 @@
             <ImageView
                 android:id="@+id/head_view_horizontal_iv_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"/>
 
             <ImageView
                 android:id="@+id/head_view_horizontal_iv_2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"/>
 
             <ImageView
                 android:id="@+id/head_view_horizontal_iv_3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"/>
 
             <ImageView
                 android:id="@+id/head_view_horizontal_iv_4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"/>
 
             <ImageView
                 android:id="@+id/head_view_horizontal_iv_5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"/>
 
             <ImageView
                 android:id="@+id/head_view_horizontal_iv_6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"/>
 
             <ImageView
                 android:id="@+id/head_view_horizontal_iv_7"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"/>
+
 
             <ImageView
                 android:id="@+id/head_view_horizontal_iv_8"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"/>
+            <ImageView
+                android:id="@+id/head_view_horizontal_iv_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"/>
+            <ImageView
+                android:id="@+id/head_view_horizontal_iv_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"/>
         </LinearLayout>
 
 

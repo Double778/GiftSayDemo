@@ -1,18 +1,13 @@
 package com.zhao.giftsaydemo.home;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
-import com.zhao.giftsaydemo.home.bean.TabBean;
-import com.zhao.giftsaydemo.volley.GsonResquest;
+import com.zhao.giftsaydemo.home.bean.HomeChannelsBean;
+import com.zhao.giftsaydemo.home.channels.ChannelsFragment;
+import com.zhao.giftsaydemo.home.channels.FirstFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +17,14 @@ import java.util.List;
  */
 public class LineAdapter extends FragmentPagerAdapter {
     List<Fragment> fragments;
-    //String[] strings = {"精选", "一周最热", "天天种草", "完美礼物", "谈个恋爱", "送女票", "送爸妈", "送基友", "送闺蜜", "送同事", "送宝贝", "设计感", "科技范", "创意生活", "文艺风", "奇葩搞怪", "萌萌哒"};
     ArrayList<String> titles;
+
+    HomeChannelsBean bean;
+
+    public void setBean(HomeChannelsBean bean) {
+        this.bean = bean;
+        notifyDataSetChanged();
+    }
 
     public void setTitles(ArrayList<String> titles) {
         this.titles = titles;
@@ -41,8 +42,22 @@ public class LineAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return fragments.get(position);
+        if (bean == null) {
+            Log.d("LineAdapter", "嗷嗷");
+            return new FirstFragment();
+
+        }
+
+//        Log.d("LineAdapter", this.bean.getMessage());
+        return ChannelsFragment.newInstance(bean);
+        //return fragments.get(position);
     }
+
+
+//    @Override
+//    public Fragment getItem(int position) {
+//        return ChannelsFragment.newInstance(position);
+//    }
 
     @Override
     public int getCount() {
@@ -51,10 +66,6 @@ public class LineAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-//      TabBean tabBean =  volleyTool.JsonTabData("http://api.liwushuo.com/v2/channels/preset?gender=1&generation=4");
-//       Log.d("LineAdapter", "tabBean:" + tabBean);
-//       return tabBean.getData().   *().get(position).getName();
-
         return titles.get(position) ;
     }
 }

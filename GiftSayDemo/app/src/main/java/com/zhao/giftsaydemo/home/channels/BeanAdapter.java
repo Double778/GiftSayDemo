@@ -1,4 +1,4 @@
-package com.zhao.giftsaydemo.home.fragments;
+package com.zhao.giftsaydemo.home.channels;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,15 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
+
 import com.zhao.giftsaydemo.R;
-import com.zhao.giftsaydemo.home.bean.HomeSelectionData;
-import com.zhao.giftsaydemo.util.MyRequestQueue;
-import com.zhao.giftsaydemo.volley.GsonResquest;
+import com.zhao.giftsaydemo.home.bean.HomeChannelsBean;
+
 import it.sephiroth.android.library.picasso.Picasso;
 
 /**
@@ -24,12 +19,11 @@ import it.sephiroth.android.library.picasso.Picasso;
  */
 public class BeanAdapter extends BaseAdapter {
     private Context context;
-    private HomeSelectionData data;
+    private HomeChannelsBean data;
 
 
-    public void setData(HomeSelectionData data) {
+    public void setData(HomeChannelsBean data) {
         this.data = data;
-        Log.d("BeanAdapter", data.getData().getItems().get(0).getCover_image_url());
         notifyDataSetChanged();
     }
 
@@ -65,7 +59,6 @@ public class BeanAdapter extends BaseAdapter {
         }
 
 
-        Log.d("BeanAdapter--", data.getData().getItems().get(0).getCover_image_url());
         holder.textView.setText(data.getData().getItems().get(position).getTitle());
         Picasso.with(context).load(data.getData().getItems().get(position).getCover_image_url()).into(holder.backgroundIv);
         holder.alphaIv.setImageResource(R.mipmap.ic_item_home_alpha);
