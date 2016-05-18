@@ -20,7 +20,7 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.util.MyRequestQueue;
-import com.zhao.giftsaydemo.volley.GsonRequest;
+import com.zhao.giftsaydemo.util.GsonRequest;
 
 import za.co.immedia.pinnedheaderlistview.PinnedHeaderListView;
 
@@ -55,7 +55,7 @@ public class GiftFragment extends BaseFragment {
                 leftListView.setAdapter(new BaseAdapter() {
                     @Override
                     public int getCount() {
-                        return response.getData().getCategories().size();
+                        return response == null? 0:response.getData().getCategories().size();
                     }
 
                     @Override
@@ -72,7 +72,7 @@ public class GiftFragment extends BaseFragment {
                     public View getView(int position, View convertView, ViewGroup parent) {
                         ViewHolder holder = null;
                         if (convertView == null) {
-                            convertView = LayoutInflater.from(context).inflate(R.layout.item_fragment_category_gift_fragment_left, parent, false);
+                            convertView = LayoutInflater.from(context).inflate(R.layout.item_fragment_category_gift_fragment_left_gv, parent, false);
                             holder = new ViewHolder(convertView);
                             convertView.setTag(holder);
                         } else {

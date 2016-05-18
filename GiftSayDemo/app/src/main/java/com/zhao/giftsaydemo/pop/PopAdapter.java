@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,11 +19,12 @@ import it.sephiroth.android.library.picasso.Picasso;
 public class PopAdapter extends RecyclerView.Adapter<PopAdapter.MyViewHolder> {
     private Context context;
     private PopBean popBean;
-//    public void setDrawables(List<Integer> drawables) {
-//        this.drawables = drawables;
-//        notifyDataSetChanged();
-//    }
+    private OnClickListener onClickListener;
+    private View itemView;
 
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
 
     public void setPopBean(PopBean popBean) {
         this.popBean = popBean;
@@ -35,17 +37,29 @@ public class PopAdapter extends RecyclerView.Adapter<PopAdapter.MyViewHolder> {
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_pop, parent, false));
+        itemView = LayoutInflater.from(context).inflate(R.layout.item_pop, parent, false);
+        MyViewHolder holder = new MyViewHolder(itemView);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-
         holder.contentTv.setText(popBean.getData().getItems().get(position).getData().getName());
         holder.priceTv.setText(popBean.getData().getItems().get(position).getData().getPrice());
-        Picasso.with(context).load(popBean.getData().getItems().get(position).getData().getCover_image_url()).resize(400,400).into(holder.imageView);
+        Picasso.with(context).load(popBean.getData().getItems().get(position).getData().getCover_image_url()).resize(400, 400).into(holder.imageView);
+        if (onClickListener != null) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    int id = popBean.getData().getItems().get(pos).getData().getId();
+                    onClickListener.onClick(id);
+
+
+                }
+            });
+        }
 
     }
 
@@ -64,5 +78,9 @@ public class PopAdapter extends RecyclerView.Adapter<PopAdapter.MyViewHolder> {
             contentTv = (TextView) itemView.findViewById(R.id.item_pop_content_tv);
             priceTv = (TextView) itemView.findViewById(R.id.item_pop_price_tv);
         }
+    }
+
+    public interface OnClickListener {
+        void onClick(int id);
     }
 }

@@ -1,9 +1,11 @@
 package com.zhao.giftsaydemo.category;
 
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
@@ -50,6 +52,8 @@ public class CategoryFragment extends BaseFragment{
             }
         });
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabTextColors(Color.parseColor("#db3746"), Color.WHITE);
+        tabLayout.setSelectedTabIndicatorHeight(0);
 
     }
 }

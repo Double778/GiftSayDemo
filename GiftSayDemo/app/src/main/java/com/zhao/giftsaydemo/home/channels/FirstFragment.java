@@ -15,22 +15,22 @@ import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.home.bean.HomeChannelsBean;
 import com.zhao.giftsaydemo.home.bean.HomeSubjectBean;
 import com.zhao.giftsaydemo.util.MyRequestQueue;
-import com.zhao.giftsaydemo.volley.GsonRequest;
+import com.zhao.giftsaydemo.util.GsonRequest;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by 华哥哥 on 16/5/10.
  */
-@BindContent(R.layout.page_home)
+@BindContent(R.layout.fragment_home_channels_fragment)
 public class FirstFragment extends BaseFragment {
     @BindView(R.id.page_home_lv)
     private ListView listView;
-    private BeanAdapter adapter;
+    private DetailsAdapter adapter;
 
     @Override
     public void initData() {
-        adapter = new BeanAdapter(context);
+        adapter = new DetailsAdapter(context);
 
         getData();
 

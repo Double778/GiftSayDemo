@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp">
+    android:layout_margin="@dimen/item_pop_margin">
     <ImageView
         android:id="@+id/item_pop_iv"
         android:layout_width="wrap_content"

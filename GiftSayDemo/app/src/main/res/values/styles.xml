@@ -7,11 +7,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="LinearLayoutReplaceLayoutStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">9</item>
-    </style>
     <style name="MainActivityRadioButtonStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -21,5 +16,31 @@
         <item name="android:textColor">@color/selector_color</item>
         <item name="android:textSize">10sp</item>
     </style>
+    <style name="HeadViewHorizontalScrollViewImageViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3dp</item>
+    </style>
+    <style name="UserFragmentRadioButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="#00000000"
+    android:dividerHeight="5dp"
+    android:layout_margin="5dp"
+    <style name="DetailsListViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:divider">#00000000</item>
+        <item name="android:dividerHeight">5dp</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
 
 </resources>

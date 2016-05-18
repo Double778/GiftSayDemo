@@ -17,7 +17,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 /**
  * Created by 华哥哥 on 16/5/10.
  */
-public class BeanAdapter extends BaseAdapter {
+public class DetailsAdapter extends BaseAdapter {
     private Context context;
     private HomeChannelsBean data;
 
@@ -27,7 +27,7 @@ public class BeanAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public BeanAdapter(Context context) {
+    public DetailsAdapter(Context context) {
         this.context = context;
     }
 

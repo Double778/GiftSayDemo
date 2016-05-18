@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="5dp"
+    android:layout_margin="@dimen/item_home_card_view_margin"
+    app:cardCornerRadius="@dimen/item_home_card_view_card_corner_radius"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     >
@@ -23,14 +23,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/item_home_background_iv"
-            android:textColor="#8c8989"
+            android:textColor="@color/item_home_content_tv_text_color"
             />
         <ImageView
             android:id="@+id/item_home_alpha_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="@dimen/item_home_alpha_iv_margin_right"
             android:src="@mipmap/ic_item_home_alpha" />
     </RelativeLayout>
 

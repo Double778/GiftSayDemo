@@ -71,7 +71,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 titleTv.setVisibility(View.VISIBLE);
                 titleTv.setTextColor(Color.WHITE);
                 titleTv.setText("热门");
-                titleTv.setTextSize(18);
+                titleTv.setTextSize(16);
                 //findViewById(R.id.title_fragment_category_tab).setVisibility(View.INVISIBLE);
 
 

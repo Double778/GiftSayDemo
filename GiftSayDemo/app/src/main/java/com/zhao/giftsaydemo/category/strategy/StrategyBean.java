@@ -1,11 +1,11 @@
-package com.zhao.giftsaydemo.category.gift;
+package com.zhao.giftsaydemo.category.strategy;
 
 import java.util.List;
 
 /**
- * Created by 华哥哥 on 16/5/14.
+ * Created by 华哥哥 on 16/5/15.
  */
-public class GiftBean {
+public class StrategyBean {
 
     private int code;
     private DataBean data;
@@ -37,41 +37,24 @@ public class GiftBean {
 
     public static class DataBean {
 
-        private List<CategoriesBean> categories;
 
-        public List<CategoriesBean> getCategories() {
-            return categories;
+        private List<ChannelGroupsBean> channel_groups;
+
+        public List<ChannelGroupsBean> getChannel_groups() {
+            return channel_groups;
         }
 
-        public void setCategories(List<CategoriesBean> categories) {
-            this.categories = categories;
+        public void setChannel_groups(List<ChannelGroupsBean> channel_groups) {
+            this.channel_groups = channel_groups;
         }
 
-        public static class CategoriesBean {
-            private String icon_url;
+        public static class ChannelGroupsBean {
             private int id;
             private String name;
             private int order;
             private int status;
-            /**
-             * icon_url : http://img02.liwushuo.com/image/150615/urgs9vy8a.png-pw144
-             * id : 7
-             * items_count : -92
-             * name : 智能设备
-             * order : 7
-             * parent_id : 1
-             * status : 0
-             */
 
-            private List<SubcategoriesBean> subcategories;
-
-            public String getIcon_url() {
-                return icon_url;
-            }
-
-            public void setIcon_url(String icon_url) {
-                this.icon_url = icon_url;
-            }
+            private List<ChannelsBean> channels;
 
             public int getId() {
                 return id;
@@ -105,22 +88,30 @@ public class GiftBean {
                 this.status = status;
             }
 
-            public List<SubcategoriesBean> getSubcategories() {
-                return subcategories;
+            public List<ChannelsBean> getChannels() {
+                return channels;
             }
 
-            public void setSubcategories(List<SubcategoriesBean> subcategories) {
-                this.subcategories = subcategories;
+            public void setChannels(List<ChannelsBean> channels) {
+                this.channels = channels;
             }
 
-            public static class SubcategoriesBean {
+            public static class ChannelsBean {
+                private int group_id;
                 private String icon_url;
                 private int id;
                 private int items_count;
                 private String name;
                 private int order;
-                private int parent_id;
                 private int status;
+
+                public int getGroup_id() {
+                    return group_id;
+                }
+
+                public void setGroup_id(int group_id) {
+                    this.group_id = group_id;
+                }
 
                 public String getIcon_url() {
                     return icon_url;
@@ -160,14 +151,6 @@ public class GiftBean {
 
                 public void setOrder(int order) {
                     this.order = order;
-                }
-
-                public int getParent_id() {
-                    return parent_id;
-                }
-
-                public void setParent_id(int parent_id) {
-                    this.parent_id = parent_id;
                 }
 
                 public int getStatus() {

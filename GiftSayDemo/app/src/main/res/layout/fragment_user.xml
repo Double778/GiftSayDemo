@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="我"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:padding="@dimen/fragment_user_radio_group_padding">
+
+        <RadioButton
+            android:id="@+id/fragment_user_cart_btn"
+            style="@style/UserFragmentRadioButtonStyle"
+            android:drawableTop="@mipmap/icon_cart"
+            android:text="@string/fragment_user_cart" />
+
+        <RadioButton
+            android:id="@+id/fragment_user_order_btn"
+            style="@style/UserFragmentRadioButtonStyle"
+            android:drawableTop="@mipmap/icon_order"
+            android:text="@string/fragment_user_order"/>
+
+        <RadioButton
+            android:id="@+id/fragment_user_coupon_btn"
+            style="@style/UserFragmentRadioButtonStyle"
+            android:drawableTop="@mipmap/icon_coupon"
+            android:text="@string/fragment_user_coupon"/>
+
+        <RadioButton
+            android:id="@+id/fragment_user_service_btn"
+            style="@style/UserFragmentRadioButtonStyle"
+            android:drawableTop="@mipmap/icon_service"
+            android:text="@string/fragment_user_service"/>
+    </RadioGroup>
 
 </LinearLayout>

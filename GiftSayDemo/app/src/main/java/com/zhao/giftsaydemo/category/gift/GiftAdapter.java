@@ -43,7 +43,7 @@ public class GiftAdapter extends SectionedBaseAdapter {
 
     @Override
     public int getSectionCount() {
-        return giftBean.getData().getCategories().size();
+        return giftBean == null? 0: giftBean.getData().getCategories().size();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class GiftAdapter extends SectionedBaseAdapter {
         holder.gridView.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
-                return giftBean.getData().getCategories().get(i).getSubcategories().size();
+                return giftBean == null? 0: giftBean.getData().getCategories().get(i).getSubcategories().size();
             }
 
             @Override
@@ -82,7 +82,7 @@ public class GiftAdapter extends SectionedBaseAdapter {
             public View getView(int position, View convertView, ViewGroup parent) {
                 ViewHolder holder = null;
                 if (convertView == null) {
-                    convertView = LayoutInflater.from(context).inflate(R.layout.item_fragment_category_gift_fragment_right_gv, parent, false);
+                    convertView = LayoutInflater.from(context).inflate(R.layout.item_fragment_category_gv, parent, false);
                     holder = new ViewHolder(convertView);
                     convertView.setTag(holder);
                 } else {
@@ -98,8 +98,8 @@ public class GiftAdapter extends SectionedBaseAdapter {
                 TextView textView;
 
                 public ViewHolder(View itemView) {
-                    imageView = (ImageView) itemView.findViewById(R.id.item_fragment_category_gift_fragment_right_gv_iv);
-                    textView = (TextView) itemView.findViewById(R.id.item_fragment_category_gift_fragment_right_gv_tv);
+                    imageView = (ImageView) itemView.findViewById(R.id.item_fragment_category_gv_iv);
+                    textView = (TextView) itemView.findViewById(R.id.item_fragment_category_gv_tv);
                 }
             }
         });
@@ -120,7 +120,7 @@ public class GiftAdapter extends SectionedBaseAdapter {
         LinearLayout layout = null;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            layout = (LinearLayout) inflater.inflate(R.layout.item_fragment_category_gift_fragment_left, viewGroup, false);
+            layout = (LinearLayout) inflater.inflate(R.layout.item_fragment_category_gift_fragment_left_gv, viewGroup, false);
         } else {
             layout = (LinearLayout) view;
         }

@@ -1,4 +1,4 @@
-package com.zhao.giftsaydemo.volley;
+package com.zhao.giftsaydemo.util;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
