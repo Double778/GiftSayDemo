@@ -3,10 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <WebView
-        android:id="@+id/activity_strategy_details_wv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
+    <ListView
+        android:id="@+id/aty_strategy_channels_lv"
+        style="@style/ChannelsListViewStyle"/>
 
 </LinearLayout>

@@ -7,7 +7,7 @@
     <dimen name="item_home_card_view_card_corner_radius">5dp</dimen>
     <dimen name="item_home_alpha_iv_margin_right">20dp</dimen>
     <dimen name="item_fragment_category_strategy_fragment_name_tv_margin">10dp</dimen>
-    <dimen name="item_fragment_category_gift_fragment_left_name_tv_padding">10dp</dimen>
+    <dimen name="item_fragment_category_gift_fragment_left_name_tv_padding">4dp</dimen>
     <dimen name="fragment_user_radio_group_padding">15dp</dimen>
     <dimen name="title_padding">10dp</dimen>
     <dimen name="title_height">40dp</dimen>

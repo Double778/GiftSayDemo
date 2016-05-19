@@ -1,11 +1,14 @@
 package com.zhao.giftsaydemo.home.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/10.
  */
-public class TabBean {
+public class TabBean implements Parcelable{
 
 
     /**
@@ -13,10 +16,29 @@ public class TabBean {
      * data : {"candidates":[{"editable":true,"id":135,"name":"一周最热"},{"editable":true,"id":136,"name":"天天种草"},{"editable":true,"id":137,"name":"完美礼物"},{"editable":true,"id":140,"name":"谈个恋爱"},{"editable":true,"id":26,"name":"送基友"},{"editable":true,"id":10,"name":"送女票"},{"editable":true,"id":5,"name":"送闺蜜"},{"editable":true,"id":6,"name":"送爸妈"},{"editable":true,"id":24,"name":"送宝贝"},{"editable":true,"id":126,"name":"奇葩搞怪"},{"editable":true,"id":125,"name":"创意生活"},{"editable":true,"id":14,"name":"文艺风"},{"editable":true,"id":11,"name":"萌萌哒"},{"editable":true,"id":127,"name":"设计感"},{"editable":true,"id":28,"name":"科技范"}],"channels":[{"editable":false,"id":108,"name":"精选"},{"editable":true,"id":135,"name":"一周最热"},{"editable":true,"id":136,"name":"天天种草"},{"editable":true,"id":137,"name":"完美礼物"},{"editable":true,"id":140,"name":"谈个恋爱"},{"editable":true,"id":26,"name":"送基友"},{"editable":true,"id":10,"name":"送女票"},{"editable":true,"id":5,"name":"送闺蜜"},{"editable":true,"id":6,"name":"送爸妈"},{"editable":true,"id":24,"name":"送宝贝"},{"editable":true,"id":126,"name":"奇葩搞怪"},{"editable":true,"id":125,"name":"创意生活"},{"editable":true,"id":14,"name":"文艺风"},{"editable":true,"id":11,"name":"萌萌哒"},{"editable":true,"id":127,"name":"设计感"},{"editable":true,"id":28,"name":"科技范"}]}
      * message : OK
      */
+    public TabBean(){
 
+    }
     private int code;
     private DataBean data;
     private String message;
+
+    protected TabBean(Parcel in) {
+        code = in.readInt();
+        message = in.readString();
+    }
+
+    public static final Creator<TabBean> CREATOR = new Creator<TabBean>() {
+        @Override
+        public TabBean createFromParcel(Parcel in) {
+            return new TabBean(in);
+        }
+
+        @Override
+        public TabBean[] newArray(int size) {
+            return new TabBean[size];
+        }
+    };
 
     public int getCode() {
         return code;
@@ -40,6 +62,17 @@ public class TabBean {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(code);
+        dest.writeString(message);
     }
 
     public static class DataBean {

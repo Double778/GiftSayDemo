@@ -1,6 +1,7 @@
 package com.zhao.giftsaydemo.category.gift;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,6 +38,7 @@ public class GiftFragment extends BaseFragment {
     private boolean isScroll = true;
     private GiftAdapter adapter;
     private GiftBean giftBean;
+    private LeftAdapter leftAdapter;
 
 
     @Override
@@ -50,47 +52,8 @@ public class GiftFragment extends BaseFragment {
             @Override
             public void onResponse(final GiftBean response) {
                 giftBean = response;
-                //Log.d("GiftFragment", "1" + giftBean.getData().getCategories().get(0).getSubcategories().get(0).getName());
-
-                leftListView.setAdapter(new BaseAdapter() {
-                    @Override
-                    public int getCount() {
-                        return response == null? 0:response.getData().getCategories().size();
-                    }
-
-                    @Override
-                    public Object getItem(int position) {
-                        return null;
-                    }
-
-                    @Override
-                    public long getItemId(int position) {
-                        return 0;
-                    }
-
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent) {
-                        ViewHolder holder = null;
-                        if (convertView == null) {
-                            convertView = LayoutInflater.from(context).inflate(R.layout.item_fragment_category_gift_fragment_left_gv, parent, false);
-                            holder = new ViewHolder(convertView);
-                            convertView.setTag(holder);
-                        } else {
-                            holder = (ViewHolder) convertView.getTag();
-                        }
-
-                        holder.textView.setText(response.getData().getCategories().get(position).getName());
-                        return convertView;
-                    }
-                    class ViewHolder {
-                        TextView textView;
-
-                        public ViewHolder(View itemView) {
-                            textView = (TextView) itemView.findViewById(R.id.item_fragment_category_gift_fragment_left_name_tv);
-                        }
-                    }
-
-                });
+                leftAdapter = new LeftAdapter(context, response);
+                leftListView.setAdapter(leftAdapter);
                 adapter = new GiftAdapter(context);
                 adapter.setGiftBean(giftBean);
                 rightListView.setAdapter(adapter);
@@ -100,7 +63,7 @@ public class GiftFragment extends BaseFragment {
                         isScroll = false;
                         for (int i = 0; i < leftListView.getChildCount(); i++) {
                             if (i == position) {
-                                leftListView.getChildAt(i).setBackgroundColor(Color.rgb(255, 255, 255));
+                                leftListView.getChildAt(i).setBackgroundColor(Color.WHITE);
                             } else {
                                 leftListView.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                             }
@@ -121,13 +84,28 @@ public class GiftFragment extends BaseFragment {
                     @Override
                     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                         if (isScroll) {
+//                            for (int i = 0; i < leftListView.getCount(); i++) {
+//                                if (i == adapter.getSectionForPosition(firstVisibleItem)) {
+//                                    leftListView.smoothScrollToPosition(i);
+//                                    //leftListView.getChildAt().setBackgroundColor(Color.rgb(255, 255, 255));
+//                                    Log.d("GiftFragment", "i:" + i);
+//                                } else {
+//                                    if (i < leftListView.getChildCount()) {
+//                                        leftListView.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
+//                                    }
+//                                }
+//                            }
+//                            leftListView.smoothScrollToPosition(adapter.getSectionForPosition(firstVisibleItem));
+//                            leftAdapter.setSelectPos(adapter.getSectionForPosition(firstVisibleItem));
                             for (int i = 0; i < leftListView.getChildCount(); i++) {
-                                if (i == adapter.getSectionForPosition(firstVisibleItem)) {
-                                    leftListView.getChildAt(i).setBackgroundColor(Color.rgb(255, 255, 255));
+                                if (i == adapter.getSectionForPosition(firstVisibleItem)){
+                                    leftListView.getChildAt(i).setBackgroundColor(Color.WHITE);
                                 } else {
                                     leftListView.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                                 }
+
                             }
+
                         } else {
                             isScroll = true;
                         }
@@ -138,8 +116,6 @@ public class GiftFragment extends BaseFragment {
             }
         }, GiftBean.class);
         MyRequestQueue.getInstance().add(gsonRequest);
-
-
 
 
     }

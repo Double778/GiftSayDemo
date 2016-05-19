@@ -10,10 +10,9 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zhao.giftsaydemo.R;
-import com.zhao.giftsaydemo.main.MainActivity;
+import com.zhao.giftsaydemo.category.strategy.channels.StrategyChannelsActivity;
 import com.zhao.giftsaydemo.util.MyGridView;
 
 import java.util.ArrayList;
@@ -118,7 +117,7 @@ public class StrategyAdapter extends BaseAdapter {
             public void onItemClick(AdapterView<?> parent, View view, int gridViewPos, long id) {
                 Log.d("StrategyAdapter", "position:" + position);
                 Log.d("StrategyAdapter", "gridViewPos:" + gridViewPos);
-                Intent intent = new Intent(context, StrategyDetailsActivity.class);
+                Intent intent = new Intent(context, StrategyChannelsActivity.class);
                 intent.putExtra("Id", bean.getData().getChannel_groups().get(position).getChannels().get(gridViewPos).getId());
                 context.startActivity(intent);
             }

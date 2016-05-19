@@ -3,17 +3,22 @@ package com.zhao.giftsaydemo.home.channels;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.base.TestFragment;
 import com.zhao.giftsaydemo.home.bean.HomeChannelsBean;
+import com.zhao.giftsaydemo.home.bean.TabBean;
+import com.zhao.giftsaydemo.util.VolleySingle;
 
 
 /**
@@ -25,12 +30,12 @@ public class ChannelsFragment extends BaseFragment {
     private ListView listView;
     private DetailsAdapter adapter;
 
-    private static final String CHANNELS_DATA = "data";
 
-    public static ChannelsFragment newInstance(HomeChannelsBean homeChannelsBean) {
+    public static ChannelsFragment newInstance(int pos, TabBean tabBean) {
         Bundle args = new Bundle();
-        args.putParcelable(CHANNELS_DATA, homeChannelsBean);
-
+        //args.putParcelable(CHANNELS_DATA, homeChannelsBean);
+        args.putInt("pos",pos);
+        args.putParcelable("TabBean",tabBean);
         ChannelsFragment fragment = new ChannelsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -41,10 +46,25 @@ public class ChannelsFragment extends BaseFragment {
     @Override
     public void initData() {
         Bundle args = getArguments();
-        HomeChannelsBean homeChannelsBean = args.getParcelable(CHANNELS_DATA);
-        adapter = new DetailsAdapter(context);
-        adapter.setData(homeChannelsBean);
-        listView.setAdapter(adapter);
+        int pos = args.getInt("pos");
+        TabBean tabBean = args.getParcelable("TabBean");
+        String path = "http://api.liwushuo.com/v2/channels/" + tabBean.getData().getChannels().get(pos).getId() + "/items?limit=20&ad=2&gender=2&offset=0&generation=1";
+
+        VolleySingle.addRequest(path, HomeChannelsBean.class, new Response.Listener<HomeChannelsBean>() {
+            @Override
+            public void onResponse(HomeChannelsBean response) {
+                adapter = new DetailsAdapter(context);
+                adapter.setData(response);
+                listView.setAdapter(adapter);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
     }
 
 

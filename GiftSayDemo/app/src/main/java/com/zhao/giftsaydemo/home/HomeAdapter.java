@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
 import com.zhao.giftsaydemo.home.bean.HomeChannelsBean;
+import com.zhao.giftsaydemo.home.bean.TabBean;
 import com.zhao.giftsaydemo.home.channels.ChannelsFragment;
 import com.zhao.giftsaydemo.home.channels.FirstFragment;
 
@@ -15,44 +16,34 @@ import java.util.List;
 /**
  * Created by 华哥哥 on 16/5/10.
  */
-public class LineAdapter extends FragmentPagerAdapter {
-    ArrayList<String> titles;
+public class HomeAdapter extends FragmentPagerAdapter {
+    private ArrayList<String> titles;
 
-    HomeChannelsBean bean;
+    private TabBean tabBean;
 
-    public void setBean(HomeChannelsBean bean) {
-        this.bean = bean;
+    public void setTabBean(TabBean tabBean) {
+        this.tabBean = tabBean;
+        titles = new ArrayList<>();
+        for (int i = 0; i < tabBean.getData().getChannels().size(); i++) {
+            titles.add(tabBean.getData().getChannels().get(i).getName());
+        }
         notifyDataSetChanged();
     }
 
-    public void setTitles(ArrayList<String> titles) {
-        this.titles = titles;
-        notifyDataSetChanged();
-    }
 
-
-    public LineAdapter(FragmentManager fm) {
+    public HomeAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     public Fragment getItem(int position) {
-//        if (bean == null) {
-//            Log.d("LineAdapter", "嗷嗷");
-//            return new FirstFragment();
-//
-//        }
+        if (position == 0) {
+            return new FirstFragment();
 
-//        Log.d("LineAdapter", this.bean.getMessage());
-        return ChannelsFragment.newInstance(bean);
-        //return fragments.get(position);
+        }
+        return ChannelsFragment.newInstance(position, tabBean);
     }
 
-
-//    @Override
-//    public Fragment getItem(int position) {
-//        return ChannelsFragment.newInstance(position);
-//    }
 
     @Override
     public int getCount() {

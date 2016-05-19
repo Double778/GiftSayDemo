@@ -5,6 +5,6 @@
     android:orientation="vertical">
     <ListView
     android:id="@+id/page_home_lv"
-    style="@style/DetailsListViewStyle"/>
+    style="@style/ChannelsListViewStyle"/>
 
 </LinearLayout>

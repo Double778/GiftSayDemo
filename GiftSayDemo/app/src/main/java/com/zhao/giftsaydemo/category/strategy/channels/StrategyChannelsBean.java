@@ -1,11 +1,11 @@
-package com.zhao.giftsaydemo.category.strategy.details;
+package com.zhao.giftsaydemo.category.strategy.channels;
 
 import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/17.
  */
-public class StrategyDetailsBean {
+public class StrategyChannelsBean {
 
     private int code;
 

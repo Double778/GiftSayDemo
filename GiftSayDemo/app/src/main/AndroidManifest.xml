@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.MainActivity"/>
-        <activity android:name=".category.strategy.StrategyDetailsActivity"/>
+        <activity android:name=".category.strategy.channels.StrategyChannelsActivity"/>
+        <activity android:name=".category.strategy.channels.DetailsActivity"/>
     </application>
 
 </manifest>

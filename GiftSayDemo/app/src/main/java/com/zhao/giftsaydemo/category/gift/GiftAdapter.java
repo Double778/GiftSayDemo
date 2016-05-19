@@ -120,7 +120,7 @@ public class GiftAdapter extends SectionedBaseAdapter {
         LinearLayout layout = null;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            layout = (LinearLayout) inflater.inflate(R.layout.item_fragment_category_gift_fragment_left_gv, viewGroup, false);
+            layout = (LinearLayout) inflater.inflate(R.layout.item_fragment_category_gift_fragment_left_lv, viewGroup, false);
         } else {
             layout = (LinearLayout) view;
         }

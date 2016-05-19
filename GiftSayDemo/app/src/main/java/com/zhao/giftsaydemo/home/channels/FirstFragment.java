@@ -16,6 +16,7 @@ import com.zhao.giftsaydemo.home.bean.HomeChannelsBean;
 import com.zhao.giftsaydemo.home.bean.HomeSubjectBean;
 import com.zhao.giftsaydemo.util.MyRequestQueue;
 import com.zhao.giftsaydemo.util.GsonRequest;
+import com.zhao.giftsaydemo.util.VolleySingle;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
@@ -46,32 +47,7 @@ public class FirstFragment extends BaseFragment {
         View v = LayoutInflater.from(context).inflate(R.layout.fragment_user, null);
         listView.addHeaderView(v);
 
-
-
-
-    }
-
-    public void getData() {
-
-        GsonRequest<HomeChannelsBean> selectionDataGsonRequest = new GsonRequest<>(Request.Method.GET, "http://api.liwushuo.com/v2/channels/103/items?", new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }, new Response.Listener<HomeChannelsBean>() {
-            @Override
-            public void onResponse(HomeChannelsBean response) {
-                adapter.setData(response);
-
-            }
-        }, HomeChannelsBean.class);
-        MyRequestQueue.getInstance().add(selectionDataGsonRequest);
-        GsonRequest<HomeSubjectBean> subjectBeanGsonRequest = new GsonRequest<>(Request.Method.GET, "http://api.liwushuo.com/v2/secondary_banners?gender=2&generation=1", new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }, new Response.Listener<HomeSubjectBean>() {
+        VolleySingle.addRequest("http://api.liwushuo.com/v2/secondary_banners?gender=2&generation=1", HomeSubjectBean.class, new Response.Listener<HomeSubjectBean>() {
             @Override
             public void onResponse(HomeSubjectBean response) {
                 View view = LayoutInflater.from(context).inflate(R.layout.head_view_horizontal_sv, null);
@@ -82,7 +58,48 @@ public class FirstFragment extends BaseFragment {
                 }
                 listView.addHeaderView(view);
             }
-        }, HomeSubjectBean.class);
-        MyRequestQueue.getInstance().add(subjectBeanGsonRequest);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+
+
+    }
+
+    public void getData() {
+
+        VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/103/items?", HomeChannelsBean.class, new Response.Listener<HomeChannelsBean>() {
+            @Override
+            public void onResponse(HomeChannelsBean response) {
+                adapter.setData(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+//        GsonRequest<HomeSubjectBean> subjectBeanGsonRequest = new GsonRequest<>(Request.Method.GET, "http://api.liwushuo.com/v2/secondary_banners?gender=2&generation=1", new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        }, new Response.Listener<HomeSubjectBean>() {
+//            @Override
+//            public void onResponse(HomeSubjectBean response) {
+//                View view = LayoutInflater.from(context).inflate(R.layout.head_view_horizontal_sv, null);
+//                int[] ids = {R.id.head_view_horizontal_iv_1, R.id.head_view_horizontal_iv_2, R.id.head_view_horizontal_iv_3, R.id.head_view_horizontal_iv_4, R.id.head_view_horizontal_iv_5, R.id.head_view_horizontal_iv_6, R.id.head_view_horizontal_iv_7, R.id.head_view_horizontal_iv_8,R.id.head_view_horizontal_iv_9,R.id.head_view_horizontal_iv_10};
+//                for (int i = 0; i < ids.length; i++) {
+//
+//                    Picasso.with(context).load(response.getData().getSecondary_banners().get(i).getImage_url()).resize(200,200).into(((ImageView) view.findViewById(ids[i])));
+//                }
+//                listView.addHeaderView(view);
+//            }
+//        }, HomeSubjectBean.class);
+//        MyRequestQueue.getInstance().add(subjectBeanGsonRequest);
     }
 }

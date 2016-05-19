@@ -1,6 +1,8 @@
 package com.zhao.giftsaydemo.home.channels;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhao.giftsaydemo.R;
+import com.zhao.giftsaydemo.category.strategy.channels.DetailsActivity;
 import com.zhao.giftsaydemo.home.bean.HomeChannelsBean;
 
 import it.sephiroth.android.library.picasso.Picasso;
@@ -62,6 +65,15 @@ public class DetailsAdapter extends BaseAdapter {
         holder.textView.setText(data.getData().getItems().get(position).getTitle());
         Picasso.with(context).load(data.getData().getItems().get(position).getCover_image_url()).into(holder.backgroundIv);
         holder.alphaIv.setImageResource(R.mipmap.ic_item_home_alpha);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = data.getData().getItems().get(position).getUrl();
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("url", url);
+                context.startActivity(intent);
+            }
+        });
 
 
         return convertView;
@@ -70,8 +82,10 @@ public class DetailsAdapter extends BaseAdapter {
     class ViewHolder {
         ImageView backgroundIv, alphaIv;
         TextView textView;
+        CardView cardView;
 
         public ViewHolder(View itemView) {
+            cardView = (CardView) itemView.findViewById(R.id.item_channels_cv);
             textView = (TextView) itemView.findViewById(R.id.item_home_content_tv);
             backgroundIv = (ImageView) itemView.findViewById(R.id.item_home_background_iv);
             alphaIv = (ImageView) itemView.findViewById(R.id.item_home_alpha_iv);
