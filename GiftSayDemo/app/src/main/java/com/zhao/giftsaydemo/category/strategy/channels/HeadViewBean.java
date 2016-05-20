@@ -1,17 +1,37 @@
 package com.zhao.giftsaydemo.category.strategy.channels;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/18.
  */
-public class HeadViewBean {
+public class HeadViewBean implements Parcelable{
 
     private int code;
 
 
     private DataBean data;
     private String message;
+
+    protected HeadViewBean(Parcel in) {
+        code = in.readInt();
+        message = in.readString();
+    }
+
+    public static final Creator<HeadViewBean> CREATOR = new Creator<HeadViewBean>() {
+        @Override
+        public HeadViewBean createFromParcel(Parcel in) {
+            return new HeadViewBean(in);
+        }
+
+        @Override
+        public HeadViewBean[] newArray(int size) {
+            return new HeadViewBean[size];
+        }
+    };
 
     public int getCode() {
         return code;
@@ -35,6 +55,17 @@ public class HeadViewBean {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(code);
+        dest.writeString(message);
     }
 
     public static class DataBean {

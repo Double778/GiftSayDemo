@@ -1,27 +1,20 @@
 package com.zhao.giftsaydemo.category.gift;
 
 import android.graphics.Color;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
-import com.zhao.giftsaydemo.util.MyRequestQueue;
-import com.zhao.giftsaydemo.util.GsonRequest;
+import com.zhao.giftsaydemo.util.VolleySingle;
 
 import za.co.immedia.pinnedheaderlistview.PinnedHeaderListView;
 
@@ -36,26 +29,19 @@ public class GiftFragment extends BaseFragment {
     @BindView(R.id.fragment_category_gift_fragment_right_lv)
     private PinnedHeaderListView rightListView;
     private boolean isScroll = true;
-    private GiftAdapter adapter;
-    private GiftBean giftBean;
+    private RightAdapter adapter;
     private LeftAdapter leftAdapter;
 
 
     @Override
     public void initData() {
-        GsonRequest<GiftBean> gsonRequest = new GsonRequest<>(Request.Method.GET, "http://api.liwushuo.com/v2/item_categories/tree", new Response.ErrorListener() {
+        VolleySingle.addRequest("http://api.liwushuo.com/v2/item_categories/tree", GiftBean.class, new Response.Listener<GiftBean>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }, new Response.Listener<GiftBean>() {
-            @Override
-            public void onResponse(final GiftBean response) {
-                giftBean = response;
+            public void onResponse(GiftBean response) {
                 leftAdapter = new LeftAdapter(context, response);
                 leftListView.setAdapter(leftAdapter);
-                adapter = new GiftAdapter(context);
-                adapter.setGiftBean(giftBean);
+                adapter = new RightAdapter(context);
+                adapter.setGiftBean(response);
                 rightListView.setAdapter(adapter);
                 leftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -95,11 +81,12 @@ public class GiftFragment extends BaseFragment {
 //                                    }
 //                                }
 //                            }
-//                            leftListView.smoothScrollToPosition(adapter.getSectionForPosition(firstVisibleItem));
-//                            leftAdapter.setSelectPos(adapter.getSectionForPosition(firstVisibleItem));
+                            //     leftListView.smoothScrollToPosition(adapter.getSectionForPosition(firstVisibleItem));
+                            //          leftAdapter.setSelectPos(adapter.getSectionForPosition(firstVisibleItem));
                             for (int i = 0; i < leftListView.getChildCount(); i++) {
-                                if (i == adapter.getSectionForPosition(firstVisibleItem)){
+                                if (i == adapter.getSectionForPosition(firstVisibleItem)) {
                                     leftListView.getChildAt(i).setBackgroundColor(Color.WHITE);
+
                                 } else {
                                     leftListView.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                                 }
@@ -112,17 +99,19 @@ public class GiftFragment extends BaseFragment {
                     }
                 });
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
             }
-        }, GiftBean.class);
-        MyRequestQueue.getInstance().add(gsonRequest);
-
+        });
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_gift_fragment, menu);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.menu_gift_fragment, menu);
+//    }
 }

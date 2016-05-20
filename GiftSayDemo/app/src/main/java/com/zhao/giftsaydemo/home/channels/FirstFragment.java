@@ -71,7 +71,7 @@ public class FirstFragment extends BaseFragment {
 
     public void getData() {
 
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/103/items?", HomeChannelsBean.class, new Response.Listener<HomeChannelsBean>() {
+        VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/103/items?limit=20&ad=2&gender=2&offset=0&generation=1", HomeChannelsBean.class, new Response.Listener<HomeChannelsBean>() {
             @Override
             public void onResponse(HomeChannelsBean response) {
                 adapter.setData(response);

@@ -29,7 +29,6 @@ public class PopFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        adapter = new PopAdapter(context);
 
         VolleySingle.addRequest("http://api.liwushuo.com/v2/items?limit=20&offset=0&gender=2&generation=1", PopBean.class, new Response.Listener<PopBean>() {
             @Override
@@ -43,11 +42,8 @@ public class PopFragment extends BaseFragment {
             }
         });
 
+        adapter = new PopAdapter(context);
         recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-        List<Integer> drawables = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            drawables.add(R.mipmap.ic_launcher);
-        }
         recyclerView.setAdapter(adapter);
     }
 

@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/title" />
-    <WebView
-        android:id="@+id/activity_strategy_details_wv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
+    <include layout="@layout/title"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_gift_channels_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

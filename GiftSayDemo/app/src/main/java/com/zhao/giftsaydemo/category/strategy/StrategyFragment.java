@@ -17,6 +17,7 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.category.strategy.channels.HeadViewBean;
+import com.zhao.giftsaydemo.category.strategy.subject.AllSubjectActivity;
 import com.zhao.giftsaydemo.util.MyRequestQueue;
 import com.zhao.giftsaydemo.util.GsonRequest;
 import com.zhao.giftsaydemo.util.VolleySingle;
@@ -61,7 +62,7 @@ public class StrategyFragment extends BaseFragment{
 
 
             @Override
-            public void onResponse(HeadViewBean response) {
+            public void onResponse(final HeadViewBean response) {
                 View view = LayoutInflater.from(context).inflate(R.layout.head_view_horizontal_sv, null);
                 for (int i = 0; i < ids.length; i++) {
 
@@ -76,9 +77,20 @@ public class StrategyFragment extends BaseFragment{
 //                        }
 //                    });
                 }
-                TextView textView = (TextView) view.findViewById(R.id.head_view_tv);
+                TextView textView = (TextView) view.findViewById(R.id.head_view_left_tv);
                 textView.setVisibility(View.VISIBLE);
                 textView.setText("专题");
+                TextView showAllTv = (TextView) view.findViewById(R.id.head_view_right_tv);
+                showAllTv.setVisibility(View.VISIBLE);
+                showAllTv.setText("查看全部");
+                showAllTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, AllSubjectActivity.class);
+                        context.startActivity(intent);
+
+                    }
+                });
                 listView.addHeaderView(view);
 
             }

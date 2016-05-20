@@ -4,8 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/title"
+        android:id="@+id/title"/>
+
     <ListView
         android:id="@+id/aty_strategy_channels_lv"
-        style="@style/ChannelsListViewStyle"/>
+        style="@style/ChannelsListViewStyle" />
 
 </LinearLayout>

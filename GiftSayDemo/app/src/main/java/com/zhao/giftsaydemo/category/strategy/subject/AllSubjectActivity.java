@@ -1,5 +1,6 @@
-package com.zhao.giftsaydemo.category.strategy.channels;
+package com.zhao.giftsaydemo.category.strategy.subject;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -11,27 +12,28 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
-import com.zhao.giftsaydemo.pop.PopBean;
+import com.zhao.giftsaydemo.category.strategy.channels.HeadViewBean;
 import com.zhao.giftsaydemo.util.VolleySingle;
 
 /**
- * Created by 华哥哥 on 16/5/17.
+ * Created by 华哥哥 on 16/5/19.
  */
 @BindContent(R.layout.activity_strategy_channels)
-public class StrategyChannelsActivity extends BaseActivity implements View.OnClickListener {
+public class AllSubjectActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.aty_strategy_channels_lv)
     private ListView listView;
-    private StrategyChannelsAdapter adapter;
+    private AllSubjectAdapter adapter;
+
     @Override
     public void initData() {
 
         setTitle();
 
-        int id = getIntent().getIntExtra("Id", 0);
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/" + id + "/items?limit=20&offset=0", StrategyChannelsBean.class, new Response.Listener<StrategyChannelsBean>() {
+        VolleySingle.addRequest("http://api.liwushuo.com/v2/collections?limit=20&offset=0", HeadViewBean.class, new Response.Listener<HeadViewBean>() {
             @Override
-            public void onResponse(StrategyChannelsBean response) {
-                adapter.setData(response);
+            public void onResponse(HeadViewBean response) {
+                adapter.setBean(response);
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -40,26 +42,23 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
             }
         });
 
-        adapter = new StrategyChannelsAdapter(this);
+        adapter = new AllSubjectAdapter(this);
         listView.setAdapter(adapter);
 
     }
 
+
     private void setTitle() {
-        findViewById(R.id.title_name_iv).setVisibility(View.INVISIBLE);
         findViewById(R.id.title_right_iv).setVisibility(View.INVISIBLE);
         ImageView imageView = (ImageView) findViewById(R.id.title_left_iv);
         imageView.setImageResource(R.mipmap.ic_action_back);
         imageView.setOnClickListener(this);
-        TextView textView = (TextView) findViewById(R.id.title_name_tv);
-        textView.setVisibility(View.VISIBLE);
-        textView.setTextSize(16);
-        textView.setText(getIntent().getStringExtra("name"));
+
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        switch (v.getId()){
             case R.id.title_left_iv:
                 finish();
                 break;

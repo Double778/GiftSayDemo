@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.main_activity_home_btn:
                 findViewById(R.id.title).setVisibility(View.VISIBLE);
                 transaction.replace(R.id.main_activity_replace_layout, new HomeFragment());
-                findViewById(R.id.title_signin_iv).setVisibility(View.VISIBLE);
+                findViewById(R.id.title_left_iv).setVisibility(View.VISIBLE);
                 findViewById(R.id.title_name_iv).setVisibility(View.VISIBLE);
                 titleTv.setVisibility(View.INVISIBLE);
                 //findViewById(R.id.title_fragment_category_tab).setVisibility(View.INVISIBLE);
@@ -66,10 +66,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 findViewById(R.id.title).setVisibility(View.VISIBLE);
 
                 transaction.replace(R.id.main_activity_replace_layout, new PopFragment());
-                findViewById(R.id.title_signin_iv).setVisibility(View.INVISIBLE);
+                findViewById(R.id.title_left_iv).setVisibility(View.INVISIBLE);
                 findViewById(R.id.title_name_iv).setVisibility(View.INVISIBLE);
                 titleTv.setVisibility(View.VISIBLE);
-                titleTv.setTextColor(Color.WHITE);
                 titleTv.setText("热门");
                 titleTv.setTextSize(16);
                 //findViewById(R.id.title_fragment_category_tab).setVisibility(View.INVISIBLE);

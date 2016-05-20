@@ -115,10 +115,9 @@ public class StrategyAdapter extends BaseAdapter {
         viewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int gridViewPos, long id) {
-                Log.d("StrategyAdapter", "position:" + position);
-                Log.d("StrategyAdapter", "gridViewPos:" + gridViewPos);
                 Intent intent = new Intent(context, StrategyChannelsActivity.class);
                 intent.putExtra("Id", bean.getData().getChannel_groups().get(position).getChannels().get(gridViewPos).getId());
+                intent.putExtra("name", bean.getData().getChannel_groups().get(position).getChannels().get(gridViewPos).getName());
                 context.startActivity(intent);
             }
         });

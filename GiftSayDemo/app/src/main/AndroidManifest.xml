@@ -17,9 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity"/>
-        <activity android:name=".category.strategy.channels.StrategyChannelsActivity"/>
+        <activity android:name=".main.MainActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".category.strategy.channels.StrategyChannelsActivity" />
         <activity android:name=".category.strategy.channels.DetailsActivity"/>
+        <activity android:name=".category.gift.channels.GiftChannelsActivity"/>
+        <activity android:name=".category.strategy.subject.AllSubjectActivity"/>
     </application>
 
 </manifest>
