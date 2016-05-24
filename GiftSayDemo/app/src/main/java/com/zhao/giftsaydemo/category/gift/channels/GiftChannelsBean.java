@@ -1,16 +1,36 @@
 package com.zhao.giftsaydemo.category.gift.channels;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/19.
  */
-public class GiftChannelsBean {
+public class GiftChannelsBean implements Parcelable{
 
     private int code;
 
     private DataBean data;
     private String message;
+
+    protected GiftChannelsBean(Parcel in) {
+        code = in.readInt();
+        message = in.readString();
+    }
+
+    public static final Creator<GiftChannelsBean> CREATOR = new Creator<GiftChannelsBean>() {
+        @Override
+        public GiftChannelsBean createFromParcel(Parcel in) {
+            return new GiftChannelsBean(in);
+        }
+
+        @Override
+        public GiftChannelsBean[] newArray(int size) {
+            return new GiftChannelsBean[size];
+        }
+    };
 
     public int getCode() {
         return code;
@@ -36,11 +56,38 @@ public class GiftChannelsBean {
         this.message = message;
     }
 
-    public static class DataBean {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(code);
+        dest.writeString(message);
+    }
+
+    public static class DataBean implements Parcelable{
 
         private PagingBean paging;
 
         private List<ItemsBean> items;
+
+        protected DataBean(Parcel in) {
+            items = in.createTypedArrayList(ItemsBean.CREATOR);
+        }
+
+        public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel in) {
+                return new DataBean(in);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
 
         public PagingBean getPaging() {
             return paging;
@@ -58,6 +105,16 @@ public class GiftChannelsBean {
             this.items = items;
         }
 
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeTypedList(items);
+        }
+
         public static class PagingBean {
             private String next_url;
 
@@ -70,7 +127,7 @@ public class GiftChannelsBean {
             }
         }
 
-        public static class ItemsBean {
+        public static class ItemsBean implements Parcelable{
             private Object ad_monitors;
             private Object brand_id;
             private Object brand_order;
@@ -96,6 +153,41 @@ public class GiftChannelsBean {
             private List<String> image_urls;
             private List<?> post_ids;
             private List<String> webp_urls;
+
+            protected ItemsBean(Parcel in) {
+                category_id = in.readInt();
+                cover_image_url = in.readString();
+                cover_webp_url = in.readString();
+                created_at = in.readInt();
+                description = in.readString();
+                editor_id = in.readInt();
+                favorites_count = in.readInt();
+                id = in.readInt();
+                name = in.readString();
+                price = in.readString();
+                purchase_id = in.readString();
+                purchase_shop_id = in.readString();
+                purchase_status = in.readInt();
+                purchase_type = in.readInt();
+                purchase_url = in.readString();
+                subcategory_id = in.readInt();
+                updated_at = in.readInt();
+                url = in.readString();
+                image_urls = in.createStringArrayList();
+                webp_urls = in.createStringArrayList();
+            }
+
+            public static final Creator<ItemsBean> CREATOR = new Creator<ItemsBean>() {
+                @Override
+                public ItemsBean createFromParcel(Parcel in) {
+                    return new ItemsBean(in);
+                }
+
+                @Override
+                public ItemsBean[] newArray(int size) {
+                    return new ItemsBean[size];
+                }
+            };
 
             public Object getAd_monitors() {
                 return ad_monitors;
@@ -295,6 +387,35 @@ public class GiftChannelsBean {
 
             public void setWebp_urls(List<String> webp_urls) {
                 this.webp_urls = webp_urls;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeInt(category_id);
+                dest.writeString(cover_image_url);
+                dest.writeString(cover_webp_url);
+                dest.writeInt(created_at);
+                dest.writeString(description);
+                dest.writeInt(editor_id);
+                dest.writeInt(favorites_count);
+                dest.writeInt(id);
+                dest.writeString(name);
+                dest.writeString(price);
+                dest.writeString(purchase_id);
+                dest.writeString(purchase_shop_id);
+                dest.writeInt(purchase_status);
+                dest.writeInt(purchase_type);
+                dest.writeString(purchase_url);
+                dest.writeInt(subcategory_id);
+                dest.writeInt(updated_at);
+                dest.writeString(url);
+                dest.writeStringList(image_urls);
+                dest.writeStringList(webp_urls);
             }
         }
     }

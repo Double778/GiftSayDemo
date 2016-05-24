@@ -35,5 +35,11 @@
             android:drawableTop="@mipmap/icon_service"
             android:text="@string/fragment_user_service"/>
     </RadioGroup>
+    <ListView
+        android:id="@+id/fragment_user_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
 
 </LinearLayout>

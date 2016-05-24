@@ -12,6 +12,9 @@ import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.home.bean.TabBean;
 import com.zhao.giftsaydemo.util.VolleySingle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by 华哥哥 on 16/5/9.
  */
@@ -43,7 +46,6 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onResponse(TabBean response) {
                 tabBean = response;
-
                 adapter.setTabBean(tabBean);
 
             }

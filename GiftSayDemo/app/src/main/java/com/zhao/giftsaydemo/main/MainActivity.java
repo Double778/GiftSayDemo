@@ -28,6 +28,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private RadioButton userBtn;
     private FragmentTransaction transaction;
 
+    private HomeFragment homeFragment;
+    private PopFragment popFragment;
+    private CategoryFragment categoryFragment;
+    private UserFragment userFragment;
+
     @Override
     public void initData() {
         transaction = getSupportFragmentManager().beginTransaction();
@@ -35,6 +40,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         homeBtn.setChecked(true);
         transaction.commit();
         setOnClick();
+
+        homeFragment = new HomeFragment();
+        popFragment = new PopFragment();
+        categoryFragment = new CategoryFragment();
+        userFragment = new UserFragment();
 
     }
 
@@ -54,7 +64,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.main_activity_home_btn:
                 findViewById(R.id.title).setVisibility(View.VISIBLE);
-                transaction.replace(R.id.main_activity_replace_layout, new HomeFragment());
+                transaction.replace(R.id.main_activity_replace_layout, homeFragment);
                 findViewById(R.id.title_left_iv).setVisibility(View.VISIBLE);
                 findViewById(R.id.title_name_iv).setVisibility(View.VISIBLE);
                 titleTv.setVisibility(View.INVISIBLE);
@@ -65,7 +75,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.main_activity_pop_btn:
                 findViewById(R.id.title).setVisibility(View.VISIBLE);
 
-                transaction.replace(R.id.main_activity_replace_layout, new PopFragment());
+                transaction.replace(R.id.main_activity_replace_layout, popFragment);
                 findViewById(R.id.title_left_iv).setVisibility(View.INVISIBLE);
                 findViewById(R.id.title_name_iv).setVisibility(View.INVISIBLE);
                 titleTv.setVisibility(View.VISIBLE);
@@ -76,12 +86,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 break;
             case R.id.main_activity_category_btn:
-                transaction.replace(R.id.main_activity_replace_layout, new CategoryFragment());
+                transaction.replace(R.id.main_activity_replace_layout, categoryFragment);
                 findViewById(R.id.title).setVisibility(View.GONE);
 
                 break;
             case R.id.main_activity_user_btn:
-                transaction.replace(R.id.main_activity_replace_layout, new UserFragment());
+                transaction.replace(R.id.main_activity_replace_layout, userFragment);
                 findViewById(R.id.title).setVisibility(View.GONE);
 
         }

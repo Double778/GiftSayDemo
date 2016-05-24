@@ -2,6 +2,7 @@ package com.zhao.giftsaydemo.pop;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +54,11 @@ public class PopAdapter extends RecyclerView.Adapter<PopAdapter.MyViewHolder> {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    int id = bean.getData().getItems().get(pos).getData().getId();
-                    onClickListener.onClick(id);
+                    onClickListener.onClick(pos, bean);
+                    Log.d("PopAdapter", "bean:" + bean);
+                    Log.d("PopAdapter", "pos:" + pos);
+
+
 
 
                 }
@@ -81,6 +85,6 @@ public class PopAdapter extends RecyclerView.Adapter<PopAdapter.MyViewHolder> {
     }
 
     public interface OnClickListener {
-        void onClick(int id);
+        void onClick(int pos, PopBean bean);
     }
 }

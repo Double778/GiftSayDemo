@@ -1,19 +1,14 @@
 package com.zhao.giftsaydemo.category.gift.channels;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhao.giftsaydemo.R;
-import com.zhao.giftsaydemo.category.strategy.channels.DetailsActivity;
-import com.zhao.giftsaydemo.category.strategy.channels.StrategyChannelsBean;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
@@ -58,8 +53,7 @@ public class GiftChannelsAdapter extends RecyclerView.Adapter<GiftChannelsAdapte
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    int id = bean.getData().getItems().get(pos).getId();
-                    onClickListener.onClick(id);
+                    onClickListener.onClick(bean, pos);
 
 
                 }
@@ -86,6 +80,6 @@ public class GiftChannelsAdapter extends RecyclerView.Adapter<GiftChannelsAdapte
         }
     }
     public interface OnClickListener {
-        void onClick(int id);
+        void onClick(GiftChannelsBean bean, int pos);
     }
 }

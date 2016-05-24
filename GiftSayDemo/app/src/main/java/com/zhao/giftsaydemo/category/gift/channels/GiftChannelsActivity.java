@@ -1,5 +1,6 @@
 package com.zhao.giftsaydemo.category.gift.channels;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,13 +13,15 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
+import com.zhao.giftsaydemo.category.gift.details.GiftDetailsActivity;
 import com.zhao.giftsaydemo.util.VolleySingle;
+
 
 /**
  * Created by 华哥哥 on 16/5/19.
  */
 @BindContent(R.layout.activity_gift_channels)
-public class GiftChannelsActivity extends BaseActivity implements View.OnClickListener {
+public class GiftChannelsActivity extends BaseActivity implements View.OnClickListener, GiftChannelsAdapter.OnClickListener {
     @BindView(R.id.activity_gift_channels_rv)
     private RecyclerView recyclerView;
     private GiftChannelsAdapter adapter;
@@ -43,6 +46,7 @@ public class GiftChannelsActivity extends BaseActivity implements View.OnClickLi
         adapter = new GiftChannelsAdapter(this);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(adapter);
+        adapter.setOnClickListener(this);
 
     }
 
@@ -61,10 +65,19 @@ public class GiftChannelsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.title_left_iv:
                 finish();
                 break;
         }
+    }
+
+
+    @Override
+    public void onClick(GiftChannelsBean bean, int pos) {
+        Intent intent = new Intent(this, GiftDetailsActivity.class);
+        GiftChannelsBean.DataBean.ItemsBean data = bean.getData().getItems().get(pos);
+        intent.putExtra("data", data);
+        startActivity(intent);
     }
 }

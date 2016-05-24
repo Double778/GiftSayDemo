@@ -29,4 +29,6 @@ dependencies {
     compile 'com.netflix.feign:feign-gson:8.16.2'
     compile 'com.android.support:cardview-v7:23.2.1'
     compile 'it.sephiroth.android.library.picasso:picasso:2.5.2.4b'
+    compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
+    compile 'de.greenrobot:greendao:2.1.0'
 }

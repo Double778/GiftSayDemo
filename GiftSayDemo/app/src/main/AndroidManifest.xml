@@ -20,9 +20,14 @@
         <activity android:name=".main.MainActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".category.strategy.channels.StrategyChannelsActivity" />
-        <activity android:name=".category.strategy.channels.DetailsActivity"/>
+        <activity android:name=".category.strategy.channels.StrategyDetailsActivity"
+            android:process=".category.strategy.channels.web"/>
         <activity android:name=".category.gift.channels.GiftChannelsActivity"/>
         <activity android:name=".category.strategy.subject.AllSubjectActivity"/>
+        <activity android:name=".category.gift.details.GiftDetailsActivity"
+            android:process=".category.gift.details.web"/>
+        <activity android:name=".pop.details.PopDetailsActivity"/>
+        <activity android:name=".category.strategy.subject.SubjectChannelsActivity"/>
     </application>
 
 </manifest>

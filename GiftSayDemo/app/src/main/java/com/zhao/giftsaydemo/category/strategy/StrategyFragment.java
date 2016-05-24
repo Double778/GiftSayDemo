@@ -18,6 +18,7 @@ import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.category.strategy.channels.HeadViewBean;
 import com.zhao.giftsaydemo.category.strategy.subject.AllSubjectActivity;
+import com.zhao.giftsaydemo.category.strategy.subject.SubjectChannelsActivity;
 import com.zhao.giftsaydemo.util.MyRequestQueue;
 import com.zhao.giftsaydemo.util.GsonRequest;
 import com.zhao.giftsaydemo.util.VolleySingle;
@@ -67,15 +68,17 @@ public class StrategyFragment extends BaseFragment{
                 for (int i = 0; i < ids.length; i++) {
 
                     Picasso.with(context).load(response.getData().getCollections().get(i).getBanner_image_url()).into(((ImageView) view.findViewById(ids[i])));
-//                    final int finalI = i;
-//                    ((ImageView)view.findViewById(ids[i])).setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Intent intent = new Intent(context, );
-//                            intent.putExtra("")
-//
-//                        }
-//                    });
+                    final int finalI = i;
+                    ((ImageView)view.findViewById(ids[i])).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(context, SubjectChannelsActivity.class);
+                            intent.putExtra("Id", response.getData().getCollections().get(finalI).getId());
+                            intent.putExtra("name", response.getData().getCollections().get(finalI).getTitle());
+                            context.startActivity(intent);
+
+                        }
+                    });
                 }
                 TextView textView = (TextView) view.findViewById(R.id.head_view_left_tv);
                 textView.setVisibility(View.VISIBLE);

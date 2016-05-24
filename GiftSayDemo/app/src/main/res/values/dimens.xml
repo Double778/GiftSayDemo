@@ -13,4 +13,7 @@
     <dimen name="title_height">40dp</dimen>
     <dimen name="fragment_category_tab_layout_height">20dp</dimen>
 
+    <dimen name="item_pop_content_tv_height">35dp</dimen>
+    <dimen name="item_channels_cv_height">160dp</dimen>
+
 </resources>

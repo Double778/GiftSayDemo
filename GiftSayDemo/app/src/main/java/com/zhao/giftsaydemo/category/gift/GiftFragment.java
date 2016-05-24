@@ -38,11 +38,8 @@ public class GiftFragment extends BaseFragment {
         VolleySingle.addRequest("http://api.liwushuo.com/v2/item_categories/tree", GiftBean.class, new Response.Listener<GiftBean>() {
             @Override
             public void onResponse(GiftBean response) {
-                leftAdapter = new LeftAdapter(context, response);
-                leftListView.setAdapter(leftAdapter);
-                adapter = new RightAdapter(context);
+                leftAdapter.setResponse(response);
                 adapter.setGiftBean(response);
-                rightListView.setAdapter(adapter);
                 leftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -106,6 +103,12 @@ public class GiftFragment extends BaseFragment {
 
             }
         });
+
+        leftAdapter = new LeftAdapter(context);
+        leftListView.setAdapter(leftAdapter);
+        adapter = new RightAdapter(context);
+        rightListView.setAdapter(adapter);
+
 
     }
 

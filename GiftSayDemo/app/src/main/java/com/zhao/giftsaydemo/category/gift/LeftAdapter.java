@@ -20,9 +20,13 @@ public class LeftAdapter extends BaseAdapter{
     private Context context;
     private GiftBean response;
 
-    public LeftAdapter(Context context, GiftBean response) {
+    public LeftAdapter(Context context) {
         this.context = context;
+    }
+
+    public void setResponse(GiftBean response) {
         this.response = response;
+        notifyDataSetChanged();
     }
 
     @Override

@@ -1,10 +1,8 @@
 package com.zhao.giftsaydemo.category.strategy.subject;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;

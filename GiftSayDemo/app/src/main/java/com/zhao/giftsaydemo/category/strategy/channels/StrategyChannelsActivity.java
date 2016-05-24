@@ -26,7 +26,6 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
     public void initData() {
 
         setTitle();
-
         int id = getIntent().getIntExtra("Id", 0);
         VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/" + id + "/items?limit=20&offset=0", StrategyChannelsBean.class, new Response.Listener<StrategyChannelsBean>() {
             @Override

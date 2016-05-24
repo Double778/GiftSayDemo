@@ -5,5 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorTitleBackground">#db3746</color>
     <color name="colorWhiteBackground">#ffffff</color>
-    <color name="item_home_content_tv_text_color">#8c8989</color>
+    <color name="item_home_content_tv_text_color">#ffffff</color>
 </resources>
