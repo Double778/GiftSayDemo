@@ -1,11 +1,13 @@
 package com.zhao.giftsaydemo.category.strategy.channels;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,8 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
+import com.zhao.giftsaydemo.db.Strategy;
+import com.zhao.giftsaydemo.db.StrategyDaoTool;
 
 
 /**
@@ -22,19 +26,62 @@ import com.zhao.giftsaydemo.base.BaseActivity;
 public class StrategyDetailsActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.activity_strategy_details_wv)
     private WebView webView;
+    private CheckBox checkBox;
+    private StrategyDaoTool strategyDaoTool;
+    private String url;
 
     @Override
     public void initData() {
 
-        setTitle();
 
-        String url = getIntent().getStringExtra("url");
+        strategyDaoTool = new StrategyDaoTool();
+        setTitle();
+        url = getIntent().getStringExtra("url");
         webView.loadUrl(url);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setAllowFileAccess(true);
         webView.setWebViewClient(new MyWebViewClient());
+
+        setLiked();
+
+
+    }
+
+    private void setLiked() {
+        final Strategy strategy = strategyDaoTool.queryStrategyByUrl(url);
+        if (strategy.getIsLiked()) {
+            checkBox.setChecked(true);
+        } else {
+            checkBox.setChecked(false);
+        }
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (strategy.getIsLiked()) {
+
+                    strategy.setIsLiked(false);
+                    strategy.setLikeCount(strategy.getLikeCount() - 1);
+                    strategyDaoTool.update(strategy);
+                    checkBox.setChecked(false);
+
+                    Intent intent = new Intent("com.zhao.giftsaydemo.LikeChanged");
+                    sendBroadcast(intent);
+
+                } else {
+
+                    strategy.setIsLiked(true);
+                    strategy.setLikeCount(strategy.getLikeCount() + 1);
+                    strategyDaoTool.update(strategy);
+                    checkBox.setChecked(true);
+
+                    Intent intent = new Intent("com.zhao.giftsaydemo.LikeChanged");
+                    sendBroadcast(intent);
+
+                }
+            }
+        });
 
     }
 
@@ -48,14 +95,18 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
         textView.setVisibility(View.VISIBLE);
         textView.setTextSize(16);
         textView.setText("攻略详情");
+        checkBox = (CheckBox) findViewById(R.id.title_right_cb);
+        checkBox.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.title_left_iv:
+
                 finish();
                 break;
+
         }
     }
 
@@ -73,7 +124,7 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
 //    }
 
     // web视图
-    private class  MyWebViewClient extends WebViewClient{
+    private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);

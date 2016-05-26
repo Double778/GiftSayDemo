@@ -2,6 +2,7 @@ package com.zhao.giftsaydemo.category.gift;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,7 +93,7 @@ public class RightAdapter extends SectionedBaseAdapter {
                     holder = (ViewHolder) convertView.getTag();
                 }
                 holder.textView.setText(giftBean.getData().getCategories().get(i).getSubcategories().get(position).getName());
-                Picasso.with(context).load(giftBean.getData().getCategories().get(i).getSubcategories().get(position).getIcon_url()).into(holder.imageView);
+                Picasso.with(context).load(giftBean.getData().getCategories().get(i).getSubcategories().get(position).getIcon_url()).config(Bitmap.Config.RGB_565).into(holder.imageView);
                 return convertView;
             }
 

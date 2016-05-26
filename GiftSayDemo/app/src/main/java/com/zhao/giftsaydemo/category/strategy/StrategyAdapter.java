@@ -2,6 +2,7 @@ package com.zhao.giftsaydemo.category.strategy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,7 +94,7 @@ public class StrategyAdapter extends BaseAdapter {
                 }
 
                 holder.textView.setText(bean.getData().getChannel_groups().get(position).getChannels().get(pos).getName());
-                Picasso.with(context).load(bean.getData().getChannel_groups().get(position).getChannels().get(pos).getIcon_url()).into(holder.imageView);
+                Picasso.with(context).load(bean.getData().getChannel_groups().get(position).getChannels().get(pos).getIcon_url()).config(Bitmap.Config.RGB_565).into(holder.imageView);
                 ids = new ArrayList<>();
                 for (int i = 0; i < bean.getData().getChannel_groups().get(position).getChannels().size(); i++) {
                     ids.add(bean.getData().getChannel_groups().get(position).getChannels().get(pos).getId());

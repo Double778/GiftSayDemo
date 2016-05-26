@@ -11,8 +11,13 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
+import com.zhao.giftsaydemo.db.Strategy;
+import com.zhao.giftsaydemo.db.StrategyDaoTool;
 import com.zhao.giftsaydemo.pop.PopBean;
 import com.zhao.giftsaydemo.util.VolleySingle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/17.
@@ -22,15 +27,31 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
     @BindView(R.id.aty_strategy_channels_lv)
     private ListView listView;
     private StrategyChannelsAdapter adapter;
+    private StrategyDaoTool strategyDaoTool;
     @Override
     public void initData() {
+        strategyDaoTool = new StrategyDaoTool();
 
         setTitle();
-        int id = getIntent().getIntExtra("Id", 0);
+        final int id = getIntent().getIntExtra("Id", 0);
         VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/" + id + "/items?limit=20&offset=0", StrategyChannelsBean.class, new Response.Listener<StrategyChannelsBean>() {
             @Override
             public void onResponse(StrategyChannelsBean response) {
-                adapter.setData(response);
+                for (int i = 0; i < response.getData().getItems().size(); i++) {
+                    Strategy strategy = new Strategy(
+                            System.currentTimeMillis(),
+                            id,
+                            response.getData().getItems().get(i).getTitle(),
+                            response.getData().getItems().get(i).getUrl(),
+                            response.getData().getItems().get(i).getCover_image_url(),
+                            response.getData().getItems().get(i).isLiked(),
+                            response.getData().getItems().get(i).getLikes_count());
+                    strategyDaoTool.addStrategy(strategy);
+                }
+                adapter.setChannels(id);
+                adapter.setStrategies(strategyDaoTool.queryStrategyByChannels(id));
+
+//                adapter.setData(response);
             }
         }, new Response.ErrorListener() {
             @Override

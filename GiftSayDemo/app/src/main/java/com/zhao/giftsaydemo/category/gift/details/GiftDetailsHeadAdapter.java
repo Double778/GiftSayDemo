@@ -1,7 +1,9 @@
 package com.zhao.giftsaydemo.category.gift.details;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by 华哥哥 on 16/5/20.
+ * 礼物详情
  */
 public class GiftDetailsHeadAdapter extends PagerAdapter{
     private List<String> imageUrls;
@@ -43,8 +46,9 @@ public class GiftDetailsHeadAdapter extends PagerAdapter{
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.page_gift_details_head, container, false);
         ImageView imageView = (ImageView) view.findViewById(R.id.page_gift_details_head_iv);
-        Picasso.with(context).load(imageUrls.get(position)).into(imageView);
+        Picasso.with(context).load(imageUrls.get(position)).config(Bitmap.Config.RGB_565).into(imageView);
         container.addView(view);
+        Log.d("GiftDetailsHeadAdapter", "imageUrls:" + imageUrls);
         return view;
     }
 

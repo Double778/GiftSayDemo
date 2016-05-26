@@ -1,6 +1,7 @@
 package com.zhao.giftsaydemo.pop;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,7 +49,7 @@ public class PopAdapter extends RecyclerView.Adapter<PopAdapter.MyViewHolder> {
 
         holder.contentTv.setText(bean.getData().getItems().get(position).getData().getName());
         holder.priceTv.setText(bean.getData().getItems().get(position).getData().getPrice());
-        Picasso.with(context).load(bean.getData().getItems().get(position).getData().getCover_image_url()).resize(400, 400).into(holder.imageView);
+        Picasso.with(context).load(bean.getData().getItems().get(position).getData().getCover_image_url()).resize(400, 400).config(Bitmap.Config.RGB_565).into(holder.imageView);
         if (onClickListener != null) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

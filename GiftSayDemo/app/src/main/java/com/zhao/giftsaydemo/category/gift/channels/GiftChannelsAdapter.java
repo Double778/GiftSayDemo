@@ -1,6 +1,7 @@
 package com.zhao.giftsaydemo.category.gift.channels;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +48,7 @@ public class GiftChannelsAdapter extends RecyclerView.Adapter<GiftChannelsAdapte
 
         holder.contentTv.setText(bean.getData().getItems().get(position).getName());
         holder.priceTv.setText(bean.getData().getItems().get(position).getPrice());
-        Picasso.with(context).load(bean.getData().getItems().get(position).getCover_image_url()).resize(400, 400).into(holder.imageView);
+        Picasso.with(context).load(bean.getData().getItems().get(position).getCover_image_url()).resize(400, 400).config(Bitmap.Config.RGB_565).into(holder.imageView);
         if (onClickListener != null) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

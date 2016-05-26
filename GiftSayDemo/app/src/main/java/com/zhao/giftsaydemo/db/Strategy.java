@@ -7,9 +7,12 @@ package com.zhao.giftsaydemo.db;
 public class Strategy {
 
     private Long id;
+    private Integer channels;
     private String name;
     private String url;
     private String imgUrl;
+    private Boolean isLiked;
+    private Integer likeCount;
 
     public Strategy() {
     }
@@ -18,11 +21,14 @@ public class Strategy {
         this.id = id;
     }
 
-    public Strategy(Long id, String name, String url, String imgUrl) {
+    public Strategy(Long id, Integer channels, String name, String url, String imgUrl, Boolean isLiked, Integer likeCount) {
         this.id = id;
+        this.channels = channels;
         this.name = name;
         this.url = url;
         this.imgUrl = imgUrl;
+        this.isLiked = isLiked;
+        this.likeCount = likeCount;
     }
 
     public Long getId() {
@@ -31,6 +37,14 @@ public class Strategy {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getChannels() {
+        return channels;
+    }
+
+    public void setChannels(Integer channels) {
+        this.channels = channels;
     }
 
     public String getName() {
@@ -55,6 +69,22 @@ public class Strategy {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Boolean getIsLiked() {
+        return isLiked;
+    }
+
+    public void setIsLiked(Boolean isLiked) {
+        this.isLiked = isLiked;
+    }
+
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
     }
 
 }

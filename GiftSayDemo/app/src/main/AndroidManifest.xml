@@ -28,6 +28,7 @@
             android:process=".category.gift.details.web"/>
         <activity android:name=".pop.details.PopDetailsActivity"/>
         <activity android:name=".category.strategy.subject.SubjectChannelsActivity"/>
+        <activity android:name=".category.gift.details.TaoBaoWebActivity"/>
     </application>
 
 </manifest>

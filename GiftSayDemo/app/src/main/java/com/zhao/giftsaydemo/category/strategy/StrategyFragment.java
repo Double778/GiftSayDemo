@@ -1,6 +1,7 @@
 package com.zhao.giftsaydemo.category.strategy;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +68,7 @@ public class StrategyFragment extends BaseFragment{
                 View view = LayoutInflater.from(context).inflate(R.layout.head_view_horizontal_sv, null);
                 for (int i = 0; i < ids.length; i++) {
 
-                    Picasso.with(context).load(response.getData().getCollections().get(i).getBanner_image_url()).into(((ImageView) view.findViewById(ids[i])));
+                    Picasso.with(context).load(response.getData().getCollections().get(i).getBanner_image_url()).config(Bitmap.Config.RGB_565).into(((ImageView) view.findViewById(ids[i])));
                     final int finalI = i;
                     ((ImageView)view.findViewById(ids[i])).setOnClickListener(new View.OnClickListener() {
                         @Override

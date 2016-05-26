@@ -21,7 +21,7 @@
         <ImageView
             android:id="@+id/item_home_background_iv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/item_channels_cv_height"
             android:scaleType="fitXY" />
 
         <FrameLayout

@@ -24,9 +24,12 @@ public class StrategyDao extends AbstractDao<Strategy, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property Url = new Property(2, String.class, "url", false, "URL");
-        public final static Property ImgUrl = new Property(3, String.class, "imgUrl", false, "IMG_URL");
+        public final static Property Channels = new Property(1, Integer.class, "channels", false, "CHANNELS");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
+        public final static Property Url = new Property(3, String.class, "url", false, "URL");
+        public final static Property ImgUrl = new Property(4, String.class, "imgUrl", false, "IMG_URL");
+        public final static Property IsLiked = new Property(5, Boolean.class, "isLiked", false, "IS_LIKED");
+        public final static Property LikeCount = new Property(6, Integer.class, "likeCount", false, "LIKE_COUNT");
     };
 
 
@@ -43,9 +46,12 @@ public class StrategyDao extends AbstractDao<Strategy, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"STRATEGY\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"NAME\" TEXT," + // 1: name
-                "\"URL\" TEXT," + // 2: url
-                "\"IMG_URL\" TEXT);"); // 3: imgUrl
+                "\"CHANNELS\" INTEGER," + // 1: channels
+                "\"NAME\" TEXT," + // 2: name
+                "\"URL\" TEXT," + // 3: url
+                "\"IMG_URL\" TEXT," + // 4: imgUrl
+                "\"IS_LIKED\" INTEGER," + // 5: isLiked
+                "\"LIKE_COUNT\" INTEGER);"); // 6: likeCount
     }
 
     /** Drops the underlying database table. */
@@ -64,19 +70,34 @@ public class StrategyDao extends AbstractDao<Strategy, Long> {
             stmt.bindLong(1, id);
         }
  
+        Integer channels = entity.getChannels();
+        if (channels != null) {
+            stmt.bindLong(2, channels);
+        }
+ 
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(2, name);
+            stmt.bindString(3, name);
         }
  
         String url = entity.getUrl();
         if (url != null) {
-            stmt.bindString(3, url);
+            stmt.bindString(4, url);
         }
  
         String imgUrl = entity.getImgUrl();
         if (imgUrl != null) {
-            stmt.bindString(4, imgUrl);
+            stmt.bindString(5, imgUrl);
+        }
+ 
+        Boolean isLiked = entity.getIsLiked();
+        if (isLiked != null) {
+            stmt.bindLong(6, isLiked ? 1L: 0L);
+        }
+ 
+        Integer likeCount = entity.getLikeCount();
+        if (likeCount != null) {
+            stmt.bindLong(7, likeCount);
         }
     }
 
@@ -91,9 +112,12 @@ public class StrategyDao extends AbstractDao<Strategy, Long> {
     public Strategy readEntity(Cursor cursor, int offset) {
         Strategy entity = new Strategy( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // url
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // imgUrl
+            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // channels
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // url
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // imgUrl
+            cursor.isNull(offset + 5) ? null : cursor.getShort(offset + 5) != 0, // isLiked
+            cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6) // likeCount
         );
         return entity;
     }
@@ -102,9 +126,12 @@ public class StrategyDao extends AbstractDao<Strategy, Long> {
     @Override
     public void readEntity(Cursor cursor, Strategy entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setUrl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setImgUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setChannels(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setImgUrl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setIsLiked(cursor.isNull(offset + 5) ? null : cursor.getShort(offset + 5) != 0);
+        entity.setLikeCount(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
      }
     
     /** @inheritdoc */

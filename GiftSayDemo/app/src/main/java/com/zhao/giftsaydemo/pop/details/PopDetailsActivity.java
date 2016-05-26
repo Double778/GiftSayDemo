@@ -1,5 +1,6 @@
 package com.zhao.giftsaydemo.pop.details;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.zhao.giftsaydemo.R;
@@ -16,15 +18,18 @@ import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.category.gift.channels.GiftChannelsBean;
 import com.zhao.giftsaydemo.category.gift.details.GiftDetailsContentAdapter;
 import com.zhao.giftsaydemo.category.gift.details.GiftDetailsHeadAdapter;
+import com.zhao.giftsaydemo.category.gift.details.TaoBaoWebActivity;
 import com.zhao.giftsaydemo.pop.PopBean;
 
 /**
  * Created by 华哥哥 on 16/5/21.
  */
 @BindContent(R.layout.activity_gift_details)
-public class PopDetailsActivity extends BaseActivity{
+public class PopDetailsActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.gift_details_coll_toolbar_vp)
     private ViewPager headViewPager;
+    @BindView(R.id.gift_details_bug_btn)
+    private Button button;
 //    @BindView(R.id.gift_details_vp)
 //    private ViewPager contentViewPager;
 //    @BindView(R.id.gift_details_tab)
@@ -71,7 +76,16 @@ public class PopDetailsActivity extends BaseActivity{
                 return false;            }
         });
 
+        button.setOnClickListener(this);
 
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, TaoBaoWebActivity.class);
+        intent.putExtra("buy", data.getPurchase_url());
+        startActivity(intent);
     }
 
     private class  MyWebViewClient extends WebViewClient {

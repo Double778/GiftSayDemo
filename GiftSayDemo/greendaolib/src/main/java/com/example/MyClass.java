@@ -18,8 +18,12 @@ public class MyClass {
     private static void addNote(Schema schema) {
         Entity entity = schema.addEntity("Strategy");
         entity.addIdProperty().autoincrement().primaryKey();
+        entity.addIntProperty("channels");
         entity.addStringProperty("name");
         entity.addStringProperty("url");
         entity.addStringProperty("imgUrl");
+        entity.addBooleanProperty("isLiked");
+        entity.addIntProperty("likeCount");
+
     }
 }

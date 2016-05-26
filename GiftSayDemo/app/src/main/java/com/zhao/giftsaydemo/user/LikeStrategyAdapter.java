@@ -1,6 +1,10 @@
 package com.zhao.giftsaydemo.user;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +35,7 @@ public class LikeStrategyAdapter extends BaseAdapter {
 
     public LikeStrategyAdapter(Context context) {
         this.context = context;
+
     }
 
     @Override
@@ -59,7 +64,7 @@ public class LikeStrategyAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.textView.setText(strategies.get(position).getName());
-        Picasso.with(context).load(strategies.get(position).getImgUrl()).resize(200, 100).into(holder.imageView);
+        Picasso.with(context).load(strategies.get(position).getImgUrl()).resize(200, 100).config(Bitmap.Config.RGB_565).into(holder.imageView);
         return convertView;
     }
 
@@ -72,4 +77,5 @@ public class LikeStrategyAdapter extends BaseAdapter {
             textView = (TextView) itemView.findViewById(R.id.item_user_like_strategy_tv);
         }
     }
+
 }

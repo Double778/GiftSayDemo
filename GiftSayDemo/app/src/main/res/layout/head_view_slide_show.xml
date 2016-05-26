@@ -3,12 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/title"
-        android:id="@+id/title"/>
-    <WebView
-        android:id="@+id/activity_strategy_details_wv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/head_view_slide_show_vp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
