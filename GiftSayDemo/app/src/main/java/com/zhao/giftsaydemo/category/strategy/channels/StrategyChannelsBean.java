@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/17.
+ * 攻略频道数据类
  */
 public class StrategyChannelsBean {
 

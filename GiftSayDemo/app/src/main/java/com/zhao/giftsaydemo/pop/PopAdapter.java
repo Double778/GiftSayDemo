@@ -17,6 +17,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by 华哥哥 on 16/5/10.
+ * 热门页面RecycleView数据类
  */
 public class PopAdapter extends RecyclerView.Adapter<PopAdapter.MyViewHolder> {
     private Context context;
@@ -50,17 +51,13 @@ public class PopAdapter extends RecyclerView.Adapter<PopAdapter.MyViewHolder> {
         holder.contentTv.setText(bean.getData().getItems().get(position).getData().getName());
         holder.priceTv.setText(bean.getData().getItems().get(position).getData().getPrice());
         Picasso.with(context).load(bean.getData().getItems().get(position).getData().getCover_image_url()).resize(400, 400).config(Bitmap.Config.RGB_565).into(holder.imageView);
+        // 行布局点击事件
         if (onClickListener != null) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
                     onClickListener.onClick(pos, bean);
-                    Log.d("PopAdapter", "bean:" + bean);
-                    Log.d("PopAdapter", "pos:" + pos);
-
-
-
 
                 }
             });
@@ -85,6 +82,7 @@ public class PopAdapter extends RecyclerView.Adapter<PopAdapter.MyViewHolder> {
         }
     }
 
+    // 点击事件接口
     public interface OnClickListener {
         void onClick(int pos, PopBean bean);
     }

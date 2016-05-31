@@ -23,6 +23,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/9.
+ * 热门页面
  */
 @BindContent(R.layout.fragment_pop)
 public class PopFragment extends BaseFragment implements PopAdapter.OnClickListener {
@@ -34,7 +35,8 @@ public class PopFragment extends BaseFragment implements PopAdapter.OnClickListe
     @Override
     public void initData() {
 
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/items?limit=20&offset=0&gender=2&generation=1", PopBean.class, new Response.Listener<PopBean>() {
+        // 获取数据
+        VolleySingle.addRequest("http://api.liwushuo.com/v2/items?gender=1&generation=4&limit=50&oddset=0", PopBean.class, new Response.Listener<PopBean>() {
             @Override
             public void onResponse(PopBean response) {
                 adapter.setPopBean(response);
@@ -53,6 +55,7 @@ public class PopFragment extends BaseFragment implements PopAdapter.OnClickListe
     }
 
 
+    // 点击跳转礼物详情页面
     @Override
     public void onClick(int pos, PopBean bean) {
         PopBean.DataBean.ItemsBean.DataBean1 data = bean.getData().getItems().get(pos).getData();

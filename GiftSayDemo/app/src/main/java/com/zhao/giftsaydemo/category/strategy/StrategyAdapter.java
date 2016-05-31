@@ -23,6 +23,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by 华哥哥 on 16/5/14.
+ * 攻略界面ListViewAdapter
  */
 public class StrategyAdapter extends BaseAdapter {
     private Context context;
@@ -64,7 +65,8 @@ public class StrategyAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.textView.setText(bean.getData().getChannel_groups().get(position).getName());
-        Log.d("StrategyAdapter", bean.getData().getChannel_groups().get(position).getName());
+
+        // ListView 嵌套GridView
         viewHolder.gridView.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -103,6 +105,7 @@ public class StrategyAdapter extends BaseAdapter {
                 return convertView;
             }
 
+            // GridView的ViewHolder
             class ViewHolder {
                 ImageView imageView;
                 TextView textView;
@@ -113,9 +116,12 @@ public class StrategyAdapter extends BaseAdapter {
                 }
             }
         });
+
+        // GridViewItem的点击事件
         viewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int gridViewPos, long id) {
+                // 跳转攻略频道页面
                 Intent intent = new Intent(context, StrategyChannelsActivity.class);
                 intent.putExtra("Id", bean.getData().getChannel_groups().get(position).getChannels().get(gridViewPos).getId());
                 intent.putExtra("name", bean.getData().getChannel_groups().get(position).getChannels().get(gridViewPos).getName());
@@ -125,6 +131,7 @@ public class StrategyAdapter extends BaseAdapter {
         return convertView;
     }
 
+    // ListViewViewHolder
     class ViewHolder {
 
         TextView textView;

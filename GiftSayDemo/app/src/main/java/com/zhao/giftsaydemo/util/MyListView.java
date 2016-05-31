@@ -6,6 +6,7 @@ import android.widget.ListView;
 
 /**
  * Created by 华哥哥 on 16/5/26.
+ * 自定义ListView, 解决在协调布局中的冲突问题
  */
 public class MyListView extends ListView{
     public MyListView(Context context) {

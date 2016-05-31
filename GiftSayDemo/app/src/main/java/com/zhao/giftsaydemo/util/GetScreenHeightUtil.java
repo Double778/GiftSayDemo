@@ -6,6 +6,7 @@ import android.view.WindowManager;
 
 /**
  * Created by 华哥哥 on 16/5/18.
+ *  推送相关
  */
 public class GetScreenHeightUtil {
     public static int getScreenHeight(Context context) {

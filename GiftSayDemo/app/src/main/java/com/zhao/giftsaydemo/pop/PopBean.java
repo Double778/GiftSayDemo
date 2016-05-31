@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/12.
+ * 热门页面数据类
  */
 public class PopBean {
 

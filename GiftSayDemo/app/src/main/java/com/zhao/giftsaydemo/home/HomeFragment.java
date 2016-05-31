@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/9.
+ * 主页面
  */
 @BindContent(R.layout.fragment_home)
 public class HomeFragment extends BaseFragment {
@@ -25,13 +26,13 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.fragment_home_vp)
     private ViewPager viewPager;
     private HomeAdapter adapter;
-    private TabBean tabBean;
 
     @Override
     public void initData() {
         adapter = new HomeAdapter(getChildFragmentManager());
 
-        requestTitle();
+        // 获取tab数据
+        requestTab();
 
 
         viewPager.setAdapter(adapter);
@@ -41,12 +42,11 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    private void requestTitle() {
+    private void requestTab() {
         VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/preset?gender=1&generation=4", TabBean.class, new Response.Listener<TabBean>() {
             @Override
             public void onResponse(TabBean response) {
-                tabBean = response;
-                adapter.setTabBean(tabBean);
+                adapter.setTabBean(response);
 
             }
         }, new Response.ErrorListener() {

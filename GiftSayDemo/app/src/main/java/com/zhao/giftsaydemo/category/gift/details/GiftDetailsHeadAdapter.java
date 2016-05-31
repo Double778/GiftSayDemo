@@ -17,7 +17,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by 华哥哥 on 16/5/20.
- * 礼物详情
+ * 礼物详情上方可滑动图片adapter
  */
 public class GiftDetailsHeadAdapter extends PagerAdapter{
     private List<String> imageUrls;

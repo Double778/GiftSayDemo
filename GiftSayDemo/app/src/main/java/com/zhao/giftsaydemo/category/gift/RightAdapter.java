@@ -21,6 +21,7 @@ import za.co.immedia.pinnedheaderlistview.SectionedBaseAdapter;
 
 /**
  * Created by 华哥哥 on 16/5/14.
+ * 右侧ListViewAdapter
  */
 public class RightAdapter extends SectionedBaseAdapter {
     private Context context;
@@ -35,6 +36,7 @@ public class RightAdapter extends SectionedBaseAdapter {
         notifyDataSetChanged();
     }
 
+
     @Override
     public Object getItem(int i, int i1) {
         return giftBean.getData().getCategories().get(i).getSubcategories().get(i1);
@@ -45,6 +47,7 @@ public class RightAdapter extends SectionedBaseAdapter {
         return i1;
     }
 
+    // 右侧ListView的页数
     @Override
     public int getSectionCount() {
         return giftBean == null? 0: giftBean.getData().getCategories().size();
@@ -66,6 +69,7 @@ public class RightAdapter extends SectionedBaseAdapter {
             holder = (ContentViewHolder) view.getTag();
         }
 
+        // GridViewAdapter
         holder.gridView.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -97,6 +101,7 @@ public class RightAdapter extends SectionedBaseAdapter {
                 return convertView;
             }
 
+            // GridView的ViewHolder
             class ViewHolder {
                 ImageView imageView;
                 TextView textView;
@@ -107,6 +112,8 @@ public class RightAdapter extends SectionedBaseAdapter {
                 }
             }
         });
+
+        // 点击GridView行布局跳转
         holder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -122,6 +129,7 @@ public class RightAdapter extends SectionedBaseAdapter {
         return view;
     }
 
+    // 右侧ListView的ViewHolder
     class ContentViewHolder {
         MyGridView gridView;
 
@@ -131,6 +139,7 @@ public class RightAdapter extends SectionedBaseAdapter {
     }
 
 
+    // 右侧头标题
     @Override
     public View getSectionHeaderView(int i, View view, ViewGroup viewGroup) {
         HeaderViewHolder holder = null;
@@ -148,6 +157,7 @@ public class RightAdapter extends SectionedBaseAdapter {
     }
 
     class HeaderViewHolder{
+
         TextView headTv;
 
         public HeaderViewHolder(View itemView) {

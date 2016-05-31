@@ -19,6 +19,7 @@ import com.zhao.giftsaydemo.util.VolleySingle;
 
 /**
  * Created by 华哥哥 on 16/5/19.
+ * 礼物页面各频道页面
  */
 @BindContent(R.layout.activity_gift_channels)
 public class GiftChannelsActivity extends BaseActivity implements View.OnClickListener, GiftChannelsAdapter.OnClickListener {
@@ -29,8 +30,10 @@ public class GiftChannelsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void initData() {
 
+        // 设置标题
         setTitle();
 
+        // 拼接网址获取数据
         String url = "http://api.liwushuo.com/v2/item_subcategories/" + getIntent().getIntExtra("Id", 0) + "/items?limit=20&offset=20";
         VolleySingle.addRequest(url, GiftChannelsBean.class, new Response.Listener<GiftChannelsBean>() {
             @Override
@@ -63,6 +66,7 @@ public class GiftChannelsActivity extends BaseActivity implements View.OnClickLi
 
     }
 
+    // 返回键
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -73,6 +77,7 @@ public class GiftChannelsActivity extends BaseActivity implements View.OnClickLi
     }
 
 
+    // 点解跳转礼物详情页
     @Override
     public void onClick(GiftChannelsBean bean, int pos) {
         Intent intent = new Intent(this, GiftDetailsActivity.class);

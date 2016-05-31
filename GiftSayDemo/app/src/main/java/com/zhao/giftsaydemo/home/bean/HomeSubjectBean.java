@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/13.
+ * 主页专题数据类
  */
 public class HomeSubjectBean {
 

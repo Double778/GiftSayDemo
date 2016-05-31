@@ -15,14 +15,13 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
-import com.zhao.giftsaydemo.category.gift.channels.GiftChannelsBean;
-import com.zhao.giftsaydemo.category.gift.details.GiftDetailsContentAdapter;
 import com.zhao.giftsaydemo.category.gift.details.GiftDetailsHeadAdapter;
 import com.zhao.giftsaydemo.category.gift.details.TaoBaoWebActivity;
 import com.zhao.giftsaydemo.pop.PopBean;
 
 /**
  * Created by 华哥哥 on 16/5/21.
+ * 礼物详情页面
  */
 @BindContent(R.layout.activity_gift_details)
 public class PopDetailsActivity extends BaseActivity implements View.OnClickListener {
@@ -38,24 +37,26 @@ public class PopDetailsActivity extends BaseActivity implements View.OnClickList
     @BindView(R.id.web)
     private WebView webView;
     private GiftDetailsHeadAdapter giftDetailsHeadAdapter;
-    private GiftDetailsContentAdapter giftDetailsContentAdapter;
-    PopBean.DataBean.ItemsBean.DataBean1 data;
+    // 礼物item数据类
+    private PopBean.DataBean.ItemsBean.DataBean1 data;
     private TextView nameTv;
 
     @Override
     public void initData() {
-        data = getIntent().getParcelableExtra("data");
 
+        // 显示数据
+        data = getIntent().getParcelableExtra("data");
         nameTv = (TextView) findViewById(R.id.gift_details_name_tv);
         nameTv.setText(data.getName());
-        Log.d("GiftDetailsActivity", data.getName());
         ((TextView)findViewById(R.id.gift_details_price_tv)).setText(data.getPrice());
         ((TextView)findViewById(R.id.gift_details_description_tv)).setText(data.getDescription());
 
+        // 页面上方显示可滑动图片
         giftDetailsHeadAdapter = new GiftDetailsHeadAdapter(this);
         giftDetailsHeadAdapter.setImageUrls(data.getImage_urls());
         headViewPager.setAdapter(giftDetailsHeadAdapter);
 
+        // webView显示url
         webView.loadUrl(data.getUrl());
         WebSettings webSettings = webView.getSettings();
         webSettings.setSupportZoom(true);
@@ -76,11 +77,13 @@ public class PopDetailsActivity extends BaseActivity implements View.OnClickList
                 return false;            }
         });
 
+        // 跳转淘宝按钮
         button.setOnClickListener(this);
 
 
     }
 
+    // 跳转淘宝页面
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(this, TaoBaoWebActivity.class);

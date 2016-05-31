@@ -23,6 +23,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/20.
+ * 礼物详情Activity
  */
 @BindContent(R.layout.activity_gift_details)
 public class GiftDetailsActivity extends BaseActivity implements View.OnClickListener {
@@ -38,7 +39,6 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.web)
     private WebView webView;
     private GiftDetailsHeadAdapter giftDetailsHeadAdapter;
-    private GiftDetailsContentAdapter giftDetailsContentAdapter;
     private GiftChannelsBean.DataBean.ItemsBean data;
     private TextView nameTv;
 
@@ -57,6 +57,7 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
         giftDetailsHeadAdapter.setImageUrls(data.getImage_urls());
         headViewPager.setAdapter(giftDetailsHeadAdapter);
 
+        // WebView显示url
         webView.loadUrl(data.getUrl());
         WebSettings webSettings = webView.getSettings();
         webSettings.setSupportZoom(true);
@@ -65,6 +66,8 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
         webSettings.setAllowFileAccess(true);
         webView.requestFocus();
         webView.setWebViewClient(new MyWebViewClient());
+
+        // 点击返回可以在web回退, 不直接退出
         webView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -82,6 +85,7 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
 
     }
 
+    // 点击跳转到淘宝web
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(this, TaoBaoWebActivity.class);

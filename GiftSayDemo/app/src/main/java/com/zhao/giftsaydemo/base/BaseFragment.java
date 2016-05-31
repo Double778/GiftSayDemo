@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 
 /**
  * Created by 华哥哥 on 16/5/9.
+ * Fragment基类
  */
 public abstract class BaseFragment extends Fragment {
     protected Context context;

@@ -11,6 +11,7 @@ import com.zhao.giftsaydemo.base.MyApplication;
 
 /**
  * Created by 华哥哥 on 16/5/16.
+ * Volley请求封装
  */
 public class VolleySingle {
     private RequestQueue queue;// 请求队列

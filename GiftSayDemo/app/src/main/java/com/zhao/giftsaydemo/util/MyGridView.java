@@ -6,6 +6,7 @@ import android.widget.GridView;
 
 /**
  * Created by 华哥哥 on 16/5/14.
+ * 自定义GridView 解决与ListView嵌套时冲突
  */
 public class MyGridView extends GridView {
 

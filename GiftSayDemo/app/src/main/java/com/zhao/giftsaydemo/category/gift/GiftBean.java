@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/14.
+ * 礼物页面数据类
  */
 public class GiftBean {
 

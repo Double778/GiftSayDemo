@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/19.
+ * 礼物界面各频道数据类
  */
 public class GiftChannelsBean implements Parcelable{
 

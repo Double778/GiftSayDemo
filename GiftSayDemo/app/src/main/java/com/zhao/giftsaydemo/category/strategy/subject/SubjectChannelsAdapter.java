@@ -3,6 +3,7 @@ package com.zhao.giftsaydemo.category.strategy.subject;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by 华哥哥 on 16/5/21.
+ * 专题频道ListView适配器
  */
 public class SubjectChannelsAdapter extends BaseAdapter{
     private Context context;
@@ -58,17 +60,19 @@ public class SubjectChannelsAdapter extends BaseAdapter{
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
         holder.numTv.setText(String.valueOf(data.getData().getPosts().get(position).getLikes_count()));
         holder.textView.setText(data.getData().getPosts().get(position).getTitle());
         Picasso.with(context).load(data.getData().getPosts().get(position).getCover_image_url()).into(holder.backgroundIv);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = data.getData().getPosts().get(position).getUrl();
+                String url = "http://www.liwushuo.com/posts/" + data.getData().getPosts().get(position).getId();
+                Log.d("SubjectChannelsAdapter", url);
                 Intent intent = new Intent(context, StrategyDetailsActivity.class);
                 intent.putExtra("url", url);
+                intent.putExtra("tag", 1);
                 context.startActivity(intent);
+
             }
         });
 

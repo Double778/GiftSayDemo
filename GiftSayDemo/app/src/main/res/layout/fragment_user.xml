@@ -24,11 +24,28 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="250dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/ic_user_me" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+
+                    <ImageView
+                        android:id="@+id/fragment_user_user_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/ic_user_me" />
+                    <TextView
+                        android:id="@+id/fragment_user_user_name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="未登录"
+                        android:textSize="15sp"
+                        android:textColor="@android:color/white"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@id/fragment_user_user_iv"
+                        />
+                </RelativeLayout>
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -100,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:gravity="center"
-                android:text="喜欢的攻略将躺在这里哦"/>
+                android:text="喜欢的攻略将躺在这里哦" />
 
         </RelativeLayout>
 

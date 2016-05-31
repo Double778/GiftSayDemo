@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/12.
+ * 主页频道数据类
  */
 public class HomeChannelsBean implements Parcelable{
 

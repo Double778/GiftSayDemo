@@ -10,6 +10,7 @@ import android.webkit.WebViewClient;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
@@ -21,6 +22,7 @@ import com.zhao.giftsaydemo.db.StrategyDaoTool;
 
 /**
  * Created by 华哥哥 on 16/5/18.
+ * 攻略详情页面
  */
 @BindContent(R.layout.activity_strategy_details)
 public class StrategyDetailsActivity extends BaseActivity implements View.OnClickListener {
@@ -32,22 +34,41 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void initData() {
-
-
         strategyDaoTool = new StrategyDaoTool();
+        // 设置标题
         setTitle();
         url = getIntent().getStringExtra("url");
+        // WebView 显示url
         webView.loadUrl(url);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setAllowFileAccess(true);
         webView.setWebViewClient(new MyWebViewClient());
+        // 点击返回可以在web回退, 不直接退出
+        webView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+                        webView.goBack();   //后退
+                        return true;    //已处理
+                    }
+                }
+                return false;
+            }
+        });
 
-        setLiked();
+
+        if (!(getIntent().getIntExtra("tag", 0) == 1)) {
+            setLiked();
+        }
 
 
     }
+
+
+    // 设置详情页收藏按钮状态
 
     private void setLiked() {
         final Strategy strategy = strategyDaoTool.queryStrategyByUrl(url);
@@ -56,6 +77,8 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
         } else {
             checkBox.setChecked(false);
         }
+
+        // 收藏按钮几点事件
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,22 +87,25 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
                     strategy.setIsLiked(false);
                     strategy.setLikeCount(strategy.getLikeCount() - 1);
                     strategyDaoTool.update(strategy);
+
+
                     checkBox.setChecked(false);
-
-                    Intent intent = new Intent("com.zhao.giftsaydemo.LikeChanged");
-                    sendBroadcast(intent);
-
+                    Toast.makeText(StrategyDetailsActivity.this, "取消喜欢", Toast.LENGTH_SHORT).show();
                 } else {
-
                     strategy.setIsLiked(true);
                     strategy.setLikeCount(strategy.getLikeCount() + 1);
-                    strategyDaoTool.update(strategy);
-                    checkBox.setChecked(true);
 
-                    Intent intent = new Intent("com.zhao.giftsaydemo.LikeChanged");
-                    sendBroadcast(intent);
+                    strategyDaoTool.update(strategy);
+
+
+                    checkBox.setChecked(true);
+                    Toast.makeText(StrategyDetailsActivity.this, "喜欢成功", Toast.LENGTH_SHORT).show();
 
                 }
+                // 发送收藏状态改变了的广播
+                Intent intent = new Intent("com.zhao.giftsaydemo.LikeChanged");
+
+                sendBroadcast(intent);
             }
         });
 
@@ -99,6 +125,7 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
         checkBox.setVisibility(View.VISIBLE);
     }
 
+    // 返回键
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

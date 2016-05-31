@@ -23,6 +23,7 @@ import android.widget.AbsListView;
 
 /**
  * Created by dllo on 15/8/5.
+ * 上拉加载, 下拉刷新工具
  */
 public class SwipeRefreshLoadingLayout extends ViewGroup {
     private static final String LOG_TAG = SwipeRefreshLayout.class.getSimpleName();

@@ -10,8 +10,11 @@ import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.main.MainActivity;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by 华哥哥 on 16/5/10.
+ * 欢迎页
  */
 @BindContent(R.layout.activity_welcome)
 public class WelcomeActivity extends BaseActivity{
@@ -20,7 +23,9 @@ public class WelcomeActivity extends BaseActivity{
     private CountDownTimer timer;
     @Override
     public void initData() {
+
         imageView.setImageResource(R.mipmap.ic_welcome);
+        // 持续3S
         timer = new CountDownTimer(3000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -29,6 +34,7 @@ public class WelcomeActivity extends BaseActivity{
 
             @Override
             public void onFinish() {
+                // 跳转主页面
                 startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
                 finish();
             }
@@ -39,6 +45,13 @@ public class WelcomeActivity extends BaseActivity{
     protected void onPause() {
         super.onPause();
         timer.cancel();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
     }
 
     @Override

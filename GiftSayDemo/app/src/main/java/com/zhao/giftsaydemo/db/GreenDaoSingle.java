@@ -6,6 +6,7 @@ import com.zhao.giftsaydemo.base.MyApplication;
 
 /**
  * Created by 华哥哥 on 16/5/23.
+ * GreenDao单例
  */
 public class GreenDaoSingle {
     private SQLiteDatabase db;// 数据库

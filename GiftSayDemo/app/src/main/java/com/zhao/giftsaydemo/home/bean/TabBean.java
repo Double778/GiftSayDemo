@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/10.
+ * 主页上方Tab的数据类
  */
 public class TabBean implements Parcelable{
 

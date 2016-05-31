@@ -21,6 +21,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/17.
+ * 攻略频道页面
  */
 @BindContent(R.layout.activity_strategy_channels)
 public class StrategyChannelsActivity extends BaseActivity implements View.OnClickListener {
@@ -32,8 +33,10 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
     public void initData() {
         strategyDaoTool = new StrategyDaoTool();
 
+        // 设置标题
         setTitle();
         final int id = getIntent().getIntExtra("Id", 0);
+        // 获取数据
         VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/" + id + "/items?limit=20&offset=0", StrategyChannelsBean.class, new Response.Listener<StrategyChannelsBean>() {
             @Override
             public void onResponse(StrategyChannelsBean response) {
@@ -46,12 +49,13 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
                             response.getData().getItems().get(i).getCover_image_url(),
                             response.getData().getItems().get(i).isLiked(),
                             response.getData().getItems().get(i).getLikes_count());
+                    // 加入数据库
                     strategyDaoTool.addStrategy(strategy);
                 }
                 adapter.setChannels(id);
+                // 根据频道从数据库获取数据
                 adapter.setStrategies(strategyDaoTool.queryStrategyByChannels(id));
 
-//                adapter.setData(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -77,6 +81,7 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
         textView.setText(getIntent().getStringExtra("name"));
     }
 
+    // 返回键
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

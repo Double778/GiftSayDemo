@@ -15,6 +15,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by 华哥哥 on 16/5/19.
+ * 礼物各频道RecycleView的Adapter
  */
 public class GiftChannelsAdapter extends RecyclerView.Adapter<GiftChannelsAdapter.MyViewHolder> {
     private Context context;
@@ -80,6 +81,8 @@ public class GiftChannelsAdapter extends RecyclerView.Adapter<GiftChannelsAdapte
             priceTv = (TextView) itemView.findViewById(R.id.item_pop_price_tv);
         }
     }
+
+    // RecycleViewItem点击接口
     public interface OnClickListener {
         void onClick(GiftChannelsBean bean, int pos);
     }

@@ -13,7 +13,8 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.util.GetScreenHeightUtil;
 
 /**
- * Created by ChenFengYao on 16/5/17.
+ * Created by 华哥哥 on 16/5/17.
+ * 左侧ListViewAdapter
  */
 public class LeftAdapter extends BaseAdapter{
     int selectPos = 0;

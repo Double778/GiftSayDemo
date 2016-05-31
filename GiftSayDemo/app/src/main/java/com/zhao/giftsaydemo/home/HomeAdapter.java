@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/10.
+ * 主页ViewPager显示Fragment的适配器
  */
 public class HomeAdapter extends FragmentPagerAdapter {
     private ArrayList<String> titles;
@@ -37,10 +38,12 @@ public class HomeAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        // 第一个页面
         if (position == 0) {
             return new FirstFragment();
 
         }
+        // 复用Fragment
         return ChannelsFragment.newInstance(position, tabBean);
     }
 

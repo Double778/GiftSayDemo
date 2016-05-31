@@ -20,14 +20,18 @@ import za.co.immedia.pinnedheaderlistview.PinnedHeaderListView;
 
 /**
  * Created by 华哥哥 on 16/5/14.
+ * 分类中的礼物界面
  */
 @BindContent(R.layout.fragment_category_gift_fragment)
 public class GiftFragment extends BaseFragment {
 
     @BindView(R.id.fragment_category_gift_fragment_left_lv)
     private ListView leftListView;
+
+    // 右侧自定义ListView
     @BindView(R.id.fragment_category_gift_fragment_right_lv)
     private PinnedHeaderListView rightListView;
+
     private boolean isScroll = true;
     private RightAdapter adapter;
     private LeftAdapter leftAdapter;
@@ -35,11 +39,14 @@ public class GiftFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        //获取数据
         VolleySingle.addRequest("http://api.liwushuo.com/v2/item_categories/tree", GiftBean.class, new Response.Listener<GiftBean>() {
             @Override
             public void onResponse(GiftBean response) {
                 leftAdapter.setResponse(response);
                 adapter.setGiftBean(response);
+
+                // 左侧ListView点击事件
                 leftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -58,6 +65,8 @@ public class GiftFragment extends BaseFragment {
                         rightListView.setSelection(rightSection);
                     }
                 });
+
+                // 右侧ListView的滑动监听
                 rightListView.setOnScrollListener(new AbsListView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(AbsListView view, int scrollState) {

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhao.giftsaydemo.R;
-import com.zhao.giftsaydemo.category.strategy.channels.HeadViewBean;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by 华哥哥 on 16/5/19.
+ * 全部专题页面ListView设配器
  */
 public class AllSubjectAdapter extends BaseAdapter{
     private Context context;
@@ -26,7 +25,6 @@ public class AllSubjectAdapter extends BaseAdapter{
 
     public void setBean(HeadViewBean bean) {
         this.bean = bean;
-        Log.d("AllSubjectAdapter", "bean:" + bean);
         notifyDataSetChanged();
     }
 
