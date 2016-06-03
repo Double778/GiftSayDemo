@@ -21,7 +21,7 @@
     <dimen name="activity_login_login_btn_margin">30dp</dimen>
     <dimen name="activity_login_cellphone_size">25dp</dimen>
     <dimen name="activity_login_line_height">0.5dp</dimen>
-    <dimen name="fragment_user_hint_tv_height">200dp</dimen>
+    <dimen name="fragment_user_hint_tv_height">150dp</dimen>
     <dimen name="head_view_slide_show_vp_height">150dp</dimen>
 
     <dimen name="head_view_slide_show_dotLayout_padding">8dp</dimen>

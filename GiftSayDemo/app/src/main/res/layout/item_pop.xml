@@ -17,7 +17,7 @@
             android:id="@+id/item_pop_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="fitStart" />
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/item_pop_content_tv"

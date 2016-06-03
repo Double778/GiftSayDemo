@@ -14,6 +14,7 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.category.gift.details.GiftDetailsActivity;
+import com.zhao.giftsaydemo.main.MainActivity;
 import com.zhao.giftsaydemo.util.VolleySingle;
 
 
@@ -82,6 +83,7 @@ public class GiftChannelsActivity extends BaseActivity implements View.OnClickLi
     public void onClick(GiftChannelsBean bean, int pos) {
         Intent intent = new Intent(this, GiftDetailsActivity.class);
         GiftChannelsBean.DataBean.ItemsBean data = bean.getData().getItems().get(pos);
+        intent.putExtra("tag", 1);
         intent.putExtra("data", data);
         startActivity(intent);
     }

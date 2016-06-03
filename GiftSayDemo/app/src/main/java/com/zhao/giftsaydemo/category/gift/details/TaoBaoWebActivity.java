@@ -1,6 +1,5 @@
 package com.zhao.giftsaydemo.category.gift.details;
 
-import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -31,19 +30,6 @@ public class TaoBaoWebActivity extends BaseActivity{
         webSettings.setAllowFileAccess(true);
         webView.setWebViewClient(new MyWebViewClient());
 
-        // 点击返回可以在web回退, 不直接退出
-        webView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
-                        webView.goBack();   //后退
-                        return true;    //已处理
-                    }
-                }
-                return false;
-            }
-        });
 
     }
 

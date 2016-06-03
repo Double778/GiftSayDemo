@@ -10,9 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
@@ -21,6 +19,7 @@ import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.category.gift.channels.GiftChannelsBean;
 import com.zhao.giftsaydemo.db.Gift;
 import com.zhao.giftsaydemo.db.GreenDaoTool;
+import com.zhao.giftsaydemo.pop.PopBean;
 
 
 /**
@@ -33,40 +32,67 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
     private ViewPager headViewPager;
     @BindView(R.id.gift_details_bug_btn)
     private Button button;
-
     @BindView(R.id.web)
     private WebView webView;
-    private GiftDetailsHeadAdapter giftDetailsHeadAdapter;
-    private GiftChannelsBean.DataBean.ItemsBean data;
-    private TextView nameTv;
     @BindView(R.id.gift_details_like_cb)
     private CheckBox checkBox;
+
+    private GiftDetailsHeadAdapter giftDetailsHeadAdapter;
+    private TextView nameTv;
     private GreenDaoTool greenDaoTool;
+    private GiftChannelsBean.DataBean.ItemsBean data;
+    private PopBean.DataBean.ItemsBean.DataBean1 popData;
+    private int tag;
 
 
     @Override
     public void initData() {
 
         greenDaoTool = new GreenDaoTool();
-        data = getIntent().getParcelableExtra("data");
 
-        if (greenDaoTool.hasThisGift(data.getPurchase_url())) {
-            checkBox.setChecked(true);
+        tag = getIntent().getIntExtra("tag", 0);
+        giftDetailsHeadAdapter = new GiftDetailsHeadAdapter(this);
+
+        if (tag == 1) {
+            data = getIntent().getParcelableExtra("data");
+            nameTv = (TextView) findViewById(R.id.gift_details_name_tv);
+            nameTv.setText(data.getName());
+            ((TextView) findViewById(R.id.gift_details_price_tv)).setText(data.getPrice());
+            ((TextView) findViewById(R.id.gift_details_description_tv)).setText(data.getDescription());
+
+            giftDetailsHeadAdapter.setImageUrls(data.getImage_urls());
+            headViewPager.setAdapter(giftDetailsHeadAdapter);
+
+            // WebView显示url
+            webView.loadUrl(data.getUrl());
+
+
+            if (greenDaoTool.hasThisGift(data.getPurchase_url())) {
+                checkBox.setChecked(true);
+            } else {
+                checkBox.setChecked(false);
+            }
         } else {
-            checkBox.setChecked(false);
+            popData = getIntent().getParcelableExtra("data");
+            nameTv = (TextView) findViewById(R.id.gift_details_name_tv);
+            nameTv.setText(popData.getName());
+            ((TextView) findViewById(R.id.gift_details_price_tv)).setText(popData.getPrice());
+            ((TextView) findViewById(R.id.gift_details_description_tv)).setText(popData.getDescription());
+
+            giftDetailsHeadAdapter.setImageUrls(popData.getImage_urls());
+            headViewPager.setAdapter(giftDetailsHeadAdapter);
+
+            // WebView显示url
+            webView.loadUrl(popData.getUrl());
+
+
+            if (greenDaoTool.hasThisGift(popData.getPurchase_url())) {
+                checkBox.setChecked(true);
+            } else {
+                checkBox.setChecked(false);
+            }
         }
 
-        nameTv = (TextView) findViewById(R.id.gift_details_name_tv);
-        nameTv.setText(data.getName());
-        ((TextView) findViewById(R.id.gift_details_price_tv)).setText(data.getPrice());
-        ((TextView) findViewById(R.id.gift_details_description_tv)).setText(data.getDescription());
-
-        giftDetailsHeadAdapter = new GiftDetailsHeadAdapter(this);
-        giftDetailsHeadAdapter.setImageUrls(data.getImage_urls());
-        headViewPager.setAdapter(giftDetailsHeadAdapter);
-
-        // WebView显示url
-        webView.loadUrl(data.getUrl());
         WebSettings webSettings = webView.getSettings();
         webSettings.setSupportZoom(true);
         webSettings.setJavaScriptEnabled(true);
@@ -74,7 +100,6 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
         webSettings.setAllowFileAccess(true);
         webView.requestFocus();
         webView.setWebViewClient(new MyWebViewClient());
-
         // 点击返回可以在web回退, 不直接退出
         webView.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -88,6 +113,7 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
                 return false;
             }
         });
+
         button.setOnClickListener(this);
         checkBox.setOnClickListener(this);
 
@@ -98,18 +124,33 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.gift_details_like_cb:
-                Toast.makeText(GiftDetailsActivity.this, "hahah", Toast.LENGTH_SHORT).show();
-                if (greenDaoTool.hasThisGift(data.getPurchase_url())) {
-                    checkBox.setChecked(false);
-                    greenDaoTool.delGiftByTaobaoUrl(data.getPurchase_url());
+                if (tag == 1) {
+
+                    if (greenDaoTool.hasThisGift(data.getPurchase_url())) {
+                        checkBox.setChecked(false);
+                        greenDaoTool.delGiftByTaobaoUrl(data.getPurchase_url());
+                    } else {
+                        greenDaoTool.addGift(new Gift(System.currentTimeMillis(), data.getCover_image_url(), data.getName(), data.getPurchase_url()));
+                        checkBox.setChecked(true);
+                    }
                 } else {
-                    greenDaoTool.addGift(new Gift(System.currentTimeMillis(), data.getCover_image_url(), data.getName(), data.getPurchase_url()));
-                    checkBox.setChecked(true);
+                    if (greenDaoTool.hasThisGift(popData.getPurchase_url())) {
+                        checkBox.setChecked(false);
+                        greenDaoTool.delGiftByTaobaoUrl(popData.getPurchase_url());
+                    } else {
+                        greenDaoTool.addGift(new Gift(System.currentTimeMillis(), popData.getCover_image_url(), popData.getName(), popData.getPurchase_url()));
+                        checkBox.setChecked(true);
+                    }
                 }
                 break;
             case R.id.gift_details_bug_btn:
                 Intent intent = new Intent(this, TaoBaoWebActivity.class);
-                intent.putExtra("buy", data.getPurchase_url());
+                if (tag == 1) {
+                    intent.putExtra("buy", data.getPurchase_url());
+                } else {
+                    intent.putExtra("buy", popData.getPurchase_url());
+
+                }
                 startActivity(intent);
                 break;
         }

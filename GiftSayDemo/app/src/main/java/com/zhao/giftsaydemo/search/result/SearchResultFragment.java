@@ -33,8 +33,5 @@ public class SearchResultFragment extends BaseFragment{
         adapter.setFragments(fragments);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
-
-
     }
 }

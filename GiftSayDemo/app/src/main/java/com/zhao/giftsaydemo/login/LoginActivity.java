@@ -3,6 +3,7 @@ package com.zhao.giftsaydemo.login;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
@@ -65,5 +66,12 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (platform.isValid()) {
 
+            Toast.makeText(this, "已登录", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

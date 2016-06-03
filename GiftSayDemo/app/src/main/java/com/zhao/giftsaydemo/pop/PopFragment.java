@@ -11,7 +11,7 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
-import com.zhao.giftsaydemo.pop.details.PopDetailsActivity;
+import com.zhao.giftsaydemo.category.gift.details.GiftDetailsActivity;
 import com.zhao.giftsaydemo.util.VolleySingle;
 
 /**
@@ -54,7 +54,7 @@ public class PopFragment extends BaseFragment implements PopAdapter.OnClickListe
     public void onClick(int pos, PopBean bean) {
         PopBean.DataBean.ItemsBean.DataBean1 data = bean.getData().getItems().get(pos).getData();
         Log.d("PopFragment", data.getName());
-        Intent intent = new Intent(context, PopDetailsActivity.class);
+        Intent intent = new Intent(context, GiftDetailsActivity.class);
         intent.putExtra("data", data);
         context.startActivity(intent);
 

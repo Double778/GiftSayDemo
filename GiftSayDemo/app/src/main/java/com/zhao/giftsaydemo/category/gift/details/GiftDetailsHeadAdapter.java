@@ -48,7 +48,6 @@ public class GiftDetailsHeadAdapter extends PagerAdapter{
         ImageView imageView = (ImageView) view.findViewById(R.id.page_gift_details_head_iv);
         Picasso.with(context).load(imageUrls.get(position)).config(Bitmap.Config.RGB_565).into(imageView);
         container.addView(view);
-        Log.d("GiftDetailsHeadAdapter", "imageUrls:" + imageUrls);
         return view;
     }
 

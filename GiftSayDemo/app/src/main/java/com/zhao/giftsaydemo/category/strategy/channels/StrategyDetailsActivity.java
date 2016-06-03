@@ -36,6 +36,7 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
     private String url;
     private ImageView shareIv;
     private Platform platform;
+    private Strategy strategy;
 
 
     @Override
@@ -48,6 +49,7 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
         // 设置标题
         setTitle();
         url = getIntent().getStringExtra("url");
+        strategy = greenDaoTool.queryStrategyByUrl(url);
         // WebView 显示url
         webView.loadUrl(url);
         WebSettings webSettings = webView.getSettings();
@@ -155,19 +157,6 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
     }
 
 
-
-    // 设置回退
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()){
-//
-//            webView.goBack();
-//            return true;
-//        }
-//        return false;
-//
-//    }
-
     // web视图
     private class MyWebViewClient extends WebViewClient {
         @Override
@@ -203,10 +192,10 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
         oks.setSiteUrl(url);
 
-        oks.setTitle("分享标题--Title");
-        oks.setTitleUrl("http://mob.com");
-        oks.setText("分享测试文--Text");
-        oks.setImageUrl("http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg");
+        oks.setTitle(strategy.getName());
+        oks.setTitleUrl(url);
+        oks.setText(strategy.getName());
+        oks.setImageUrl(strategy.getImgUrl());
 
 // 启动分享GUI
         oks.show(this);

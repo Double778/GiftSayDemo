@@ -66,6 +66,8 @@ public class SearchResultGiftFragment extends BaseFragment implements GiftChanne
         List<String> imgUrls = new ArrayList<>();
         imgUrls.add(giftChannelsBean.getData().getItems().get(pos).getCover_image_url());
         data.setImage_urls(imgUrls);
+        data.setPurchase_url("");
+        intent.putExtra("tag", 1);
         intent.putExtra("data", data);
         startActivity(intent);
     }
