@@ -1,42 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
-
-
-    <RelativeLayout
-        android:id="@+id/slideView"
+    <com.youth.banner.Banner
+        android:id="@+id/head_view_slide_show_banner"
         android:layout_width="match_parent"
-        android:layout_height="150dp" >
+        android:layout_height="@dimen/head_view_slide_show_vp_height"/>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/head_view_slide_show_vp"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"/>
 
-        <LinearLayout
-            android:id="@+id/dotLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="8dp" >
-
-            <View
-                android:id="@+id/v_dot1"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:background="@mipmap/point_pressed" />
-
-            <View
-                android:id="@+id/v_dot2"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginLeft="5dp"
-                android:background="@mipmap/point_unpressed" />
-        </LinearLayout>
-    </RelativeLayout>
 
 </LinearLayout>

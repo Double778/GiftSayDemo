@@ -12,6 +12,9 @@
         android:id="@+id/fragment_hot_words_gv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="4"/>
+        android:numColumns="4"
+        android:horizontalSpacing="@dimen/item_pop_margin"
+        android:verticalSpacing="@dimen/item_pop_margin"
+        android:layout_margin="@dimen/item_pop_margin"/>
 
 </LinearLayout>

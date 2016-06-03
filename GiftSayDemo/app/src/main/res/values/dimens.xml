@@ -10,10 +10,27 @@
     <dimen name="item_fragment_category_gift_fragment_left_name_tv_padding">4dp</dimen>
     <dimen name="fragment_user_radio_group_padding">15dp</dimen>
     <dimen name="title_padding">10dp</dimen>
-    <dimen name="title_height">40dp</dimen>
+    <dimen name="title_height">50dp</dimen>
+    <dimen name="title_image_size">20dp</dimen>
     <dimen name="fragment_category_tab_layout_height">20dp</dimen>
-
+    <dimen name="title_search_margin">10dp</dimen>
     <dimen name="item_pop_content_tv_height">35dp</dimen>
     <dimen name="item_channels_cv_height">160dp</dimen>
+    <dimen name="gift_details_coll_toolbar_vp_height">350dp</dimen>
+    <dimen name="activity_login_close_iv_margin">20dp</dimen>
+    <dimen name="activity_login_login_btn_margin">30dp</dimen>
+    <dimen name="activity_login_cellphone_size">25dp</dimen>
+    <dimen name="activity_login_line_height">0.5dp</dimen>
+    <dimen name="fragment_user_hint_tv_height">200dp</dimen>
+    <dimen name="head_view_slide_show_vp_height">150dp</dimen>
+
+    <dimen name="head_view_slide_show_dotLayout_padding">8dp</dimen>
+    <dimen name="head_view_slide_show_point_size">8dp</dimen>
+    <dimen name="head_view_slide_show_point_margin_left">5dp</dimen>
+    <dimen name="item_home_like_count_cb_size">12dp</dimen>
+    <dimen name="item_home_like_count_cb_padding">5dp</dimen>
+    <dimen name="item_search_activity_hot_words_fragment_gv_tv_padding">10dp</dimen>
+    <dimen name="page_gift_details_head_iv_height">360dp</dimen>
+
 
 </resources>

@@ -62,14 +62,14 @@ public abstract class BaseFragment extends Fragment {
             }
         }
 
-        initData();
+ //       initData();
 
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        initData();
+        initData();
     }
 
     public abstract void initData();

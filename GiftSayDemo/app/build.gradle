@@ -39,4 +39,6 @@ dependencies {
     compile 'it.sephiroth.android.library.picasso:picasso:2.5.2.4b'
     compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
     compile 'de.greenrobot:greendao:2.1.0'
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
+    compile 'com.youth.banner:banner:+'
 }

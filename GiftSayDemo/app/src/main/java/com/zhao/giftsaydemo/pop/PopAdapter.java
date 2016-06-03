@@ -50,7 +50,7 @@ public class PopAdapter extends RecyclerView.Adapter<PopAdapter.MyViewHolder> {
 
         holder.contentTv.setText(bean.getData().getItems().get(position).getData().getName());
         holder.priceTv.setText(bean.getData().getItems().get(position).getData().getPrice());
-        Picasso.with(context).load(bean.getData().getItems().get(position).getData().getCover_image_url()).resize(400, 400).config(Bitmap.Config.RGB_565).into(holder.imageView);
+        Picasso.with(context).load(bean.getData().getItems().get(position).getData().getCover_image_url()).resize(380, 380).config(Bitmap.Config.RGB_565).into(holder.imageView);
         // 行布局点击事件
         if (onClickListener != null) {
             itemView.setOnClickListener(new View.OnClickListener() {

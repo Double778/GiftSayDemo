@@ -6,11 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,13 +16,11 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.db.Strategy;
-import com.zhao.giftsaydemo.db.StrategyDaoTool;
+import com.zhao.giftsaydemo.db.GreenDaoTool;
 import com.zhao.giftsaydemo.home.bean.HomeChannelsBean;
 import com.zhao.giftsaydemo.home.bean.TabBean;
 import com.zhao.giftsaydemo.util.SwipeRefreshLoadingLayout;
 import com.zhao.giftsaydemo.util.VolleySingle;
-
-import java.util.List;
 
 
 /**
@@ -42,12 +35,11 @@ public class ChannelsFragment extends BaseFragment implements SwipeRefreshLoadin
     private SwipeRefreshLoadingLayout swipeRefreshLoadingLayout;
 
     private HomeChannelsBean bean;
-    private DetailsAdapter adapter;
-    private StrategyDaoTool strategyDaoTool;
+    private ChannelsAdapter adapter;
+    private GreenDaoTool greenDaoTool;
     private String url;
     private int channels;
-    //private LikeChangedReceiver likeChangedReceiver;
-
+    private LikeChangedReceiver likeChangedReceiver;
 
 
     public static ChannelsFragment newInstance(int pos, TabBean tabBean) {
@@ -65,8 +57,7 @@ public class ChannelsFragment extends BaseFragment implements SwipeRefreshLoadin
     public void initData() {
 
 
-
-        strategyDaoTool = new StrategyDaoTool();
+        greenDaoTool = new GreenDaoTool();
 
         // 取出Bundle中的数据
         Bundle args = getArguments();
@@ -79,7 +70,7 @@ public class ChannelsFragment extends BaseFragment implements SwipeRefreshLoadin
 
         getDate(url, channels);
 
-        adapter = new DetailsAdapter(context);
+        adapter = new ChannelsAdapter(context);
         listView.setAdapter(adapter);
 
         swipeRefreshLoadingLayout.setOnRefreshListener(this);
@@ -90,17 +81,17 @@ public class ChannelsFragment extends BaseFragment implements SwipeRefreshLoadin
 
     // 注册广播
     private void registerReceiver() {
-//        likeChangedReceiver = new LikeChangedReceiver();
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction("com.zhao.giftsaydemo.LikeChanged");
-//        context.registerReceiver(likeChangedReceiver, filter);
+        likeChangedReceiver = new LikeChangedReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.zhao.giftsaydemo.LikeChanged");
+        context.registerReceiver(likeChangedReceiver, filter);
     }
 
 
     // 上拉加载
     @Override
     public void onRefresh() {
-        strategyDaoTool.clean();
+        greenDaoTool.clean();
 
         getDate(url, channels);
         Toast.makeText(context, "刷新数据", Toast.LENGTH_SHORT).show();
@@ -139,12 +130,12 @@ public class ChannelsFragment extends BaseFragment implements SwipeRefreshLoadin
                             response.getData().getItems().get(i).getCover_image_url(),
                             response.getData().getItems().get(i).isLiked(),
                             response.getData().getItems().get(i).getLikes_count());
-                    strategyDaoTool.addStrategy(strategy);
+                    greenDaoTool.addStrategy(strategy);
                 }
 
 
                 adapter.setChannels(channels);
-                adapter.setStrategies(strategyDaoTool.queryStrategyByChannels(channels));
+                adapter.setStrategies(greenDaoTool.queryStrategyByChannels(channels));
 
 
             }
@@ -158,24 +149,21 @@ public class ChannelsFragment extends BaseFragment implements SwipeRefreshLoadin
     }
 
     // 收藏改变广播
-//    class LikeChangedReceiver extends BroadcastReceiver {
-//
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            Log.d("LikeChangedReceiver", "11");
-//            Log.d("LikeChangedReceiver", "-----------" + strategyDaoTool.queryStrategyByChannels(channels).get(0).getIsLiked().toString());
-//            adapter.setStrategies(strategyDaoTool.queryStrategyByChannels(channels));
-//
-//        }
-//    }
+    class LikeChangedReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(final Context context, Intent intent) {
+            adapter.setStrategies(greenDaoTool.queryStrategyByChannels(channels));
+        }
+    }
 
 
     @Override
     public void onDestroy() {
 
-       // context.unregisterReceiver(likeChangedReceiver);
+        context.unregisterReceiver(likeChangedReceiver);
         super.onDestroy();
-
-
     }
+
+
 }

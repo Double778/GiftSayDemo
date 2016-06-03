@@ -12,12 +12,9 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.db.Strategy;
-import com.zhao.giftsaydemo.db.StrategyDaoTool;
-import com.zhao.giftsaydemo.pop.PopBean;
+import com.zhao.giftsaydemo.db.GreenDaoTool;
+import com.zhao.giftsaydemo.home.channels.ChannelsAdapter;
 import com.zhao.giftsaydemo.util.VolleySingle;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by 华哥哥 on 16/5/17.
@@ -27,11 +24,12 @@ import java.util.List;
 public class StrategyChannelsActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.aty_strategy_channels_lv)
     private ListView listView;
-    private StrategyChannelsAdapter adapter;
-    private StrategyDaoTool strategyDaoTool;
+   // private StrategyChannelsAdapter adapter;
+    private ChannelsAdapter adapter;
+    private GreenDaoTool greenDaoTool;
     @Override
     public void initData() {
-        strategyDaoTool = new StrategyDaoTool();
+        greenDaoTool = new GreenDaoTool();
 
         // 设置标题
         setTitle();
@@ -50,11 +48,11 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
                             response.getData().getItems().get(i).isLiked(),
                             response.getData().getItems().get(i).getLikes_count());
                     // 加入数据库
-                    strategyDaoTool.addStrategy(strategy);
+                    greenDaoTool.addStrategy(strategy);
                 }
                 adapter.setChannels(id);
                 // 根据频道从数据库获取数据
-                adapter.setStrategies(strategyDaoTool.queryStrategyByChannels(id));
+                adapter.setStrategies(greenDaoTool.queryStrategyByChannels(id));
 
             }
         }, new Response.ErrorListener() {
@@ -64,7 +62,8 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
             }
         });
 
-        adapter = new StrategyChannelsAdapter(this);
+        //adapter = new StrategyChannelsAdapter(this);
+        adapter = new ChannelsAdapter(this);
         listView.setAdapter(adapter);
 
     }

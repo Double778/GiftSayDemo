@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@mipmap/ic_hot_words_background">
+    android:background="@drawable/shape_hot_words"
+    android:padding="@dimen/item_search_activity_hot_words_fragment_gv_tv_padding">
 
 
 </TextView>

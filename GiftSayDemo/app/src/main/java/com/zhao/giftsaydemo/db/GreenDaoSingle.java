@@ -14,6 +14,7 @@ public class GreenDaoSingle {
     private DaoSession daoSession;// 会话者
     private DaoMaster.DevOpenHelper helper;
     private StrategyDao strategyDao;
+    private GiftDao giftDao;
 
     public DaoMaster.DevOpenHelper getHelper() {
         if (helper == null) {
@@ -50,6 +51,12 @@ public class GreenDaoSingle {
         return strategyDao;
     }
 
+    public GiftDao getGiftDao() {
+        if (giftDao == null) {
+            giftDao = getDaoSession().getGiftDao();
+        }
+        return giftDao;
+    }
 
     private static GreenDaoSingle ourInstance = new GreenDaoSingle();
 

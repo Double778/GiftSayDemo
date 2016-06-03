@@ -3,7 +3,6 @@ package com.zhao.giftsaydemo.category.strategy.channels;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import android.widget.TextView;
 
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.db.Strategy;
-import com.zhao.giftsaydemo.db.StrategyDaoTool;
+import com.zhao.giftsaydemo.db.GreenDaoTool;
 
 import java.util.List;
 
@@ -28,7 +27,7 @@ import it.sephiroth.android.library.picasso.Picasso;
  */
 public class StrategyChannelsAdapter extends BaseAdapter {
     private Context context;
-    private StrategyDaoTool strategyDaoTool;
+    private GreenDaoTool greenDaoTool;
     private List<Strategy> strategies;
     private int channels;
     //private LikeChangedReceiver likeChangedReceiver;
@@ -45,7 +44,7 @@ public class StrategyChannelsAdapter extends BaseAdapter {
 
     public StrategyChannelsAdapter(Context context) {
         this.context = context;
-        strategyDaoTool = new StrategyDaoTool();
+        greenDaoTool = new GreenDaoTool();
 //        likeChangedReceiver = new LikeChangedReceiver();
 //        IntentFilter filter = new IntentFilter();
 //        filter.addAction("com.zhao.giftsaydemo.LikeChanged");
@@ -104,13 +103,13 @@ public class StrategyChannelsAdapter extends BaseAdapter {
                 if (strategies.get(position).getIsLiked()) {
 
                     // 根据pos查询出点击的那条数据
-                    Strategy strategy = strategyDaoTool.queryStrategyByChannels(channels).get(position);
+                    Strategy strategy = greenDaoTool.queryStrategyByChannels(channels).get(position);
 
                     // 改变收藏状态
                     strategy.setIsLiked(false);
                     strategy.setLikeCount(strategy.getLikeCount() - 1);
                     // 加回数据库
-                    strategyDaoTool.update(strategy);
+                    greenDaoTool.update(strategy);
 
                     holder.checkBox.setChecked(false);
 
@@ -118,11 +117,11 @@ public class StrategyChannelsAdapter extends BaseAdapter {
 
                 } else {
 
-                    Strategy strategy = strategyDaoTool.queryStrategyByChannels(channels).get(position);
+                    Strategy strategy = greenDaoTool.queryStrategyByChannels(channels).get(position);
                     strategy.setIsLiked(true);
                     strategy.setLikeCount(strategy.getLikeCount() + 1);
 
-                    strategyDaoTool.update(strategy);
+                    greenDaoTool.update(strategy);
                     holder.checkBox.setChecked(true);
 
                     notifyDataSetChanged();
@@ -155,15 +154,6 @@ public class StrategyChannelsAdapter extends BaseAdapter {
             numTv = (TextView) itemView.findViewById(R.id.item_home_like_count_num_tv);
         }
     }
-
-//    class LikeChangedReceiver extends BroadcastReceiver {
-//
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            strategies = strategyDaoTool.queryStrategyByChannels(channels);
-//            notifyDataSetChanged();
-//        }
-//    }
 
 
 }

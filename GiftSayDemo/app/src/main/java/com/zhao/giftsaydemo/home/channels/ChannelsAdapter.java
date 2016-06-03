@@ -1,11 +1,8 @@
 package com.zhao.giftsaydemo.home.channels;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,29 +11,29 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.category.strategy.channels.StrategyDetailsActivity;
-import com.zhao.giftsaydemo.db.GreenDaoSingle;
 import com.zhao.giftsaydemo.db.Strategy;
-import com.zhao.giftsaydemo.db.StrategyDao;
-import com.zhao.giftsaydemo.db.StrategyDaoTool;
-import com.zhao.giftsaydemo.home.bean.HomeChannelsBean;
+import com.zhao.giftsaydemo.db.GreenDaoTool;
 
 import java.util.List;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
 import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by 华哥哥 on 16/5/10.
  * 主页各Fragment中ListView的适配器
  */
-public class DetailsAdapter extends BaseAdapter {
+public class ChannelsAdapter extends BaseAdapter {
     private Context context;
-    private StrategyDaoTool strategyDaoTool;
+    private GreenDaoTool greenDaoTool;
     private List<Strategy> strategies;
     private int channels;
-    //private LikeChangedReceiver likeChangedReceiver;
 
     public void setChannels(int channels) {
         this.channels = channels;
@@ -48,13 +45,10 @@ public class DetailsAdapter extends BaseAdapter {
     }
 
 
-    public DetailsAdapter(Context context) {
+    public ChannelsAdapter(Context context) {
         this.context = context;
-        strategyDaoTool = new StrategyDaoTool();
-//        likeChangedReceiver = new LikeChangedReceiver();
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction("com.zhao.giftsaydemo.LikeChanged");
-//        context.registerReceiver(likeChangedReceiver, filter);
+        greenDaoTool = new GreenDaoTool();
+        ShareSDK.initSDK(context);
 
 
     }
@@ -97,43 +91,50 @@ public class DetailsAdapter extends BaseAdapter {
                 String url = strategies.get(position).getUrl();
                 Intent intent = new Intent(context, StrategyDetailsActivity.class);
                 intent.putExtra("url", url);
-
                 context.startActivity(intent);
+
             }
         });
         // 收藏按钮点击事件
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 根据是否收藏判断事件内容
+                Platform platform = ShareSDK.getPlatform(context, QQ.NAME);
+                if (platform.getDb().isValid()) {
 
-                if (strategies.get(position).getIsLiked()) {
                     // 根据pos查询出点击的那条数据
+                    if (strategies.get(position).getIsLiked()) {
 
-                    Strategy strategy = strategyDaoTool.queryStrategyByChannels(channels).get(position);
-                    // 改变收藏状态
-                    strategy.setIsLiked(false);
-                    strategy.setLikeCount(strategy.getLikeCount() - 1);
-                    // 加回数据库
-                    strategyDaoTool.update(strategy);
+                        Strategy strategy = greenDaoTool.queryStrategyByChannels(channels).get(position);
+                        // 改变收藏状态
+                        strategy.setIsLiked(false);
+                        strategy.setLikeCount(strategy.getLikeCount() - 1);
+                        // 加回数据库
+                        greenDaoTool.update(strategy);
 
 
-                    holder.checkBox.setChecked(false);
+                        holder.checkBox.setChecked(false);
 
-                    notifyDataSetChanged();
+                        notifyDataSetChanged();
 
+                    } else {
+
+                        Strategy strategy = greenDaoTool.queryStrategyByChannels(channels).get(position);
+                        strategy.setIsLiked(true);
+                        strategy.setLikeCount(strategy.getLikeCount() + 1);
+
+                        greenDaoTool.update(strategy);
+                        holder.checkBox.setChecked(true);
+
+                        notifyDataSetChanged();
+
+                    }
                 } else {
-
-                    Strategy strategy = strategyDaoTool.queryStrategyByChannels(channels).get(position);
-                    strategy.setIsLiked(true);
-                    strategy.setLikeCount(strategy.getLikeCount() + 1);
-
-                    strategyDaoTool.update(strategy);
-                    holder.checkBox.setChecked(true);
-
-                    notifyDataSetChanged();
+                    Toast.makeText(context, "要先登录哦", Toast.LENGTH_SHORT).show();
 
                 }
+                // 根据是否收藏判断事件内容
+
             }
         });
 
@@ -162,15 +163,5 @@ public class DetailsAdapter extends BaseAdapter {
             numTv = (TextView) itemView.findViewById(R.id.item_home_like_count_num_tv);
         }
     }
-
-    class LikeChangedReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            strategies = strategyDaoTool.queryStrategyByChannels(channels);
-            notifyDataSetChanged();
-        }
-    }
-
 
 }

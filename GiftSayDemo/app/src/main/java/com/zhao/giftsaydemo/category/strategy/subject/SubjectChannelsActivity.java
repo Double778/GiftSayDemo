@@ -12,8 +12,8 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.db.Strategy;
-import com.zhao.giftsaydemo.db.StrategyDaoTool;
-import com.zhao.giftsaydemo.home.channels.DetailsAdapter;
+import com.zhao.giftsaydemo.db.GreenDaoTool;
+import com.zhao.giftsaydemo.home.channels.ChannelsAdapter;
 import com.zhao.giftsaydemo.util.VolleySingle;
 
 /**
@@ -26,11 +26,11 @@ public class SubjectChannelsActivity extends BaseActivity implements View.OnClic
     @BindView(R.id.aty_strategy_channels_lv)
     private ListView listView;
     //private SubjectChannelsAdapter adapter;
-    private DetailsAdapter adapter;
-    private StrategyDaoTool strategyDaoTool;
+    private ChannelsAdapter adapter;
+    private GreenDaoTool greenDaoTool;
     @Override
     public void initData() {
-        strategyDaoTool = new StrategyDaoTool();
+        greenDaoTool = new GreenDaoTool();
 
         setTitle();
 
@@ -49,11 +49,11 @@ public class SubjectChannelsActivity extends BaseActivity implements View.OnClic
                             response.getData().getPosts().get(i).isLiked(),
                             response.getData().getPosts().get(i).getLikes_count());
                     // 获取完添加进数据库
-                    strategyDaoTool.addStrategy(strategy);
+                    greenDaoTool.addStrategy(strategy);
                 }
                 adapter.setChannels(id);
                 // 根据channels从数据库获取数据
-                adapter.setStrategies(strategyDaoTool.queryStrategyByChannels(id));
+                adapter.setStrategies(greenDaoTool.queryStrategyByChannels(id));
                 //adapter.setData(response);
             }
         }, new Response.ErrorListener() {
@@ -62,7 +62,7 @@ public class SubjectChannelsActivity extends BaseActivity implements View.OnClic
 
             }
         });
-        adapter = new DetailsAdapter(this);
+        adapter = new ChannelsAdapter(this);
         //adapter = new SubjectChannelsAdapter(this);
         listView.setAdapter(adapter);
 

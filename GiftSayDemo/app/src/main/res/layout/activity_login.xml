@@ -5,9 +5,9 @@
 
     <ImageView
         android:id="@+id/activity_login_close_iv"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_margin="20dp"
+        android:layout_width="@dimen/title_image_size"
+        android:layout_height="@dimen/title_image_size"
+        android:layout_margin="@dimen/activity_login_close_iv_margin"
         android:src="@mipmap/btn_close_login" />
 
     <Button
@@ -15,23 +15,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="30dp"
+        android:layout_margin="@dimen/activity_login_login_btn_margin"
         android:background="@color/colorTitleBackground"
         android:text="登录"
-        android:textSize="16sp"
-        android:textColor="@color/colorWhiteBackground" />
+        android:textColor="@color/colorWhiteBackground"
+        android:textSize="16sp" />
 
     <RelativeLayout
         android:id="@+id/activity_login_phone_number_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/activity_login_login_btn"
-        android:layout_margin="30dp">
+        android:layout_margin="@dimen/activity_login_login_btn_margin">
 
         <ImageView
             android:id="@+id/activity_login_cellphone"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/activity_login_cellphone_size"
+            android:layout_height="@dimen/activity_login_cellphone_size"
             android:layout_centerVertical="true"
             android:src="@mipmap/icon_cellphone" />
 
@@ -40,16 +40,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/title_search_margin"
             android:layout_toRightOf="@id/activity_login_cellphone"
             android:background="@null"
             android:hint="密码" />
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_toRightOf="@id/activity_login_cellphone"
+            android:layout_height="@dimen/activity_login_line_height"
             android:layout_alignBottom="@id/activity_login_code_et"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/title_search_margin"
+            android:layout_toRightOf="@id/activity_login_cellphone"
             android:background="@android:color/black" />
     </RelativeLayout>
 
@@ -57,13 +58,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/activity_login_phone_number_rl"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+        android:layout_marginLeft="@dimen/activity_login_login_btn_margin"
+        android:layout_marginRight="@dimen/activity_login_login_btn_margin">
 
         <ImageView
             android:id="@+id/activity_login_password"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/activity_login_cellphone_size"
+            android:layout_height="@dimen/activity_login_cellphone_size"
             android:layout_centerVertical="true"
             android:src="@mipmap/icon_password" />
 
@@ -72,16 +73,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/title_search_margin"
             android:layout_toRightOf="@id/activity_login_password"
             android:background="@null"
             android:hint="输入手机号" />
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_toRightOf="@id/activity_login_password"
+            android:layout_height="@dimen/activity_login_line_height"
             android:layout_alignBottom="@id/activity_login_phone_number_et"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/title_search_margin"
+            android:layout_toRightOf="@id/activity_login_password"
             android:background="@android:color/black" />
     </RelativeLayout>
 
@@ -90,26 +92,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/activity_login_login_btn"
-        android:layout_margin="30dp">
+        android:layout_margin="@dimen/activity_login_login_btn_margin">
 
         <TextView
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/title_search_margin"
             android:hint="使用社交账号登录" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="@dimen/activity_login_line_height"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/tv"
             android:background="@android:color/black" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="@dimen/activity_login_line_height"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/tv"
             android:background="@android:color/black" />
@@ -119,8 +121,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/activity_login_use_something_login_rl"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+        android:layout_marginLeft="@dimen/activity_login_login_btn_margin"
+        android:layout_marginRight="@dimen/activity_login_login_btn_margin">
 
         <ImageView
             android:id="@+id/activity_login_wechat_iv"
@@ -140,9 +142,9 @@
             android:id="@+id/activity_login_sina_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:src="@mipmap/icon_log_sina"
-            android:layout_alignParentRight="true"/>
+            android:src="@mipmap/icon_log_sina" />
     </RelativeLayout>
 
 

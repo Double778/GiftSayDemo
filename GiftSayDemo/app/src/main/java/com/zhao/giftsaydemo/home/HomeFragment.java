@@ -2,6 +2,8 @@ package com.zhao.giftsaydemo.home;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,6 +27,7 @@ public class HomeFragment extends BaseFragment {
     private TabLayout tabLayout;
     @BindView(R.id.fragment_home_vp)
     private ViewPager viewPager;
+
     private HomeAdapter adapter;
 
     @Override
@@ -40,10 +43,12 @@ public class HomeFragment extends BaseFragment {
         tabLayout.setupWithViewPager(viewPager);
 
 
+
     }
 
     private void requestTab() {
         VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/preset?gender=1&generation=4", TabBean.class, new Response.Listener<TabBean>() {
+
             @Override
             public void onResponse(TabBean response) {
                 adapter.setTabBean(response);

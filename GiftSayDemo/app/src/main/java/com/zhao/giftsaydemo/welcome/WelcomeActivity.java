@@ -11,6 +11,7 @@ import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.main.MainActivity;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.sharesdk.framework.ShareSDK;
 
 /**
  * Created by 华哥哥 on 16/5/10.
@@ -23,6 +24,7 @@ public class WelcomeActivity extends BaseActivity{
     private CountDownTimer timer;
     @Override
     public void initData() {
+
 
         imageView.setImageResource(R.mipmap.ic_welcome);
         // 持续3S

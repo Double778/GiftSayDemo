@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/item_fragment_category_gv_iv"
+        android:layout_marginTop="@dimen/title_search_margin"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

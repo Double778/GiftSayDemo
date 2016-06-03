@@ -8,8 +8,8 @@
     >
     <ImageView
         android:id="@+id/title_left_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/title_image_size"
+        android:layout_height="@dimen/title_image_size"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         />
@@ -49,5 +49,14 @@
         android:button="@null"
         android:layout_alignParentRight="true"
         android:background="@drawable/selector_heart_white"/>
+    <ImageView
+        android:id="@+id/title_share_iv"
+        android:layout_width="@dimen/title_image_size"
+        android:layout_height="@dimen/title_image_size"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/title_search_margin"
+        android:layout_toLeftOf="@id/title_right_cb"
+        android:src="@mipmap/ic_action_compact_share"/>
 
 </RelativeLayout>

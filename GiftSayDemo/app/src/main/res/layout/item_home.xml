@@ -13,9 +13,9 @@
 
 
     <RelativeLayout
+        android:id="@+id/item_home_onclick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/item_home_onclick"
         android:descendantFocusability="blocksDescendants">
 
         <ImageView
@@ -26,7 +26,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="@dimen/fragment_category_tab_layout_height"
             android:layout_alignParentBottom="true"
             android:alpha="0.2"
             android:background="@mipmap/ic_black_background" />
@@ -36,6 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/item_home_background_iv"
+            android:lines="1"
+            android:ellipsize="end"
             android:textColor="@color/item_home_content_tv_text_color" />
 
 
@@ -50,22 +52,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_item_home_like_count_background_iv" />
+
             <CheckBox
                 android:id="@+id/item_home_like_count_cb"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
+                android:layout_width="@dimen/item_home_like_count_cb_size"
+                android:layout_height="@dimen/item_home_like_count_cb_size"
                 android:layout_centerVertical="true"
-                android:padding="5dp"
-                android:button="@null"
                 android:layout_marginLeft="@dimen/item_home_card_view_margin"
-                android:background="@drawable/selector_heart"/>
+                android:background="@drawable/selector_heart"
+                android:button="@null"
+                android:padding="@dimen/item_home_like_count_cb_padding" />
+
             <TextView
                 android:id="@+id/item_home_like_count_num_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textSize="10sp"
-                android:layout_toRightOf="@id/item_home_like_count_cb"/>
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_toRightOf="@id/item_home_like_count_cb"
+                android:textSize="10sp" />
         </RelativeLayout>
 
     </RelativeLayout>
