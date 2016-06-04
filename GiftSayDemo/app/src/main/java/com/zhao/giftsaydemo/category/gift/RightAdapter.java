@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.category.gift.channels.GiftChannelsActivity;
 import com.zhao.giftsaydemo.util.MyGridView;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import it.sephiroth.android.library.picasso.Picasso;
 import za.co.immedia.pinnedheaderlistview.SectionedBaseAdapter;
@@ -120,8 +121,8 @@ public class RightAdapter extends SectionedBaseAdapter {
 
                 int beanId = giftBean.getData().getCategories().get(i).getSubcategories().get(position).getId();
                 String name = giftBean.getData().getCategories().get(i).getSubcategories().get(position).getName();
-                intent.putExtra("Id", beanId);
-                intent.putExtra("name", name);
+                intent.putExtra(GiftSayValues.INTENT_CHANNELS_ID, beanId);
+                intent.putExtra(GiftSayValues.INTENT_CHANNELS_NAME, name);
                 context.startActivity(intent);
             }
         });
@@ -150,7 +151,6 @@ public class RightAdapter extends SectionedBaseAdapter {
             holder = (HeaderViewHolder) view.getTag();
         }
 
-        //layout.setClickable(false);
         holder.headTv.setText(giftBean.getData().getCategories().get(i).getName());
         return view;
     }

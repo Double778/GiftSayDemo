@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.category.strategy.channels.StrategyDetailsActivity;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
@@ -66,11 +67,10 @@ public class SubjectChannelsAdapter extends BaseAdapter{
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://www.liwushuo.com/posts/" + data.getData().getPosts().get(position).getId();
-                Log.d("SubjectChannelsAdapter", url);
+                String url = GiftSayValues.STRATEGY_ALL_SUBJECT_DETAILS_URL_START + data.getData().getPosts().get(position).getId();
                 Intent intent = new Intent(context, StrategyDetailsActivity.class);
-                intent.putExtra("url", url);
-                intent.putExtra("tag", 1);
+                intent.putExtra(GiftSayValues.INTENT_STRATEGY_DETAILS_URL, url);
+                intent.putExtra(GiftSayValues.INTENT_SUBJECT_CHANNELS_TAG, GiftSayValues.FROM_SUBJECT_CHANNELS_ACTIVITY);
                 context.startActivity(intent);
 
             }

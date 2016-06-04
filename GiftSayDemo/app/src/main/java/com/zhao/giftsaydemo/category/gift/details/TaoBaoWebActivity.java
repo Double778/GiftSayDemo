@@ -9,6 +9,7 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 /**
  * Created by 华哥哥 on 16/5/25.
@@ -23,7 +24,7 @@ public class TaoBaoWebActivity extends BaseActivity{
         findViewById(R.id.title).setVisibility(View.GONE);
 
         // WebView显示url
-        webView.loadUrl(getIntent().getStringExtra("buy"));
+        webView.loadUrl(getIntent().getStringExtra(GiftSayValues.INTENT_BUY_URL));
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(true);

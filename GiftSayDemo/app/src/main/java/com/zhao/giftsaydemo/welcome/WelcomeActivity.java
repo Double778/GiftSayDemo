@@ -18,13 +18,14 @@ import cn.sharesdk.framework.ShareSDK;
  * 欢迎页
  */
 @BindContent(R.layout.activity_welcome)
-public class WelcomeActivity extends BaseActivity{
+public class WelcomeActivity extends BaseActivity {
     @BindView(R.id.activity_welcome_show_iv)
     private ImageView imageView;
     private CountDownTimer timer;
+
     @Override
     public void initData() {
-
+        
 
         imageView.setImageResource(R.mipmap.ic_welcome);
         // 持续3S

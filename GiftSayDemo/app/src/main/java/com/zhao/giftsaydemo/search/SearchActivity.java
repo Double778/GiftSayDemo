@@ -16,6 +16,7 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.search.result.SearchResultFragment;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -52,9 +53,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     private void getInputContent() {
         input = getUTF8XMLString(inputEt.getText().toString().trim());
-        SharedPreferences sp = getSharedPreferences("Input", MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(GiftSayValues.SP_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("input", input);
+        editor.putString(GiftSayValues.SEARCH_INPUT, input);
         editor.commit();
     }
 

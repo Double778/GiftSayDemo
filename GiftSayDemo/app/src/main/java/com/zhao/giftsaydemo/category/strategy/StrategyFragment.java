@@ -18,6 +18,7 @@ import com.zhao.giftsaydemo.category.strategy.subject.HeadViewBean;
 import com.zhao.giftsaydemo.category.strategy.subject.AllSubjectActivity;
 import com.zhao.giftsaydemo.category.strategy.subject.SubjectChannelsActivity;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
@@ -40,7 +41,7 @@ public class StrategyFragment extends BaseFragment{
         addHeadView();
 
         // 获取数据
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/channel_groups/all", StrategyBean.class, new Response.Listener<StrategyBean>() {
+        VolleySingle.addRequest(GiftSayValues.CATEGORY_STRATEGY_URL, StrategyBean.class, new Response.Listener<StrategyBean>() {
             @Override
             public void onResponse(StrategyBean response) {
                 adapter = new StrategyAdapter(context);
@@ -62,7 +63,7 @@ public class StrategyFragment extends BaseFragment{
     private void addHeadView() {
 
         // 获取头布局数据
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/collections?limit=20&offset=0", HeadViewBean.class, new Response.Listener<HeadViewBean>() {
+        VolleySingle.addRequest(GiftSayValues.CATEGORY_STRATEGY_HEAD_VIEW_URL, HeadViewBean.class, new Response.Listener<HeadViewBean>() {
 
 
             @Override
@@ -78,8 +79,8 @@ public class StrategyFragment extends BaseFragment{
                         public void onClick(View v) {
                             // 跳转专题频道界面
                             Intent intent = new Intent(context, SubjectChannelsActivity.class);
-                            intent.putExtra("Id", response.getData().getCollections().get(finalI).getId());
-                            intent.putExtra("name", response.getData().getCollections().get(finalI).getTitle());
+                            intent.putExtra(GiftSayValues.INTENT_CHANNELS_ID, response.getData().getCollections().get(finalI).getId());
+                            intent.putExtra(GiftSayValues.INTENT_CHANNELS_NAME, response.getData().getCollections().get(finalI).getTitle());
                             context.startActivity(intent);
 
                         }

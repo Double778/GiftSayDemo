@@ -27,6 +27,7 @@ import com.zhao.giftsaydemo.home.bean.HomeSubjectBean;
 import com.zhao.giftsaydemo.home.bean.SlideShowBean;
 import com.zhao.giftsaydemo.util.SwipeRefreshLoadingLayout;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class FirstFragment extends BaseFragment implements SwipeRefreshLoadingLa
     private HomeChannelsBean bean;
     private GreenDaoTool greenDaoTool;
     private LikeChangedReceiver likeChangedReceiver;
-
+    
 
     @Override
     public void initData() {
@@ -60,7 +61,7 @@ public class FirstFragment extends BaseFragment implements SwipeRefreshLoadingLa
         greenDaoTool = new GreenDaoTool();
         adapter = new ChannelsAdapter(context);
 
-        getData("http://api.liwushuo.com/v2/channels/108/items?limit=20&ad=2&gender=2&offset=0&generation=1", 108);
+        getData(GiftSayValues.HOME_FIRST_CHANNELS_URL, GiftSayValues.HOME_FIRST_CHANNELS_ID);
 
         // 加头布局
         addHeadView();
@@ -77,7 +78,7 @@ public class FirstFragment extends BaseFragment implements SwipeRefreshLoadingLa
     public void addHeadView() {
 
         // 轮播图
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/banners", SlideShowBean.class, new Response.Listener<SlideShowBean>() {
+        VolleySingle.addRequest(GiftSayValues.HOME_SLIDE_SHOW_URL, SlideShowBean.class, new Response.Listener<SlideShowBean>() {
             @Override
             public void onResponse(final SlideShowBean response) {
 
@@ -96,9 +97,9 @@ public class FirstFragment extends BaseFragment implements SwipeRefreshLoadingLa
                     @Override
                     public void OnBannerClick(View view, int position) {
                         Intent intent = new Intent(context, SubjectChannelsActivity.class);
-                        intent.putExtra("Id", ids.get(position));
+                        intent.putExtra(GiftSayValues.INTENT_CHANNELS_ID, ids.get(position));
                         if (response.getData().getBanners().get(position).getTarget() != null) {
-                            intent.putExtra("name", response.getData().getBanners().get(position).getTarget().getTitle());
+                            intent.putExtra(GiftSayValues.INTENT_CHANNELS_NAME, response.getData().getBanners().get(position).getTarget().getTitle());
                         }
                         context.startActivity(intent);
                     }
@@ -108,7 +109,7 @@ public class FirstFragment extends BaseFragment implements SwipeRefreshLoadingLa
 
 
                 // 专题头布局
-                VolleySingle.addRequest("http://api.liwushuo.com/v2/secondary_banners?gender=2&generation=1", HomeSubjectBean.class, new Response.Listener<HomeSubjectBean>() {
+                VolleySingle.addRequest(GiftSayValues.HOME_SUBJECT_URL, HomeSubjectBean.class, new Response.Listener<HomeSubjectBean>() {
                     @Override
                     public void onResponse(HomeSubjectBean response) {
                         View view = LayoutInflater.from(context).inflate(R.layout.head_view_horizontal_sv, null);
@@ -177,7 +178,7 @@ public class FirstFragment extends BaseFragment implements SwipeRefreshLoadingLa
         // 下拉时清理一次数据库
         greenDaoTool.clean();
         // 重新获取数据
-        getData("http://api.liwushuo.com/v2/channels/108/items?limit=20&ad=2&gender=2&offset=0&generation=1", 108);
+        getData(GiftSayValues.HOME_FIRST_CHANNELS_URL, GiftSayValues.HOME_FIRST_CHANNELS_ID);
 
         Toast.makeText(context, "刷新数据", Toast.LENGTH_SHORT).show();
 
@@ -191,7 +192,7 @@ public class FirstFragment extends BaseFragment implements SwipeRefreshLoadingLa
     public void onLoad() {
         // 如果nextUrl不为null就获取里面的数据
         if (!bean.getData().getPaging().getNext_url().equals("")) {
-            getData(bean.getData().getPaging().getNext_url(), 108);
+            getData(bean.getData().getPaging().getNext_url(), GiftSayValues.HOME_FIRST_CHANNELS_ID);
 
         } else {
             Toast.makeText(context, "没有更多", Toast.LENGTH_SHORT).show();
@@ -203,7 +204,7 @@ public class FirstFragment extends BaseFragment implements SwipeRefreshLoadingLa
     private void registerReceiver() {
         likeChangedReceiver = new LikeChangedReceiver();
         IntentFilter filter = new IntentFilter();
-        filter.addAction("com.zhao.giftsaydemo.LikeChanged");
+        filter.addAction(GiftSayValues.LIKE_CHANGED_RECEIVER);
         context.registerReceiver(likeChangedReceiver, filter);
     }
 
@@ -213,7 +214,7 @@ public class FirstFragment extends BaseFragment implements SwipeRefreshLoadingLa
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            adapter.setStrategies(greenDaoTool.queryStrategyByChannels(108));
+            adapter.setStrategies(greenDaoTool.queryStrategyByChannels(GiftSayValues.HOME_FIRST_CHANNELS_ID));
         }
 
 

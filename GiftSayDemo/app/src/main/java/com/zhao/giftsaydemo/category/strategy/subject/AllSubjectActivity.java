@@ -11,6 +11,7 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 /**
  * Created by 华哥哥 on 16/5/19.
@@ -28,7 +29,7 @@ public class AllSubjectActivity extends BaseActivity implements View.OnClickList
         setTitle();
 
         // 获取全部专题数据
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/collections?limit=20&offset=0", HeadViewBean.class, new Response.Listener<HeadViewBean>() {
+        VolleySingle.addRequest(GiftSayValues.CATEGORY_STRATEGY_HEAD_VIEW_URL, HeadViewBean.class, new Response.Listener<HeadViewBean>() {
             @Override
             public void onResponse(HeadViewBean response) {
                 adapter.setBean(response);

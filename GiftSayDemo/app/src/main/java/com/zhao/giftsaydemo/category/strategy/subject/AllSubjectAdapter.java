@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhao.giftsaydemo.R;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
@@ -66,8 +67,8 @@ public class AllSubjectAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SubjectChannelsActivity.class);
-                intent.putExtra("Id", bean.getData().getCollections().get(position).getId());
-                intent.putExtra("name", bean.getData().getCollections().get(position).getTitle());
+                intent.putExtra(GiftSayValues.INTENT_CHANNELS_ID, bean.getData().getCollections().get(position).getId());
+                intent.putExtra(GiftSayValues.INTENT_CHANNELS_NAME, bean.getData().getCollections().get(position).getTitle());
                 context.startActivity(intent);
             }
         });

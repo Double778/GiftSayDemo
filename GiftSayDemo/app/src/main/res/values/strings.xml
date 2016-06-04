@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">GiftSayDemo</string>
-    <string name="tab_home">礼物说</string>
+    <string name="app_name">Amelie</string>
+    <string name="tab_home">指南</string>
     <string name="tab_pop">热门</string>
     <string name="tab_category">分类</string>
-    <string name="tab_user">我</string>
+    <string name="tab_user">我的</string>
     <string name="fragment_user_cart">购物车</string>
     <string name="fragment_user_order">订单</string>
     <string name="fragment_user_coupon">礼券</string>

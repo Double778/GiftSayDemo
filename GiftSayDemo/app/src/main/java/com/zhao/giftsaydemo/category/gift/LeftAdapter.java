@@ -17,7 +17,6 @@ import com.zhao.giftsaydemo.util.GetScreenHeightUtil;
  * 左侧ListViewAdapter
  */
 public class LeftAdapter extends BaseAdapter{
-    int selectPos = 0;
     private Context context;
     private GiftBean response;
 
@@ -33,11 +32,6 @@ public class LeftAdapter extends BaseAdapter{
     @Override
     public int getCount() {
         return response == null ? 0 : response.getData().getCategories().size();
-    }
-
-    public void setSelectPos(int pos){
-        this.selectPos = pos;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -61,11 +55,7 @@ public class LeftAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
-//        if (position==selectPos){
-//            holder.textView.setTextColor(Color.RED);
-//        }else {
-//            holder.textView.setTextColor(Color.YELLOW);
-//        }
+
         holder.textView.setText(response.getData().getCategories().get(position).getName());
 
         return convertView;

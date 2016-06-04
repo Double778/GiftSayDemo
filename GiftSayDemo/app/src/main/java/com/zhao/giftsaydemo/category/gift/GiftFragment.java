@@ -15,6 +15,7 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import za.co.immedia.pinnedheaderlistview.PinnedHeaderListView;
 
@@ -40,7 +41,7 @@ public class GiftFragment extends BaseFragment {
     @Override
     public void initData() {
         //获取数据
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/item_categories/tree", GiftBean.class, new Response.Listener<GiftBean>() {
+        VolleySingle.addRequest(GiftSayValues.CATEGORY_GIFT_URL, GiftBean.class, new Response.Listener<GiftBean>() {
             @Override
             public void onResponse(GiftBean response) {
                 leftAdapter.setResponse(response);
@@ -76,19 +77,7 @@ public class GiftFragment extends BaseFragment {
                     @Override
                     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                         if (isScroll) {
-//                            for (int i = 0; i < leftListView.getCount(); i++) {
-//                                if (i == adapter.getSectionForPosition(firstVisibleItem)) {
-//                                    leftListView.smoothScrollToPosition(i);
-//                                    //leftListView.getChildAt().setBackgroundColor(Color.rgb(255, 255, 255));
-//                                    Log.d("GiftFragment", "i:" + i);
-//                                } else {
-//                                    if (i < leftListView.getChildCount()) {
-//                                        leftListView.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
-//                                    }
-//                                }
-//                            }
-                            //     leftListView.smoothScrollToPosition(adapter.getSectionForPosition(firstVisibleItem));
-                            //          leftAdapter.setSelectPos(adapter.getSectionForPosition(firstVisibleItem));
+
                             for (int i = 0; i < leftListView.getChildCount(); i++) {
                                 if (i == adapter.getSectionForPosition(firstVisibleItem)) {
                                     leftListView.getChildAt(i).setBackgroundColor(Color.WHITE);

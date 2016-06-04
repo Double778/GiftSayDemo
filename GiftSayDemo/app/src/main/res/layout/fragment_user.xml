@@ -47,38 +47,7 @@
                         android:textSize="15sp" />
                 </RelativeLayout>
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:gravity="bottom"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/fragment_user_radio_group_padding">
 
-                    <RadioButton
-                        android:id="@+id/fragment_user_cart_btn"
-                        style="@style/UserFragmentRadioButtonStyle"
-                        android:drawableTop="@mipmap/icon_cart"
-                        android:text="@string/fragment_user_cart" />
-
-                    <RadioButton
-                        android:id="@+id/fragment_user_order_btn"
-                        style="@style/UserFragmentRadioButtonStyle"
-                        android:drawableTop="@mipmap/icon_order"
-                        android:text="@string/fragment_user_order" />
-
-                    <RadioButton
-                        android:id="@+id/fragment_user_coupon_btn"
-                        style="@style/UserFragmentRadioButtonStyle"
-                        android:drawableTop="@mipmap/icon_coupon"
-                        android:text="@string/fragment_user_coupon" />
-
-                    <RadioButton
-                        android:id="@+id/fragment_user_service_btn"
-                        style="@style/UserFragmentRadioButtonStyle"
-                        android:drawableTop="@mipmap/icon_service"
-                        android:text="@string/fragment_user_service" />
-                </RadioGroup>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/activity_login_line_height"
@@ -95,11 +64,7 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
         </android.support.design.widget.CollapsingToolbarLayout>
 
-        <!--<android.support.design.widget.TabLayout-->
-            <!--android:id="@+id/fragment_user_tab"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/colorWhiteBackground" />-->
+
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="@dimen/title_height"
@@ -115,6 +80,10 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="喜欢的礼物" />
+            <View
+                android:layout_width="@dimen/activity_login_line_height"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"/>
 
             <RadioButton
                 android:id="@+id/fragment_user_like_strategy"
@@ -127,6 +96,10 @@
 
 
         </RadioGroup>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_login_line_height"
+            android:background="@android:color/darker_gray"/>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView

@@ -18,6 +18,8 @@
             android:id="@+id/hint_tv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/fragment_user_hint_tv_height"
+            android:layout_margin="@dimen/fragment_user_hint_tv_margin"
+            android:drawableTop="@mipmap/ic_like"
             android:gravity="center"
             android:text="喜欢的礼物将躺在这里哦" />
 

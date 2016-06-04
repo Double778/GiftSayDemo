@@ -17,6 +17,7 @@ import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.category.strategy.channels.StrategyDetailsActivity;
 import com.zhao.giftsaydemo.db.Strategy;
 import com.zhao.giftsaydemo.db.GreenDaoTool;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import java.util.List;
 
@@ -90,7 +91,7 @@ public class ChannelsAdapter extends BaseAdapter {
             public void onClick(View v) {
                 String url = strategies.get(position).getUrl();
                 Intent intent = new Intent(context, StrategyDetailsActivity.class);
-                intent.putExtra("url", url);
+                intent.putExtra(GiftSayValues.INTENT_STRATEGY_DETAILS_URL, url);
                 context.startActivity(intent);
 
             }

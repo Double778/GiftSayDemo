@@ -14,8 +14,8 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.category.gift.details.GiftDetailsActivity;
-import com.zhao.giftsaydemo.main.MainActivity;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 
 /**
@@ -35,7 +35,7 @@ public class GiftChannelsActivity extends BaseActivity implements View.OnClickLi
         setTitle();
 
         // 拼接网址获取数据
-        String url = "http://api.liwushuo.com/v2/item_subcategories/" + getIntent().getIntExtra("Id", 0) + "/items?limit=20&offset=20";
+        String url = GiftSayValues.GIFT_CHANNELS_URL_START + getIntent().getIntExtra(GiftSayValues.INTENT_CHANNELS_ID, 0) + GiftSayValues.GIFT_CHANNELS_URL_END;
         VolleySingle.addRequest(url, GiftChannelsBean.class, new Response.Listener<GiftChannelsBean>() {
             @Override
             public void onResponse(GiftChannelsBean response) {
@@ -63,7 +63,7 @@ public class GiftChannelsActivity extends BaseActivity implements View.OnClickLi
         TextView textView = (TextView) findViewById(R.id.title_name_tv);
         textView.setVisibility(View.VISIBLE);
         textView.setTextSize(16);
-        textView.setText(getIntent().getStringExtra("name"));
+        textView.setText(getIntent().getStringExtra(GiftSayValues.INTENT_CHANNELS_NAME));
 
     }
 
@@ -78,13 +78,13 @@ public class GiftChannelsActivity extends BaseActivity implements View.OnClickLi
     }
 
 
-    // 点解跳转礼物详情页
+    // 点击跳转礼物详情页
     @Override
     public void onClick(GiftChannelsBean bean, int pos) {
         Intent intent = new Intent(this, GiftDetailsActivity.class);
         GiftChannelsBean.DataBean.ItemsBean data = bean.getData().getItems().get(pos);
-        intent.putExtra("tag", 1);
-        intent.putExtra("data", data);
+        intent.putExtra(GiftSayValues.INTENT_GIFT_CHANNELS_TAG, GiftSayValues.FROM_GIFT_CHANNELS_ACTIVITY);
+        intent.putExtra(GiftSayValues.INTENT_GIFT_DETAILS_DATA, data);
         startActivity(intent);
     }
 }

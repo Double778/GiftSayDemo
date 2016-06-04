@@ -12,6 +12,7 @@ import com.zhao.giftsaydemo.annotation.BindContent;
 import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 /**
  * Created by 华哥哥 on 16/5/27.
@@ -32,7 +33,7 @@ public class HotWordsFragment extends BaseFragment implements AdapterView.OnItem
     public void initData() {
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, R.layout.item_search_activity_hot_words_fragment_gv);
 
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/search/hot_words", HotWordsBean.class, new Response.Listener<HotWordsBean>() {
+        VolleySingle.addRequest(GiftSayValues.SEARCH_HOT_WORDS_URL, HotWordsBean.class, new Response.Listener<HotWordsBean>() {
             @Override
             public void onResponse(HotWordsBean response) {
                 hotWordsBean = response;

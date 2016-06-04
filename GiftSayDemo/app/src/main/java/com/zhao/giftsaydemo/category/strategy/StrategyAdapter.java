@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.zhao.giftsaydemo.R;
 import com.zhao.giftsaydemo.category.strategy.channels.StrategyChannelsActivity;
 import com.zhao.giftsaydemo.util.MyGridView;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,8 +124,8 @@ public class StrategyAdapter extends BaseAdapter {
             public void onItemClick(AdapterView<?> parent, View view, int gridViewPos, long id) {
                 // 跳转攻略频道页面
                 Intent intent = new Intent(context, StrategyChannelsActivity.class);
-                intent.putExtra("Id", bean.getData().getChannel_groups().get(position).getChannels().get(gridViewPos).getId());
-                intent.putExtra("name", bean.getData().getChannel_groups().get(position).getChannels().get(gridViewPos).getName());
+                intent.putExtra(GiftSayValues.INTENT_CHANNELS_ID, bean.getData().getChannel_groups().get(position).getChannels().get(gridViewPos).getId());
+                intent.putExtra(GiftSayValues.INTENT_CHANNELS_NAME, bean.getData().getChannel_groups().get(position).getChannels().get(gridViewPos).getName());
                 context.startActivity(intent);
             }
         });

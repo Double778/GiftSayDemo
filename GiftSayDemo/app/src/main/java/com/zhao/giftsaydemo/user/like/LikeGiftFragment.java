@@ -17,6 +17,7 @@ import com.zhao.giftsaydemo.db.Gift;
 import com.zhao.giftsaydemo.db.GreenDaoTool;
 import com.zhao.giftsaydemo.db.Strategy;
 import com.zhao.giftsaydemo.util.MyListView;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import java.util.List;
 
@@ -42,7 +43,6 @@ public class LikeGiftFragment extends BaseFragment {
         greenDaoTool = new GreenDaoTool();
         // 查询出已收藏的攻略
         final List<Gift> gifts = greenDaoTool.queryGift();
-        Log.d("LikeGiftFragment", "gifts.size():" + gifts.size());
 
         adapter = new LikeAdapter(context);
         adapter.setGifts(gifts);
@@ -55,7 +55,7 @@ public class LikeGiftFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(context, TaoBaoWebActivity.class);
-                intent.putExtra("buy", gifts.get(position).getTaobaoUrl());
+                intent.putExtra(GiftSayValues.INTENT_BUY_URL, gifts.get(position).getTaobaoUrl());
                 context.startActivity(intent);
 
             }

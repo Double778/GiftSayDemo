@@ -56,12 +56,8 @@ public class LoginActivity extends BaseActivity {
                     }
                 });
                 platform.showUser(null);
-                if (platform.isValid()) {
 
-                    platform.authorize();
-                }
-
-                //finish();
+                platform.authorize();
             }
         });
     }

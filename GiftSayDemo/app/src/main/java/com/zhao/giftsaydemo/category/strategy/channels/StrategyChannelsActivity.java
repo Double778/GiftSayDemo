@@ -15,6 +15,7 @@ import com.zhao.giftsaydemo.db.Strategy;
 import com.zhao.giftsaydemo.db.GreenDaoTool;
 import com.zhao.giftsaydemo.home.channels.ChannelsAdapter;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 /**
  * Created by 华哥哥 on 16/5/17.
@@ -24,7 +25,6 @@ import com.zhao.giftsaydemo.util.VolleySingle;
 public class StrategyChannelsActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.aty_strategy_channels_lv)
     private ListView listView;
-   // private StrategyChannelsAdapter adapter;
     private ChannelsAdapter adapter;
     private GreenDaoTool greenDaoTool;
     @Override
@@ -33,9 +33,9 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
 
         // 设置标题
         setTitle();
-        final int id = getIntent().getIntExtra("Id", 0);
+        final int id = getIntent().getIntExtra(GiftSayValues.INTENT_CHANNELS_ID, 0);
         // 获取数据
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/" + id + "/items?limit=20&offset=0", StrategyChannelsBean.class, new Response.Listener<StrategyChannelsBean>() {
+        VolleySingle.addRequest(GiftSayValues.STRATEGY_CHANNELS_URL_START + id + GiftSayValues.STRATEGY_CHANNELS_URL_END, StrategyChannelsBean.class, new Response.Listener<StrategyChannelsBean>() {
             @Override
             public void onResponse(StrategyChannelsBean response) {
                 for (int i = 0; i < response.getData().getItems().size(); i++) {
@@ -62,7 +62,6 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
             }
         });
 
-        //adapter = new StrategyChannelsAdapter(this);
         adapter = new ChannelsAdapter(this);
         listView.setAdapter(adapter);
 
@@ -77,7 +76,7 @@ public class StrategyChannelsActivity extends BaseActivity implements View.OnCli
         TextView textView = (TextView) findViewById(R.id.title_name_tv);
         textView.setVisibility(View.VISIBLE);
         textView.setTextSize(16);
-        textView.setText(getIntent().getStringExtra("name"));
+        textView.setText(getIntent().getStringExtra(GiftSayValues.INTENT_CHANNELS_NAME));
     }
 
     // 返回键

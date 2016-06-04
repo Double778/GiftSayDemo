@@ -16,6 +16,7 @@ import com.zhao.giftsaydemo.category.gift.channels.GiftChannelsAdapter;
 import com.zhao.giftsaydemo.category.gift.channels.GiftChannelsBean;
 import com.zhao.giftsaydemo.category.gift.details.GiftDetailsActivity;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,8 @@ public class SearchResultGiftFragment extends BaseFragment implements GiftChanne
     @Override
     public void initData() {
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("Input", Context.MODE_PRIVATE);
-        String input = sharedPreferences.getString("input", "");
+        SharedPreferences sharedPreferences = context.getSharedPreferences(GiftSayValues.SP_NAME, Context.MODE_PRIVATE);
+        String input = sharedPreferences.getString(GiftSayValues.SEARCH_INPUT, "");
 
         // 拼接网址获取数据
         String url = "http://api.liwushuo.com/v2/search/item?keyword=" + input + "&limit=20&offset=0&sort=";

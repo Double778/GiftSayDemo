@@ -3,7 +3,6 @@ package com.zhao.giftsaydemo.pop;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -13,6 +12,7 @@ import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.category.gift.details.GiftDetailsActivity;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 /**
  * Created by 华哥哥 on 16/5/9.
@@ -29,7 +29,7 @@ public class PopFragment extends BaseFragment implements PopAdapter.OnClickListe
     public void initData() {
 
         // 获取数据
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/items?gender=1&generation=4&limit=50&oddset=0", PopBean.class, new Response.Listener<PopBean>() {
+        VolleySingle.addRequest(GiftSayValues.POP_URL, PopBean.class, new Response.Listener<PopBean>() {
             @Override
             public void onResponse(PopBean response) {
                 adapter.setPopBean(response);
@@ -53,9 +53,8 @@ public class PopFragment extends BaseFragment implements PopAdapter.OnClickListe
     @Override
     public void onClick(int pos, PopBean bean) {
         PopBean.DataBean.ItemsBean.DataBean1 data = bean.getData().getItems().get(pos).getData();
-        Log.d("PopFragment", data.getName());
         Intent intent = new Intent(context, GiftDetailsActivity.class);
-        intent.putExtra("data", data);
+        intent.putExtra(GiftSayValues.INTENT_GIFT_DETAILS_DATA, data);
         context.startActivity(intent);
 
     }

@@ -15,6 +15,7 @@ import com.zhao.giftsaydemo.db.Strategy;
 import com.zhao.giftsaydemo.db.GreenDaoTool;
 import com.zhao.giftsaydemo.home.channels.ChannelsAdapter;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 /**
  * Created by 华哥哥 on 16/5/21.
@@ -25,7 +26,6 @@ import com.zhao.giftsaydemo.util.VolleySingle;
 public class SubjectChannelsActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.aty_strategy_channels_lv)
     private ListView listView;
-    //private SubjectChannelsAdapter adapter;
     private ChannelsAdapter adapter;
     private GreenDaoTool greenDaoTool;
     @Override
@@ -35,8 +35,8 @@ public class SubjectChannelsActivity extends BaseActivity implements View.OnClic
         setTitle();
 
         // 根据Id频道网址获取各频道的数据
-        final int id = getIntent().getIntExtra("Id", 0);
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/collections/" + id + "/posts?limit=20&offset=0", SubjectChannelsBean.class, new Response.Listener<SubjectChannelsBean>() {
+        final int id = getIntent().getIntExtra(GiftSayValues.INTENT_CHANNELS_ID, 0);
+        VolleySingle.addRequest(GiftSayValues.STRATEGY_SUBJECT_CHANNELS_URL_START + id + GiftSayValues.STRATEGY_SUBJECT_CHANNELS_URL_END, SubjectChannelsBean.class, new Response.Listener<SubjectChannelsBean>() {
             @Override
             public void onResponse(SubjectChannelsBean response) {
                 for (int i = 0; i < response.getData().getPosts().size(); i++) {
@@ -54,7 +54,6 @@ public class SubjectChannelsActivity extends BaseActivity implements View.OnClic
                 adapter.setChannels(id);
                 // 根据channels从数据库获取数据
                 adapter.setStrategies(greenDaoTool.queryStrategyByChannels(id));
-                //adapter.setData(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -63,7 +62,6 @@ public class SubjectChannelsActivity extends BaseActivity implements View.OnClic
             }
         });
         adapter = new ChannelsAdapter(this);
-        //adapter = new SubjectChannelsAdapter(this);
         listView.setAdapter(adapter);
 
     }
@@ -78,7 +76,7 @@ public class SubjectChannelsActivity extends BaseActivity implements View.OnClic
         TextView textView = (TextView) findViewById(R.id.title_name_tv);
         textView.setVisibility(View.VISIBLE);
         textView.setTextSize(16);
-        textView.setText(getIntent().getStringExtra("name"));
+        textView.setText(getIntent().getStringExtra(GiftSayValues.INTENT_CHANNELS_NAME));
     }
 
     // 返回键

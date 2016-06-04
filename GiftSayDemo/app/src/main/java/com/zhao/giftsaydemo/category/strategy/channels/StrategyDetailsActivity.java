@@ -17,6 +17,7 @@ import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseActivity;
 import com.zhao.giftsaydemo.db.Strategy;
 import com.zhao.giftsaydemo.db.GreenDaoTool;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
@@ -48,7 +49,7 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
         greenDaoTool = new GreenDaoTool();
         // 设置标题
         setTitle();
-        url = getIntent().getStringExtra("url");
+        url = getIntent().getStringExtra(GiftSayValues.INTENT_STRATEGY_DETAILS_URL);
         strategy = greenDaoTool.queryStrategyByUrl(url);
         // WebView 显示url
         webView.loadUrl(url);
@@ -72,7 +73,7 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
         });
 
 
-        if (!(getIntent().getIntExtra("tag", 0) == 1)) {
+        if (!(getIntent().getIntExtra(GiftSayValues.INTENT_SUBJECT_CHANNELS_TAG, 0) == GiftSayValues.FROM_SUBJECT_CHANNELS_ACTIVITY)) {
             setLiked();
         }
 
@@ -117,7 +118,7 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
                     Toast.makeText(StrategyDetailsActivity.this, "要先登录哦", Toast.LENGTH_SHORT).show();
                 }
 //                // 发送收藏状态改变了的广播
-                Intent intent = new Intent("com.zhao.giftsaydemo.LikeChanged");
+                Intent intent = new Intent(GiftSayValues.LIKE_CHANGED_RECEIVER);
                 sendBroadcast(intent);
 
             }
@@ -186,7 +187,7 @@ public class StrategyDetailsActivity extends BaseActivity implements View.OnClic
         // url仅在微信（包括好友和朋友圈）中使用
         oks.setUrl(url);
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("我是测试评论文本");
+        oks.setComment(strategy.getName());
         // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite(getString(R.string.app_name));
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用

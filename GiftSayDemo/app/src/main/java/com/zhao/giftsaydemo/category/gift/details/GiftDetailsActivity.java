@@ -2,7 +2,6 @@ package com.zhao.giftsaydemo.category.gift.details;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -20,6 +19,7 @@ import com.zhao.giftsaydemo.category.gift.channels.GiftChannelsBean;
 import com.zhao.giftsaydemo.db.Gift;
 import com.zhao.giftsaydemo.db.GreenDaoTool;
 import com.zhao.giftsaydemo.pop.PopBean;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 
 /**
@@ -49,12 +49,12 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
     public void initData() {
 
         greenDaoTool = new GreenDaoTool();
-
-        tag = getIntent().getIntExtra("tag", 0);
         giftDetailsHeadAdapter = new GiftDetailsHeadAdapter(this);
 
-        if (tag == 1) {
-            data = getIntent().getParcelableExtra("data");
+        tag = getIntent().getIntExtra(GiftSayValues.INTENT_GIFT_CHANNELS_TAG, 0);
+
+        if (tag == GiftSayValues.FROM_GIFT_CHANNELS_ACTIVITY) {
+            data = getIntent().getParcelableExtra(GiftSayValues.INTENT_GIFT_DETAILS_DATA);
             nameTv = (TextView) findViewById(R.id.gift_details_name_tv);
             nameTv.setText(data.getName());
             ((TextView) findViewById(R.id.gift_details_price_tv)).setText(data.getPrice());
@@ -73,7 +73,7 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
                 checkBox.setChecked(false);
             }
         } else {
-            popData = getIntent().getParcelableExtra("data");
+            popData = getIntent().getParcelableExtra(GiftSayValues.INTENT_GIFT_DETAILS_DATA);
             nameTv = (TextView) findViewById(R.id.gift_details_name_tv);
             nameTv.setText(popData.getName());
             ((TextView) findViewById(R.id.gift_details_price_tv)).setText(popData.getPrice());
@@ -124,7 +124,7 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.gift_details_like_cb:
-                if (tag == 1) {
+                if (tag == GiftSayValues.FROM_GIFT_CHANNELS_ACTIVITY) {
 
                     if (greenDaoTool.hasThisGift(data.getPurchase_url())) {
                         checkBox.setChecked(false);
@@ -146,9 +146,9 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
             case R.id.gift_details_bug_btn:
                 Intent intent = new Intent(this, TaoBaoWebActivity.class);
                 if (tag == 1) {
-                    intent.putExtra("buy", data.getPurchase_url());
+                    intent.putExtra(GiftSayValues.INTENT_BUY_URL, data.getPurchase_url());
                 } else {
-                    intent.putExtra("buy", popData.getPurchase_url());
+                    intent.putExtra(GiftSayValues.INTENT_BUY_URL, popData.getPurchase_url());
 
                 }
                 startActivity(intent);

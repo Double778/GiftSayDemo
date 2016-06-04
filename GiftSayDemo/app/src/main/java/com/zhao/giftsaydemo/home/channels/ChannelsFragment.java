@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +21,7 @@ import com.zhao.giftsaydemo.home.bean.HomeChannelsBean;
 import com.zhao.giftsaydemo.home.bean.TabBean;
 import com.zhao.giftsaydemo.util.SwipeRefreshLoadingLayout;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 
 /**
@@ -66,7 +66,7 @@ public class ChannelsFragment extends BaseFragment implements SwipeRefreshLoadin
         TabBean tabBean = args.getParcelable("TabBean");
 
         // 根据pos,Tab数据获取当前页的数据
-        url = "http://api.liwushuo.com/v2/channels/" + tabBean.getData().getChannels().get(pos).getId() + "/items?limit=20&ad=2&gender=2&offset=0&generation=1";
+        url = GiftSayValues.HOME_CHANNELS_URL_START + tabBean.getData().getChannels().get(pos).getId() + GiftSayValues.HOME_CHANNELS_URL_END;
         channels = tabBean.getData().getChannels().get(pos).getId();
 
         getDate(url, channels);
@@ -84,7 +84,7 @@ public class ChannelsFragment extends BaseFragment implements SwipeRefreshLoadin
     private void registerReceiver() {
         likeChangedReceiver = new LikeChangedReceiver();
         IntentFilter filter = new IntentFilter();
-        filter.addAction("com.zhao.giftsaydemo.LikeChanged");
+        filter.addAction(GiftSayValues.LIKE_CHANGED_RECEIVER);
         context.registerReceiver(likeChangedReceiver, filter);
     }
 

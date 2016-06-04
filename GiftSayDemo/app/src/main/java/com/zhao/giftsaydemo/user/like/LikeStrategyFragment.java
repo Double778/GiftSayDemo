@@ -16,6 +16,7 @@ import com.zhao.giftsaydemo.category.strategy.channels.StrategyDetailsActivity;
 import com.zhao.giftsaydemo.db.GreenDaoTool;
 import com.zhao.giftsaydemo.db.Strategy;
 import com.zhao.giftsaydemo.util.MyListView;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class LikeStrategyFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(context, StrategyDetailsActivity.class);
-                intent.putExtra("url", strategyList.get(position).getUrl());
+                intent.putExtra(GiftSayValues.INTENT_STRATEGY_DETAILS_URL, strategyList.get(position).getUrl());
                 context.startActivity(intent);
 
             }
@@ -66,7 +67,7 @@ public class LikeStrategyFragment extends BaseFragment {
     private void registerReceiver() {
         likeChangedReceiver = new LikeChangedReceiver();
         IntentFilter filter = new IntentFilter();
-        filter.addAction("com.zhao.giftsaydemo.LikeChanged");
+        filter.addAction(GiftSayValues.LIKE_CHANGED_RECEIVER);
         context.registerReceiver(likeChangedReceiver, filter);
     }
 

@@ -13,6 +13,7 @@ import com.zhao.giftsaydemo.annotation.BindView;
 import com.zhao.giftsaydemo.base.BaseFragment;
 import com.zhao.giftsaydemo.home.bean.TabBean;
 import com.zhao.giftsaydemo.util.VolleySingle;
+import com.zhao.giftsaydemo.value.GiftSayValues;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void requestTab() {
-        VolleySingle.addRequest("http://api.liwushuo.com/v2/channels/preset?gender=1&generation=4", TabBean.class, new Response.Listener<TabBean>() {
+        VolleySingle.addRequest(GiftSayValues.HOME_TAB_URL, TabBean.class, new Response.Listener<TabBean>() {
 
             @Override
             public void onResponse(TabBean response) {
